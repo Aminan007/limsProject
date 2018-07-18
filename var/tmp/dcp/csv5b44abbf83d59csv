@@ -1,0 +1,129 @@
+// famille action;;;id;class;name
+BEGIN;PORTFOLIO;Traitement;36;;BATCH
+TYPE;C
+USEFOR;SA
+ICON;freeaction.gif
+CLASS;Dcp\Core\BatchDocument
+METHOD
+
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;options
+
+
+
+ATTR;BATCH_PLAN;;Planification;N;N;menu;10;W;;%S%app=FREEDOM&action=FREEDOM_PROCESSTOEXEC&id=%I%;;::canExecute(FREEDOM,FREEDOM_PROCESSTOEXEC)
+
+PARAM;BATCH_FR_IDENT;;Identification;N;N;frame;10;W
+PARAM;BATCH_TITLE;BATCH_FR_IDENT;Titre;N;N;text;20;W;Y
+PARAM;BATCH_DESC;BATCH_FR_IDENT;Description;N;N;longtext;30;W
+PARAM;BATCH_IDFAM;BATCH_FR_IDENT;Id famille;N;N;docid("FAMILY");40;W;;;fdl.php;lfamilies(D,CT):BATCH_IDFAM,CT
+PARAM;BATCH_FAM;BATCH_FR_IDENT;Famille;N;N;text;50;H;;;;::getTitle(BATCH_IDFAM)
+
+
+END
+
+
+
+// famille action;;;id;class;name
+BEGIN;;Processus;37;;EXEC
+CLASS;Dcp\Core\ExecProcessus
+USEFOR;S
+ICON;processes.gif
+MAXREV;100
+METHOD
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;option
+ATTR;EXEC_FR_IDENT;;Identification;N;N;frame;10;W
+ATTR;EXEC_IDUSER;EXEC_FR_IDENT  ;Exécutant;N;N;docid("IUSER");20;W;;;;;;;doctitle=EXEC_USER
+ATTR;EXEC_USER;EXEC_FR_IDENT;Exécutant (titre);N;N;text;30;H
+ATTR;EXEC_IDREF;EXEC_FR_IDENT;Issue de;N;N;docid("BATCH");40;R;;;;;;;doctitle=EXEC_REF
+ATTR;EXEC_REF;EXEC_FR_IDENT;Référent (titre);Y;N;text;50;H
+ATTR;EXEC_TITLE;EXEC_FR_IDENT;Titre;Y;N;text;60;W
+ATTR;EXEC_STATUS;EXEC_FR_IDENT;Exécution;N;N;enum;60;R;;;;none|Non,progressing|En cours,waiting|En attente;;;system=yes
+ATTR;EXEC_STATUSDATE;EXEC_FR_IDENT;Exécution depuis;N;N;timestamp;70;R
+ATTR;EXEC_FR_BATCH;;Traitement;N;N;frame;80;W
+ATTR;EXEC_APPLICATION;EXEC_FR_BATCH;Application;Y;N;text;90;W;N;;fdl.php;lapplications(EXEC_APPLICATION):EXEC_APPLICATION
+ATTR;EXEC_ACTION;EXEC_FR_BATCH;Action;Y;N;text;100;W;N;;fdl.php;lactions(EXEC_APPLICATION,EXEC_ACTION):EXEC_ACTION
+ATTR;EXEC_API;EXEC_FR_BATCH;Api;Y;N;text;110;W;N;;fdl.php;lapi(EXEC_API):EXEC_API
+ATTR;EXEC_T_PARAMETERS;EXEC_FR_BATCH;Paramètres;N;N;array;120;W
+ATTR;EXEC_IDVAR;EXEC_T_PARAMETERS;Variable;N;N;text;130;W
+ATTR;EXEC_VALUEVAR;EXEC_T_PARAMETERS;Valeur;N;N;text;140;W
+ATTR;EXEC_FR_DATE;;Dates;N;N;frame;150;W
+ATTR;EXEC_PREVDATE;EXEC_FR_DATE;Précédente date d'exécution;N;Y;timestamp;160;R;;%S%app=FDL&action=FDL_CARD&id=%I%&latest=P;;::getPrevExecDate();;;ltitle=Voir l'exécution précédente
+ATTR;EXEC_NEXTDATE;EXEC_FR_DATE;Prochaine date d'exécution;N;Y;timestamp;170;R
+ATTR;EXEC_HANDNEXTDATE;EXEC_FR_DATE;À exécuter le;N;N;timestamp;180;W;;;;;;::isFutureDate(EXEC_HANDNEXTDATE)
+ATTR;EXEC_PERIODDAY;EXEC_FR_DATE;Période en jours;N;N;int;190;W;;;;;;;elabel=à faire tous les n jours|esize=3
+ATTR;EXEC_PERIODHOUR;EXEC_FR_DATE;Période en heures;N;N;int;200;W;;;;;;;elabel=à faire tous les n heures|esize=3
+ATTR;EXEC_PERIODMIN;EXEC_FR_DATE;Période en minutes;N;N;int;210;W;;;;;;;elabel=à faire tous les n minutes|esize=3
+ATTR;EXEC_PERIODENDDATE;EXEC_FR_DATE;Jusqu'au;N;N;timestamp;220;H;;;;;;::isFutureDate(EXEC_PERIODENDDATE)
+ATTR;EXEC_PERIODDAYNUMBER;EXEC_FR_DATE;Jour de la semaine;N;N;enum;230;H;;;; |---,1|Lundi,2|Mardi,3|Mercredi,4|Jeudi,5|Vendredi,6|Samedi,7|Dimanche;;;system=yes,bmenu=no
+;;;;;;;240
+;;;;;;;250
+ATTR;EXEC_FR_CR;;Compte-rendu;N;N;frame;260;W
+ATTR;EXEC_DATE;EXEC_FR_CR;Date d'exécution;N;N;timestamp("%A %d %B %Y %X");270;R
+ATTR;EXEC_ELAPSED;EXEC_FR_CR;Durée d'exécution;N;N;time("%H:%M:%S");280;R
+ATTR;EXEC_STATE;EXEC_FR_CR;Statut;N;N;text;290;R
+ATTR;EXEC_DETAIL;EXEC_FR_CR;Détail;N;N;ifile;300;R
+ATTR;EXEC_DETAILLOG;EXEC_FR_CR;Log;N;N;longtext;310;R
+ATTR;EXEC_BGEXEC;;Exécuter maintenant;N;N;menu;10;R;;::bgExecute();;::isLatestExec()
+ATTR;EXEC_RESET;;Abandonner l'exécution en cours;N;N;menu;20;R;;::resetExecute();;::isInprogress();;;ltarget=_self
+DEFAULT;EXEC_IDUSER;::getUserId()
+DEFAULT;EXEC_USER;::getTitle(EXEC_IDUSER)
+PARAM;EXEC_FR_PARAM;;Paramètre;N;N;frame;10;W
+PARAM;EXEC_IDADMIN;EXEC_FR_PARAM;Administrateur;N;N;docid("IUSER");20;W;N;;;;;;elabel=recevra en copie les couriels des rapports d'exécution
+END
+
+
+
+// famille action;;id;class;name
+BEGIN;BATCH;Publipostage;;;PUBLIMAIL
+CLASS;Dcp\Core\Emailing
+USEFOR;SA
+ICON;sendmail.gif
+METHOD
+
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;option
+ATTR;FR_BASIC;;Basique;N;N;frame;0;H
+ATTR;BA_TITLE;FR_BASIC  ;Titre;N;N;text;1;H;N
+
+ATTR;PUBM_FR_IDENT;;Identification;N;N;frame;100;W
+ATTR;PUBM_TITLE;PUBM_FR_IDENT;Sujet;Y;N;text;110;W;Y
+;;;;;;;120
+ATTR;PUBM_FR_BODY;;Corps;N;N;frame;130;W
+ATTR;PUBM_BODY;PUBM_FR_BODY;Corps du message;N;N;htmltext;140;W;;;;;;;toolbar=DocAttr
+ATTR;PUBM_BGIMG;PUBM_FR_BODY;Image de fond;N;N;image;150;W
+ATTR;PUBM_FR_ATT;;Attachements;N;N;frame;160;W
+ATTR;PUBM_T_ATT;PUBM_FR_ATT;Attachements;N;N;array;170;W
+ATTR;PUBM_ADESC;PUBM_T_ATT;Description;N;N;text;180;W
+ATTR;PUBM_FDESC;PUBM_T_ATT;Fichier;N;N;file;190;W
+ATTR;PUBM_SEND;;Envoyer;N;N;action;200;W;;;FDL;IMPCARD&zone=FDL:FDL_PUBMAIL;;;submenu=actions|lconfirm=yes
+ATTR;PUBM_PREVIEW;;Prévisualisation;N;N;action;205;W;;;FDL;VIEWSCARD&zone=FDL:FDL_PUBPREVIEW;;;submenu=actions
+ATTR;PUBM_DISPLAY;;Afficher;N;N;action;200;W;;;FDL;VIEWSCARD&zone=FDL:FDL_PUBDISPLAY;;;submenu=actions|barmenu=yes
+ATTR;PUBM_PRINT;;Imprimer;N;N;action;210;W;;;FDL;VIEWSCARD&zone=FDL:FDL_PUBPRINT;;;submenu=actions|barmenu=yes
+ATTR;PUBM_FR_CONFIG;;Configuration;N;N;frame;220;W
+ATTR;PUBM_IDFAM;PUBM_FR_CONFIG;Id famille;N;N;docid;230;H;;;;::getTitle(PUBM_IDFAM):PUBM_FAM
+ATTR;PUBM_FAM;PUBM_FR_CONFIG;Famille du lot;N;N;text;240;W;;%S%app=FDL&action=FDL_CARD&id=%PUBM_IDFAM%;fdl.php;lfamilies(D,PUBM_FAM):PUBM_IDFAM,PUBM_FAM
+ATTR;PUBM_MAILATT;PUBM_FR_CONFIG;Attribut mail;N;N;text;250;W;;;fdl.php;getSortAttr(D,PUBM_IDFAM):PUBM_MAILATT
+DEFAULT;PUBM_IDFAM;IUSER
+DEFAULT;PUBM_FAM;utilisateur
+DEFAULT;PUBM_MAILATT;us_mail
+DEFAULT;FLD_ALLBUT;0
+DEFAULT;FLD_FAMIDS; 
+DEFAULT;FLD_FAM; 
+END;0
+
+
+// famille action;;;id;class;name
+BEGIN;BATCH;Action basique;;;BASICBATCH
+TYPE;C
+USEFOR;SA
+ICON;basicbatch.gif
+
+
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;option
+ATTR;BBATCH_LOCK;;Verrouiller;N;N;action;200;W;;;FDL;LOCKFILE;;;submenu=actions|batchfolder=yes
+ATTR;BBATCH_UNLOCK;;Déverrouiller;N;N;action;210;W;;;FDL;UNLOCKFILE;;;submenu=actions|batchfolder=yes
+ATTR;BBATCH_DELETE;;Supprimer;N;N;action;220;W;;;GENERIC;GENERIC_DEL;;;submenu=actions|batchfolder=yes
+ATTR;BBATCH_COPY;;Dupliquer;N;N;action;220;W;;;GENERIC;GENERIC_DUPLICATE;;;submenu=actions|batchfolder=yes
+END;0
+
+
+

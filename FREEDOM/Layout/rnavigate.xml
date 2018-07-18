@@ -1,0 +1,62 @@
+[ZONE FDL:HTMLHEAD?title=[TEXT:Relation document]]
+<script src="lib/json2/json2.js?wv=[WVERSION]"></script>
+<script src="lib/jquery/jquery.js?wv=[WVERSION]"></script>
+<style>
+.relation_link{
+   vertical-align:top;
+}
+.css-links-wrapper {
+    float:left;
+    display:inline-block;
+    vertical-align:top;
+    overflow:auto;
+    height:400px;
+    min-width : 200px;
+    border:[CORE_FGCOLOR] 2px ridge!important;
+    border-radius:10px;
+    background-color:[CORE_BGCELLCOLOR];
+}
+.css-list-wrapper {
+    list-style-type : none;
+    padding : 0 0 1em 0.25em;
+    margin : 0;
+}
+.css-list-title {
+    text-decoration : underline;
+}
+.css-column-title {
+    margin-left: 10px;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+.css-list-none-element {
+    display: block;
+    margin-bottom: 1em;
+}
+.css-document-wrapper {
+    position : relative;
+    cursor : pointer;
+}
+.css-document-wrapper:hover {
+    background-color : [COLOR_A9];
+}
+.css-document-selected {
+    background-color : [CORE_BGCOLORHIGH];
+}
+.css-document-icon {
+    position : absolute;
+    cursor : pointer;
+}
+.css-document-open-next {
+    margin-left : 16px;
+}
+</style>
+<script type="application/json" id="init_data">
+    [init_data]
+</script>
+<script>
+window.rnavigate = JSON.parse($("#init_data").html());
+</script>
+<script src="[RNAVIGATE_JS]"></script>
+
+[ZONE FDL:HTMLFOOT]

@@ -1,0 +1,11 @@
+drwxrwxr-x distrib/distrib   0 2018-02-13 05:38 ./
+drwxrwxr-x distrib/distrib   0 2018-02-13 05:38 ./HTTPAPI_V1_ADMIN/
+-rw-rw-r-- distrib/distrib 1282 2018-02-13 05:38 ./HTTPAPI_V1_ADMIN/HTTPAPI_V1_ADMIN.app
+drwxrwxr-x distrib/distrib    0 2018-02-13 05:38 ./HTTPAPI_V1_ADMIN/Layout/
+-rw-rw-r-- distrib/distrib 7378 2018-02-13 05:38 ./HTTPAPI_V1_ADMIN/Layout/token_access.html
+-rw-rw-r-- distrib/distrib 4507 2018-02-13 05:38 ./HTTPAPI_V1_ADMIN/Layout/token_admin.js
+-rw-rw-r-- distrib/distrib   89 2018-02-13 05:38 ./HTTPAPI_V1_ADMIN/HTTPAPI_V1_ADMIN_init.php.in
+-rw-rw-r-- distrib/distrib 1602 2018-02-13 05:38 ./HTTPAPI_V1_ADMIN/action.restTokenAccess.php
+-rw-rw-r-- distrib/distrib   77 2018-02-13 05:38 ./HTTPAPI_V1_ADMIN/HTTPAPI_V1_ADMIN_init.php
+-rw-rw-r-- distrib/distrib 6476 2018-02-13 05:38 ./HTTPAPI_V1_ADMIN/action.restTokenMethod.php
+-rw-rw-r-- distrib/distrib 1475 2018-02-13 05:38 ./HTTPAPI_V1_ADMIN/action.restTokenData.php

@@ -1,0 +1,9 @@
+drwxrwxr-x distrib/distrib   0 2018-03-05 11:08 ./
+drwxrwxr-x distrib/distrib   0 2018-03-05 11:08 ./programs/
+-rwxrwxr-x distrib/distrib 3446 2018-03-05 11:08 ./programs/ckeditor4_install
+drwxrwxr-x distrib/distrib    0 2018-03-05 11:08 ./.autoloader-ignore.d/
+-rw-rw-r-- distrib/distrib   16 2018-03-05 11:08 ./.autoloader-ignore.d/dynacase-ckeditor-4-installer
+drwxrwxr-x distrib/distrib    0 2018-03-05 11:08 ./lib/
+drwxrwxr-x distrib/distrib    0 2018-03-05 11:08 ./lib/ckeditor/
+drwxrwxr-x distrib/distrib    0 2018-03-05 11:08 ./lib/ckeditor/4/
+-rw-rw-r-- distrib/distrib  140 2018-03-05 11:08 ./lib/ckeditor/4/.htaccess

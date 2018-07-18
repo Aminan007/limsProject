@@ -1,0 +1,162 @@
+div.docresume,
+tr.docresume,
+tr.popupsource,
+div.popupsource {
+  border: solid 1px [COLOR_B1];
+  background-color: [CORE_BGCELLCOLOR];
+  color: [CORE_TEXTFGCOLOR];
+  border-width: 1px;
+  margin: 2px 4px 1px 4px;
+
+}
+div.docresume {
+  margin: 2px 0 0 0;
+
+}
+#innermain {
+    height:200px;
+    overflow:auto;
+    border:none;
+    margin:0 0 0 3px;
+    padding:0;
+}
+.searchFooter {
+    /*background-color: [COLOR_B4];*/
+}
+.searchHeader {
+   /* background-color: [COLOR_B4];*/
+    padding-left:10px;
+    font-weight: bold;
+    padding: 2px;
+}
+
+div.docresume:hover, tr.docresume:hover {
+  background-color:[CORE_BGCOLORHIGH]!important;
+
+}
+
+div.docresume[selected="1"], tr.docresume[selected="1"] {
+    background-color:[COLOR_B8]!important;
+    background: -webkit-gradient(linear, 0% 0, 0% 100%, from([COLOR_B8]), to([COLOR_B5]) )!important;
+    background: -moz-linear-gradient(270deg, [COLOR_B8], [COLOR_B5])!important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='[COLOR_B8]', endColorstr='[COLOR_B5]')!important;
+    
+}
+tr.docresume:nth-child(even) {
+    background-color: [COLOR_A9];
+}
+
+#searchkey {
+    text-align: left;
+    margin:0;
+}
+#searchgo {
+    border:none;
+    margin:0;
+}
+#searchkey::-webkit-input-placeholder {
+    color: #aaa;
+    text-shadow: 0 1px 1px #fff;
+}
+#searchkey:-moz-placeholder {
+    color: #aaa;
+    text-shadow: 0 1px 1px #fff;
+}
+
+#searchheader {
+    border-radius: 3px;
+    margin-left:5px;
+    margin-top: 3px;
+    margin-bottom: 10px;
+    border: solid 1px [COLOR_A7];
+    border-color: [COLOR_A7] [COLOR_A5] [COLOR_A5] [COLOR_A7];
+    background-color: [COLOR_C6];
+}
+#searches {
+    position: absolute;
+    float:left;
+    max-height: 400px;
+    overflow-x: hidden;
+    font-size: 11px;
+    overflow-y: auto;
+    [IF ISIE6]width: 100px;[ENDIF ISIE6]
+}
+#searches li a { white-space: nowrap; }
+.selected-search {
+    [IF ISIE6]max-width:100px;[ENDIF ISIE6]
+}
+.select-search-button,
+.selected-search {
+    cursor: pointer;
+    border-style: solid;
+    border-width: 1px;
+    background-color: [COLOR_A7];
+}
+.select-search-button {
+   border-color: [COLOR_WHITE] [COLOR_A5] [COLOR_A5] [COLOR_WHITE];
+   border-radius: 3px 0 0 3px;
+}
+.selected-search {
+   border-color: [COLOR_WHITE] [COLOR_A5] [COLOR_A5] [COLOR_WHITE];
+   border-radius: 0 3px 3px 0;
+   padding-left: 5px;
+}
+[IFNOT ISIE6]
+#close-select-search {  visibility:hidden; }
+.selected-search:hover #close-select-search {  visibility:visible; }
+[ENDIF ISIE6]
+
+#selected-search-text {
+     [IFNOT ISIE6][IFNOT ISIE8]white-space: nowrap;
+     max-width:125px;
+     overflow:hidden;
+     text-overflow: ellipsis;[ENDIF ISIE8][ENDIF ISIE6]
+     margin:0;
+     color: [COLOR_A0];
+}
+
+.search-input-key {
+   min-width:120px;
+}
+.search-input-key input {
+    font-family: tahoma, arial, helvetica, sans-serif;
+    font-size: [SIZE_LARGE]
+    border-radius : 3px 0 0 3px;
+    border: solid 1px [COLOR_C6];
+    background-color:  [COLOR_C6];
+    padding-right: 16px;
+    height: 1.7em;
+    [IF ISIE6]width: 100px;[ENDIF ISIE6]
+}
+.search-input-key input:focus,
+.search-input-key input:hover {
+   background-color:  [COLOR_WHITE];
+   border: solid 1px [COLOR_C6];
+}
+
+.select-search-button {
+    background-color:  [COLOR_A7] ;
+    width:10px;
+    border-right: solid 1px [COLOR_A5];
+}
+.css-search-zone {
+    border: 0;
+    float: right;
+    margin: 1px 5px 1px 5px;
+}
+.css-icon-search {
+    cursor: pointer;
+    height: 100%;   
+}
+.ui-icon-search, .ui-icon-close, .ui-icon-triangle-1-s, #id-search-help {
+    cursor:pointer;
+}
+
+.pagination-button {
+    font-size: 0.7em !important;
+}
+
+div.noresults {
+    text-align: center;
+    margin: 10px;
+}

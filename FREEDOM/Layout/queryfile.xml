@@ -1,0 +1,23 @@
+[ZONE FDL:HTMLHEAD?title=[TEXT:Change icon]]
+
+
+<style>
+    img.docicon {
+       max-width:200px;
+    max-heigth:200px;
+    }
+</style>
+
+<!-- Title Table -->
+<div class="TITLE">
+
+<p>[TEXT: change icon]</p>
+<p>[title]</p>
+<img class="docicon" src="[iconsrc]" alt="icon">
+<form  name="edit" method="POST" ENCTYPE="multipart/form-data" action="[CORE_STANDURL]app=[APPNAME]&action=CHANGEICON&id=[docid]">
+  <input type="file" name="ifile" accept="image/*" value="[ifilevalue]" />
+  <input type="submit" value="[TEXT: lauch importation]" />
+</form>
+</div>
+
+        [ZONE FDL:HTMLFOOT]

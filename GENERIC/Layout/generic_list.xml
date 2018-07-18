@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>[TEXT: folder containt]</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <link rel="shortcut icon" href="[DYNACASE_FAVICO]"/>
+
+    [CSS:CUSTOMREF]
+    <style type="text/css">[CSS:CODE]</style>
+    [JS:REF]
+    <script>
+
+        [JS:CODE]
+        document.dirid = '[dirid]';
+
+        document.needreload = true;
+
+
+        var catgid = parseInt('[catg]');
+
+        var PDS = '';
+        function SendSimpleSearch(event) {
+               sendSimpleSearchP(event,'[famid]','[ONEFAMORIGIN]','[dirid]','[folderid]','[pds]');
+           }
+
+
+
+        addEvent(window, "load", function () {
+            if (window.parent && window.parent.multidoc) window.parent.multidoc(window.document);
+
+          //  $('#csid').button();
+
+        });
+        var resizeInProgress=false;
+        function resizeTable() {
+                if (resizeInProgress) {
+                    window.clearTimeout(resizeInProgress);
+                }
+
+                   var widthStr = "[ACARD_WIDTH]";
+                   var index = widthStr.indexOf("%");
+                   var $cellmain = $('#cellmain');
+                   if (index != -1) {
+
+                       var $firstAbstract = $cellmain.children("div:first");
+
+                       if ($firstAbstract.length > 0) {
+                           var startX = $cellmain.position().left;
+                           var percentage = widthStr.substr(0, index);
+                           var divWidth = $("#main").width();
+
+                           var delta = $firstAbstract.outerWidth(true) - $firstAbstract.width();
+                           if (isIE6) {
+                               delta += 10; // because... resize is looping else
+                               if (document.body.offsetHeight > document.documentElement.clientHeight) {
+                                   delta += 10; // add scrollbar width
+                               }
+                           }
+                            var im=document.getElementById('innermain');
+                            if (im.clientWidth < im.offsetWidth) {
+                                delta += (im.offsetWidth - im.clientWidth)+2; // 2 for padding
+                            }
+
+
+                           var newWidth = ((divWidth * percentage) / 100) - startX - delta;
+                           $(".docresume").width(newWidth);
+                       }
+                   }
+               resizeBodyHeigth();
+                    resizeInProgress=window.setTimeout(function() {
+                        resizeBodyHeigth(); // need resize after in case of content disposition has changed
+                    },200)
+
+               }
+
+               $(window).on("load resize", resizeTable);
+
+
+    </script>
+</head>
+
+<body class="freedom" [IFNOT ISIE]style="visibility:hidden"[ENDIF ISIE]>
+
+    [ZONE [APPNAME]:FAMILY_BARMENU?catg=[catg]&onefam=[ONEFAMORIGIN]&famid=[famid]&pds=[pds]]
+    [ZONE FDL:POPUPDOCMENU?mzone=GENERIC:POPUPLISTDETAIL%26famid=[famid]]
+    <div id="main">
+        <table cellspacing="0" cellpadding="0" id="searchheader"><tr>
+            [IF ONESEARCH]
+            <td class="select-search-button">
+                <span id="selectsearches" title="[TEXT:Select search]"  class="ui-icon ui-icon-triangle-1-s" >
+		</span>
+            </td>
+            <td class="selected-search" id="selected-search" >
+                <table cellspacing="0" cellpadding="0" ><tr><td><p class="selected-search-text" id="selected-search-text"></p></td>
+                    <td><span id="close-select-search" title="[TEXT:Delete selected search]"  class="ui-icon ui-icon-close"></span></td></tr></table>
+
+            </td>
+            [ENDIF ONESEARCH]
+            <td class="search-input-key">
+                <div class="css-search-zone">
+                    <input onMouseUp="return true" title="[TEXT:Search document]" placeholder="[SearchPlaceHolder]" onKeyPress="KeySendSimpleSearch(event)" type="text" value="[tkey]"  id="searchkey"/>
+                </div>
+            </td>
+            <td>
+                <span class="css-icon-search">
+                    <span title="[TEXT:Send search]" onclick="SendSimpleSearch(event);return false" class="ui-icon ui-icon-search"></span>
+                </span>
+            </td>
+            <td class="select-search-button">
+                <span id="id-search-help" title="[TEXT:Help search]" class="ui-icon ui-icon-help"></span>
+            </td>
+        </tr></table>
+
+    <div class="searchHeader ui-widget-header" cellspacing="0" width="100%">
+        <span class="searchTitle"> [fldtitle]</span>
+    </div>
+        <table class="transparent" width="100%" cellpadding="0px" cellspacing="0px">
+            <tr>
+                [IF hasOnglet]
+                <td id="letterTabs" width="1px" valign="top" cellspacing="0" cellpadding="0">
+                    <table cellpadding="1px" cellspacing="1px">
+                        [BLOCK ONGLET]
+                        <tr>
+                            <td class="[ongclass]" align="center"
+                        onmouseover="if (className != 'onglets') {className='ongleth';}"
+                        onmouseout="if (className != 'onglets') {className='onglet';}"
+                        onclick="document.location.href='?app=[APPNAME]&amp;action=GENERIC_TAB&amp;onefam=[ONEFAMORIGIN]&amp;catg=[catg]&amp;tab=[ongdir]&amp;famid=[famid][pds]'">[onglabel]</td>
+                        </tr>
+                        [ENDBLOCK ONGLET]
+                    </table>
+                </td>
+                [ENDIF hasOnglet]
+                <td id="cellmain" valign="top">
+                     <div id="innermain">
+                    [BLOCK TABLEBODY]
+                    <!-- TABLEBODY -->
+                    <div id="d[id]"
+                         view="multidoc" documentId="[id]" hrefDoc='[CORE_STANDURL]&app=FDL&action=FDL_CARD&id=[id]'
+                         style="width:[ACARD_WIDTH];float:left;cursor:crosshair;overflow:hidden;"
+                         onclick="if (document.noselect) document.noselect=false; else {vselect(this);subwindow([FDL_VD2SIZE],[FDL_HD2SIZE],'[famtarget]','[CORE_STANDURL]&app=FDL&action=FDL_CARD&id=[id]');}"
+                         oncontextmenu="viewdocmenu(event,'[id]',false,false,this);return false;"
+                         class="docresume">
+                        [IFNOT canedit]
+                        <img align="right" width="30px" id="ic[id]" documentId="[id]"
+                         hrefDoc='?app=GENERIC&amp;action=GENERIC_EDIT&amp;latest=Y&amp;id=[id]'
+                         needresize="1" src="[iconsrc]" class="aiconnoh" />
+                        [ENDIF canedit]
+                        [IF canedit]
+                        <img align="right" width="30px" id="ic[id]" documentId="[id]"
+                         hrefDoc='?app=GENERIC&amp;action=GENERIC_EDIT&amp;latest=Y&amp;id=[id]'
+                         needresize="1" src="[iconsrc]" class="aicon" title="[TEXT:Modify]"
+                        onclick="document.noselect=true;vselect(this.parentNode);vedit(event,'[id]','[famid]');"/>
+                        [ENDIF canedit]
+                        <img align="right" title="[emblemt]" src="[emblem]" width="20px"/>
+                        [IF postitid]
+                        <img align="right" needresize="1" src="[IMG:stickynotes.png]" width="20px"/>
+                        [ENDIF postitid]
+                        [IF inDomain]
+                        <img align="right" needresize="1" src="[IMG:domainsync.png]" width="20px"/>
+                        [ENDIF inDomain]
+
+                        <a class="title" style="float:left;" id="t[id]">[title]</a>
+                        <i class="statetext" style="float:right;border-color:[statecolor];">[state]</i>
+                        <div style="clear:both"></div>
+                        [ABSTRACTVALUES]
+                    </div>
+                    [ENDBLOCK TABLEBODY]
+                    [IFNOT nbdoc]<div class="noresults">[TEXT:No results]</div>[ENDIF nbdoc]
+                    <br/>
+                    </div>
+                    <!-- /TABLEBODY --> </td>
+            </tr>
+        </table>
+
+    <div class="searchFooter ui-widget-header" id="searchFooter">
+    [ZONE GENERIC:PAGINATION]
+    </div>
+
+    </div>
+
+
+    <ul id="searches">
+        [BLOCK SYSSEARCH]
+        <li  ><a style="background-color:[gui_color]" data-isparam="[isparam]" data-isreport="[isreport]" data-searchid="[id]" data-selected="[selected]">[title]</a></li>
+        [ENDBLOCK SYSSEARCH]
+        [IF MSEARCH] <li  >--</li> [ENDIF MSEARCH]
+        [BLOCK USERSEARCH]
+        <li  ><a style="background-color:[gui_color]" data-isparam="[isparam]" data-isreport="[isreport]" data-searchid="[id]" data-selected="[selected]">[title]</a></li>
+        [ENDBLOCK USERSEARCH]
+    </ul>
+    <!--  FOOT HTML -->
+
+</body>
+</html>

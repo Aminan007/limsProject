@@ -1,0 +1,147 @@
+// famille recherche;;;id;class;name
+
+BEGIN;BASE;Recherche;5;DocSearch;SEARCH
+TYPE;C
+ICON;search.gif
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;option
+ATTR;SE_AUTHOR;FR_BASIC;Auteur;N;N;account;29;R
+ATTR;GUI_COLOR;FR_BASIC;Couleur intercalaire;N;N;color;30;O
+ATTR;GUI_ISRSS;FR_BASIC;Utilisable comme flux RSS;N;N;enum;32;W;;;;[bool]no|non,yes|oui;;;bmenu=no|system=yes
+ATTR;GUI_SYSRSS;FR_BASIC;Flux RSS système;N;N;enum;33;R;;;;[bool]no|non,yes|oui;;;bmenu=no|system=yes
+ATTR;SE_MEMO;FR_BASIC;À utiliser dans les menus;N;N;enum;40;W;;;;[bool]no|non,yes|oui;;;bmenu=no|system=yes
+ATTR;SE_CRIT;;Critère;N;N;frame;0;W
+ATTR;SE_KEY;SE_CRIT;Mot-clef;N;Y;text;100;W
+ATTR;SE_LATEST;SE_CRIT;Révision;N;N;enum;110;W;;;;yes|courante,no|toutes les révisions,fixed|dernière révision,allfixed|sans la courante,lastfixed|dernière parmi les révisions effectuées;;;bmenu=no|system=yes
+ATTR;SE_CASE;SE_CRIT;Mode ;N;N;enum;120;W;;;;no|expression sans casse,yes|expression avec casse,full|mot complet;;;bmenu=no|system=yes
+ATTR;SE_FAM;SE_CRIT;Famille;N;Y;text;130;W;;%S%&app=FDL&action=FDL_CARD&id=%SE_FAMID%;fdl.php;lfamilies(D,SE_FAM):SE_FAMID,SE_FAM
+ATTR;SE_FAMID;SE_CRIT;Famille (id);N;N;docid;140;H;;;;::getTitle(SE_FAMID):SE_FAM
+ATTR;SE_SYSFAM;SE_CRIT;Inclure les documents système;N;N;enum;170;W;;;;[bool]no|non,yes|oui;;;bmenu=no|system=yes
+ATTR;SE_IDFLD;SE_CRIT;Dossier racine;N;N;docid;160;H;;;;::getTitle(SE_IDFLD):SE_CFLD
+ATTR;SE_CFLD;SE_CRIT;À partir du dossier;N;N;text;150;R;;%S%&app=FDL&action=FDL_CARD&id=%SE_IDFLD%
+ATTR;SE_TRASH;SE_CRIT;Dans la poubelle;N;N;enum;165;W;;;;no|non,only|seulement,also|aussi;;;bmenu=no|system=yes
+ATTR;SE_ARCHIVE;SE_CRIT;Dans l'archive;N;N;docid("ARCHIVING");166;W;;;fdl.php;lfamily(D,ARCHIVING,CT,0,arc_status='C'):SE_ARCHIVE,CT
+ATTR;SE_SUBLEVEL;SE_CRIT;Profondeur de recherche;N;N;int;170;H
+ATTR;SE_SQLSELECT;SE_CRIT;Requête sql;N;N;text;180;H
+ATTR;SE_IDCFLD;SE_CRIT;Id dossier père courant;N;N;docid;190;H;;;;::getTitle(SE_IDCFLD):SE_CCFLD
+ATTR;SE_CCFLD;SE_CRIT;Dossier père courant;N;N;text;200;R;;%S%&app=FDL&action=FDL_CARD&id=%SE_IDCFLD%
+ATTR;SE_ORDERBY;SE_CRIT;Trié par;N;N;text;210;R
+ATTR;SE_FAMONLY;SE_CRIT;Sans sous famille;N;N;enum;220;W;;;;no|Avec les sous familles,yes|Sans les sous familles;;;bmenu=no|system=yes
+ATTR;SE_ACL;SE_CRIT;Document;N;N;enum;230;W;;;;edit|Modifiable,delete|Supprimable;;;bmenu=no|system=yes|multiple=yes|eformat=hcheck|eunset=yes
+ATTR;SE_STATIC;SE_CRIT;Requête statique;N;N;text;240;H
+ATTR;SE_OPEN;;Ouvrir;N;N;menu;20;R;;%S%app=FREEDOM&action=FREEDOM_VIEW&dirid=%I%
+ATTR;SE_OPENFOLIO;;Ouvrir comme une chemise;N;N;menu;30;R;;C%S%app=FREEDOM&action=OPENFOLIO&id=%I%
+ATTR;SE_SETSYSRSS;;RSS visible/masquée aux utilisateurs;N;N;menu;40;R;;C%S%app=FREEDOM&action=SETSYSRSS&id=%I%;;;;;ltarget=_self
+
+END;0
+
+//SEARCH;<special id>;<special dir id>;titre;requête
+
+SEARCH;11;9;les familles;select * from docfam where doctype='C'
+SEARCH;12;9;les profils;select * from doc3 where doctype ='P'
+SEARCH;13;9;les maisons;select * from doc2 where (owner < 0) and (locked != -1)
+SEARCH;14;9;la poubelle;select * from doc where doctype ='Z' and lmodify='D'
+SEARCH;22;9;les cycles;select * from doc20 where doctype='W'
+
+
+
+// recherche détaillée;fromid;;id;class;name
+
+BEGIN;SEARCH;Recherche groupée;31;;MSEARCH
+ICON;searchm.gif
+CLASS;Dcp\Core\GroupedSearch
+METHOD
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;option
+
+ATTR;SE_CRIT;;Critère;N;N;frame;0;H
+
+ATTR;SE_FR_SEARCHES;;Les recherches;N;N;frame;100;W
+ATTR;SEG_T_COND;SE_FR_SEARCHES;Ensemble de recherche;N;N;array;110;W
+ATTR;SEG_IDCOND;SEG_T_COND;Recherche;N;N;docid("SEG_IDCOND");120;W;;;fdl.php;lsearches(D,CT):SEG_IDCOND,CT;;;doctitle=seg_cond
+ATTR;SEG_COND;SEG_T_COND;Recherche (titre);N;N;text;130;W
+
+END;0
+
+
+
+// recherche détaillée;fromid;;id;class;name
+
+BEGIN;SEARCH;Recherche détaillée;16;;DSEARCH
+ICON;searchd.gif
+CLASS;Dcp\Core\DetailSearch
+METHOD
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;option
+ATTR;SE_FR_DETAIL;;Conditions;N;N;frame;0;W
+ATTR;SE_OL;SE_FR_DETAIL;Condition;N;N;enum;300;W;;;;and|satisfait toutes les conditions,or|satisfait au moins une condition,perso|personnalisée;;;system=yes|bmenu=no
+ATTR;SE_T_DETAIL;SE_FR_DETAIL;Conditions;N;N;array;310;W;;;;;;::checkConditions()
+ATTR;SE_OLS;SE_T_DETAIL;Opérateur;N;N;enum;320;W;;;;and|et,or|ou;;;system=yes|bmenu=no
+ATTR;SE_LEFTP;SE_T_DETAIL;Parenthèse gauche;N;N;enum;330;W;;;;no| ,yes|(;;;system=yes|bmenu=no
+ATTR;SE_ATTRIDS;SE_T_DETAIL;Attributs;N;N;text;340;W
+ATTR;SE_FUNCS;SE_T_DETAIL;Fonctions;N;N;text;350;W
+ATTR;SE_KEYS;SE_T_DETAIL;Mot-clefs;N;N;text;360;W;;;;;;::isValidCondition(SE_ATTRIDS,SE_FUNCS,SE_KEYS)
+ATTR;SE_RIGHTP;SE_T_DETAIL;Parenthèse droite;N;N;enum;370;W;;;;no| ,yes|);;;system=yes|bmenu=no
+ATTR;SE_T_FILTERS;SE_FR_DETAIL;Filtres;N;N;array;380;R;;;;;;;empty=yes
+ATTR;SE_FILTER;SE_T_FILTERS;Filtre;N;N;xml;380;R
+ATTR;SE_TYPEFILTER;SE_T_FILTERS;Type;N;N;enum;390;R;;;;specified|Spécifié,generated|Généré;;;system=yes|bmenu=no
+END
+
+
+
+// recherche détaillée;fromid;;id;class;name
+
+BEGIN;SEARCH;Recherche spécialisée;38;;SSEARCH
+ICON;searchs.gif
+USEFOR;S
+CLASS;Dcp\Core\SpecialSearch
+METHOD
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;option
+ATTR;SE_FR_FUNCTION;;Fonction;N;N;frame;0;W
+ATTR;SE_PHPFILE;SE_FR_FUNCTION;Fichier PHP;N;N;text;300;W
+ATTR;SE_PHPFUNC;SE_FR_FUNCTION;Fonction PHP;N;N;text;310;W
+ATTR;SE_PHPARG;SE_FR_FUNCTION;Argument PHP;N;N;text;320;W
+MODATTR;SE_CRIT;;;;;;;H
+END
+
+
+
+
+
+
+
+
+// recherche détaillée;fromid;;id;class;name
+
+BEGIN;DSEARCH;Rapport;25;;REPORT
+CLASS;Dcp\Core\Report
+ICON;report.gif
+METHOD
+RESET;attributes
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;options
+ATTR;REP_TAB_PRESENTATION;;Présentation;N;N;tab;1000;W
+ATTR;REP_FR_PRESENTATION;REP_TAB_PRESENTATION;Présentation;N;N;frame;1010;W
+ATTR;REP_CAPTION;REP_FR_PRESENTATION;Description;N;Y;longtext;1020;W
+ATTR;REP_SORT;REP_FR_PRESENTATION;Tri;N;N;text;1030;W;;;fdl.php;getReportSortableColumns(D,SE_FAMID,REP_SORT):REP_IDSORT,REP_SORT,REP_ORDERSORT
+ATTR;REP_IDSORT;REP_FR_PRESENTATION;Id tri;N;N;text;1040;H
+ATTR;REP_ORDERSORT;REP_FR_PRESENTATION;Ordre;N;N;enum;1050;W;;;;asc|ascendant,desc|descendant;;;system=yes|bmenu=no
+ATTR;REP_LIMIT;REP_FR_PRESENTATION;Limite;N;N;int;1060;W;;;;;;;elabel=nombre maximum de documents retournés|esize=3
+;;;;;;;1070
+ATTR;REP_TCOLS;REP_FR_PRESENTATION;Colonnes;N;N;array;1080;W;;;fdl.php;FDL:REPORTCHOOSECOLUMNS(A,ID):;;;ltitle=Choisir les colonnes du rapport|lsymbol=Choisir les colonnes|mwidth=800|mheight=600
+ATTR;REP_LCOLS;REP_TCOLS;Label;N;N;text;1090;W;;;fdl.php;getReportColumns(D,SE_FAMID,REP_LCOLS):REP_IDCOLS,REP_LCOLS,REP_DISPLAYOPTION
+ATTR;REP_IDCOLS;REP_TCOLS;Id colonnes;N;N;text;1100;H
+ATTR;REP_DISPLAYOPTION;REP_TCOLS;Option de présentation;N;N;text;1110;H
+ATTR;REP_COLORS;REP_TCOLS;Couleur;N;N;color;1120;W;;;;;;;cwidth=110px
+ATTR;REP_FOOTS;REP_TCOLS;Pied de tableau;N;N;enum;1130;W;;;-;NONE| ,SUM|Somme,MOY|Moyenne,CARD|Cardinal;;;system=yes|cwidth=110px
+ATTR;REP_STYLE;REP_FR_PRESENTATION;Style;N;N;enum;1140;W;;;-;standard1|Standard (Thème 1),standard2|Standard (Thème 2),standard3|Standard (Thème 3),reportHBlue|Bleu horizontal,reportVGreen|Vert vertical,reportHYellow|Jaune horizontal,reportHInverse|Inverse vidéo, |Personnalisé...;;;system=yes
+ATTR;REP_COLORHF;REP_FR_PRESENTATION;Couleur entête;N;N;color;1150;W;;;;::nothing(REP_STYLE);;;elabel=couleur du fond pour l'entête et le pied de tableau
+ATTR;REP_COLORODD;REP_FR_PRESENTATION;Couleur impaire;N;N;color;1160;W;;;;::nothing(REP_STYLE);;;elabel=couleur du fond pour les rangées impaires
+ATTR;REP_COLOREVEN;REP_FR_PRESENTATION;Couleur paire;N;N;color;1170;W;;;;::nothing(REP_STYLE);;;elabel=couleur du fond pour les rangées paires
+ATTR;REP_CSV;;Export CSV;N;N;menu;5;W;;%S%app=FDL&action=REPORT_EXPORT_CSV&id=%I%&displayForm=true
+ATTR;REP_IMP; ;Version imprimable;N;N;menu;20;W;;%S%app=FDL&action=IMPCARD&props=N&dochead=N&id=%I%&ulink=N;;;;;barmenu=yes
+PARAM;REP_FR_PARAM;;Paramètres;N;N;frame;100;W
+PARAM;REP_NOACCESSTEXT;REP_FR_PARAM;Texte à afficher pour les valeurs protégées;N;N;htmltext;105;W;;;;;;;elabel=Dans la cas où un attribut est protégé (visibilité I)
+PARAM;REP_MAXDISPLAYLIMIT;REP_FR_PARAM;Limite d'affichage pour le nombre de rangées;N;N;int;110;W
+INITIAL;REP_NOACCESSTEXT;N.C.
+INITIAL;REP_MAXDISPLAYLIMIT;1000
+END
+
+
+

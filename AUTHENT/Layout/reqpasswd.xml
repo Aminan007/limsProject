@@ -1,0 +1,43 @@
+<div class="head">
+    <div class="societe">[CORE_CLIENT]</div>
+</div>
+<form action="[CORE_BASEURL]app=AUTHENT&amp;action=SUBMITREQPASSWD"
+      method="post" id="reqform" name="reqform">
+    <input type="hidden" name="lang" value="[lang]"/>
+    <div id="authform" class="authmain" style="visibility:hidden">
+
+
+        <div id="main" style="visibility:hidden">
+
+            <div id="idbanner" class="banner">
+                <div class="realm">[CORE_REALM]</div>
+            </div>
+
+            <div class="form">
+                <div class="zoneinput">
+                    <label for="form_login" class="label">[TEXT:reqpasswd_login]
+                    </label>
+                    <div class="input">
+                        <input type="text" placeholder="[TEXT:Enter your login]"
+                               name="form_login" id="form_login" autocapitalize="off"
+                               autocorrect="off"/>
+                    </div>
+                    <p class="or">
+                        [TEXT:reqpasswd_or]
+                    </p>
+                    <label for="form_email" class="label">[TEXT:reqpasswd_email]
+                    </label>
+                    <div class="input">
+                        <input type="email" name="form_email" id="form_email"
+                               autocapitalize="off" autocorrect="off"
+                               placeholder="[TEXT:Enter your email]"/>
+                    </div>
+                    <div class="action">
+                        <input class="submit" type="submit" value="[TEXT:reqpasswd_submit]"/>
+                        <div style="clear:both"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

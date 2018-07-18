@@ -1,0 +1,64 @@
+<?php
+/*
+ * @author Anakeen
+ * @package FDL
+*/
+global $sty_desc, $sty_const;
+
+$sty_desc = array(
+    "name" => "ORIGINAL", //Name
+    "description" => N_("old style") //long description
+    
+);
+
+$sty_inherit = "STYLE/DEFAULT/DEFAULT.sty";
+$sty_const = array(
+    "CORE_FGIMGMENU" => "url('STYLE/ORIGINAL/Images/bg.png')",
+    "CORE_BGIMAGE" => "url('STYLE/ORIGINAL/Images/bg.gif')",
+    "CORE_TEXTFGCOLOR" => "#483d8b",
+    "CORE_FGCOLOR" => "#483d8b",
+    "CORE_ACOLOR" => "#2495fc",
+    "COLOR_BLACK" => "#483d8b"
+);
+$sty_colors = array(
+    "A" => '#a4a4ef', // ligh blue
+    "B" => '#126ab5', //blue
+    "C" => "#94b9f2"
+); // light blue2
+// local variable for compose style css
+$sty_local = array(
+    "menu-background-disabled-color" => "COLOR_BLACK",
+    "menu-background-hover-color" => "COLOR_C5",
+    "menu-background-normal-color" => "COLOR_BLACK",
+    "menu-text-normal-color" => "COLOR_WHITE",
+    "menu-text-disabled-color" => "COLOR_C3",
+    "menu-text-hover-color" => "COLOR_BLACK"
+);
+
+$sty_rules = array(
+    'css' => array(
+        'dcp/main.css' => array(
+            "src" => array(
+                "CORE/Layout/core.css",
+                "FDL/Layout/freedom.css",
+                "WHAT/Layout/size-normal.css",
+                "STYLE/ORIGINAL/Layout/ORIGINAL.css"
+            ) ,
+            "flags" => Style::RULE_FLAG_PARSE_ON_RUNTIME,
+            "deploy_parser" => array(
+                "className" => '\Dcp\Style\dcpCssTemplateParser'
+            )
+        ) ,
+        'dcp/system.css' => array(
+            "src" => array(
+                "STYLE/ORIGINAL/Layout/ORIGINAL.css",
+                "WHAT/Layout/size-normal.css"
+            ) ,
+            "flags" => Style::RULE_FLAG_PARSE_ON_RUNTIME,
+            "deploy_parser" => array(
+                "className" => '\Dcp\Style\dcpCssTemplateParser'
+            )
+        )
+    )
+);
+?>

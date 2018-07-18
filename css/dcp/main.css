@@ -1,0 +1,2057 @@
+/* ---------------------------------------------------------------------------
+ * $Id: core.css,v 1.55 2009/01/12 15:13:11 jerome Exp $
+ * ---------------------------------------------------------------------------
+ 
+ * ---------------------------------------------------------------------------
+ */
+
+
+body, .core {
+  margin:0px;
+}
+
+TD {
+	empty-cells: show;
+	border-style : inherit;
+}
+TH {
+  empty-cells: show;
+  font-weight: bold;
+}
+
+
+/*
+ *
+ * --------------------------------------------
+ * Header CSS specific
+ * --------------------------------------------
+ */
+
+.tablesimple {
+	width : 100%;
+	border-width: 0px;
+	border-spacing: 0px;
+	empty-cells: show;
+        background: #FFFFFF;
+
+
+}
+
+.tableborder {
+	border : #99D5FF inset 1pt;
+	border-spacing: 0px;
+	empty-cells: show;
+        background: #FFFFFF;
+}
+
+
+
+.headtitle {
+  color: #000000;
+  font-weight: bold;
+}
+
+A.headtitle:link,A.headtitle:visited {
+  color: #000000;  
+}
+A.headtitle:hover {
+  color: #000000;
+  background-color: #99D5FF;
+[IFNOT ISIE6]  background-image: url('Images/tabvig.png');[ENDIF ISIE6]
+}
+
+TR.headcell  {
+  background-color: #99D5FF;
+[IFNOT ISIE6]  background-image: url('Images/tabvig.png');[ENDIF ISIE6]
+  
+  border: none;
+}
+
+
+.historique {
+  color: #000000;
+}  
+
+.anakeen {
+  color: #000000;
+}
+
+
+/*
+ * --------------------------------------------
+ * TDM Specific styles
+ * --------------------------------------------
+ */
+
+.toctitle {
+  font-weight: bold;
+  color: #99D5FF;
+}  
+
+.tocitem0on {
+  background-color: #99D5FF;
+  font-weight: bold;
+  color: #FFFFFF;
+}  
+
+.tocitem0off {
+  color: #99D5FF;
+}  
+
+
+/*
+ * ------------------------------------------
+ * LINKS
+ * ------------------------------------------
+ */
+A:link, A:visited {
+  text-decoration: none;
+}
+
+IMG.click {
+  	cursor: pointer;
+	border:none;
+}
+IMG.click:hover {
+        background-color: #EFF9FF; 
+}
+
+/*
+ * ------------------------------------------
+ * TAB STYLES
+ * ------------------------------------------
+ */
+.TABBackgroundSelected {
+    background-color: #99D5FF;
+    border-radius: 0 20px 0 0;
+    padding: 0 20px 0 0;
+    float:left;
+    margin-right:3px;
+[IFNOT ISIE]  background-image: url('Images/tabvg.png');[ENDIF ISIE]
+
+color: #000000;
+    font-weight: bold;
+}
+.TABBackground {
+    background: #D6EEFF;
+    border-radius: 0 20px 0 0;
+    padding: 0 20px 0 0;
+    float:left;
+    margin-right:3px;
+[IFNOT ISIE]  background-image: url('Images/tabvg.png');[ENDIF ISIE]
+  
+
+  color: #000000;
+}
+.TABOdd {
+  background: #99D5FF;
+  border-color: #99D5FF;
+  border-style:solid none none none;
+  border-width: 1px 0pt 0pt 0pt;
+  color: #000000;
+}
+.TABLabelSelected {
+  color: #000000;
+}
+.TABLabel {
+  color: #000000;
+}
+
+
+/*
+ * ------------------------------------------
+ * PAGE CONTENT STYLES
+ * ------------------------------------------
+ */
+
+.CORETblHead {
+  color: #000000;
+  background-color: #99D5FF;
+[IFNOT ISIE6]  background-image: url('Images/tabvig.png');[ENDIF ISIE6]
+}
+
+.CORETblHeadBold {
+  color: #000000;
+  background-color: #99D5FF;
+[IFNOT ISIE6]  background-image: url('Images/tabvig.png');[ENDIF ISIE6]
+  font-weight: bold;
+}
+.CORETblHeadCell {
+  background-color: #99D5FF;
+[IFNOT ISIE6]  background-image: url('Images/tabvig.png');[ENDIF ISIE6]
+}
+.CORETblHeadCell TD{
+  color: #000000;
+}
+.CORETblHeadCellLine {
+  background-color: #99D5FF;
+[IFNOT ISIE6]  background-image: url('Images/tabvig.png');[ENDIF ISIE6]
+  border-style : solid none none none;
+  border-width : 1px;
+  border-color : #FFFFFF;
+}
+
+.CORETbl {
+  color: #000000;
+}
+
+.CORETblBold {
+  color: #000000;
+  font-weight: bold;
+}
+
+.CORETblCell {
+  background-color: #FFFFFF;
+}
+.CORETblCellLine {
+  background-color: #FFFFFF;
+  border-style : solid none none none;
+  border-width : 1px;
+}
+
+.CORETblCellAltern, OPTION.CORETblCellAltern {
+  background-color: #99D5FF!important;
+}
+
+.Error {  
+  color: red;
+  white-space:normal;
+}
+.COREError {
+  color: red;
+  font-weight: bold;
+  padding:20px;
+
+[IFNOT ISIE]background-image:url('Images/op20.png');[ENDIF ISIE]
+  [IF ISIE]filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='Images/op20.png',sizingMethod='scale');float:left;[ENDIF ISIE]
+  border:solid 1px;
+  text-align:center;
+  z-index: 2;
+}
+.CORETextError {
+
+}
+.COREErrorBg {
+  color: red;
+  font-weight: bold;
+  padding:20px;
+  background:#FFFFFF;
+  border:solid 1px;
+  text-align:center;
+  z-index: 2;
+  cursor:pointer;
+}
+.COREErrorBg:hover {
+    border:inset 1px;
+}
+IMG.Fade {
+	[IF ISIE]filter:alpha(opacity=50);[ENDIF ISIE]
+	[IFNOT ISIE]opacity:.5;[ENDIF ISIE]
+}
+IMG.NotFade {
+} 
+TD.NotFade A:hover {
+  color: #000000;
+  background-color: inherit;
+  background-image: inherit;
+}
+IMG.Select {	
+}
+TD.Fade {
+[IF ISIE]
+	padding-left:2px;
+	padding-right:2px;
+        border-left-style:none;
+        border-right-style:none;[ENDIF ISIE]
+[IFNOT ISIE]
+	border-left:2px transparent solid;
+	border-right:2px transparent solid;[ENDIF ISIE]
+}
+TD.Select {
+[IF ISIE]
+	padding-left:2px;
+	padding-right:2px;[ENDIF ISIE]
+[IFNOT ISIE]
+	border-left:2px transparent solid;
+	border-right:2px transparent solid;[ENDIF ISIE]
+}
+TD.NotFade {
+/*	background-image:url('CORE/Images/core-noimage.png');*/
+	/*background-color:#99D5FF;*/
+	border:2px outset #99D5FF;
+[IF ISIE]
+	padding-left:0px;
+	padding-right:0px;[ENDIF ISIE]
+}
+
+div.detail {
+  font-weight : bold ;
+  background:#99D5FF;
+  border: solid ;
+  border-color: #99D5FF;
+  border-width: 1pt;
+  background: #FFFFFF;
+  float:left;
+  width:300px;
+  padding:10px;
+  margin:10px;
+	
+  -moz-border-radius:25px;
+}
+
+/*
+ * LOG Style (like serial VT)
+ */
+.LOGConsole {
+   background-color: #000000;
+   color: #eaea67;
+   font-family : monospace;
+}
+
+
+
+DIV.TITLE { color : #000000;
+	text-align:center;
+	border-style : inset;
+	border-color : #99D5FF;
+	border-width: 1pt;
+	padding : 3pt;		
+}
+
+
+
+[IF ISIE6]
+/*
+Select Fix for IE6 and IE5.x
+Version 0.3
+
+CSS instructions from http://www.hedgerwow.com/360/bugs/css-select-free.html
+But keep in mind that these classes are a bit modified.
+*/
+
+.select-free {
+  overflow:hidden;/*must have*/
+}
+.select-free .innerFixer {
+  position:absolute;/*must have*/
+  top:0;/*must have*/
+  left:0;/*must have*/
+  display:none;/*sorry for IE5*/
+  display/**/:block;/*sorry for IE5*/
+  width:100%;/* (old value 3000px) must have for any big value*/
+  height:100%;/* (old value 3000px) must have for any big value*/
+}
+.select-free iframe.innerFixer {
+  border: 0;
+  filter:mask();/*must have*/
+  z-index:-1;/*must have*/
+}
+[ENDIF ISIE6]
+
+[IF ISSAFARI]
+/**
+ * Apple Webkit automatically lighten, or darken, the color
+ * of disabled text input fields. So let him handle it
+ * from the inherited color, instead of messing our own
+ * finely chosen color.
+ *
+ * (Not perfect, as the inherited color might not be the
+ * same color as non disabled input fields...)
+ *
+ * Bug ref. <https://bugs.webkit.org/show_bug.cgi?id=13818>
+ */
+input[disabled], textarea[disabled] {
+  color: inherit !important;
+}
+[ENDIF ISSAFARI]/* ---------------------------------------------------------------------------
+ * $Id: freedom.css,v 1.151 2009/01/14 14:16:49 eric Exp $
+ * ---------------------------------------------------------------------------
+ */
+.FREEDOMTblTitle{
+	background-color: #99D5FF;	
+}
+html,body.freedom html {
+width:100%;height:100%;
+}
+body.freedom  {
+width:100%;height:100%;
+margin:0;padding:0;
+}
+.FREEDOMTextBigTitle{
+  font-weight: bold;
+  font-size: 12pt;
+  font-variant: small-caps;
+}
+.emblem { margin-right : 2px;
+  height:22px }
+
+.FREEDOMTextTitle{
+  font-weight: bold;
+  color: #000000;
+  text-transform:capitalize;
+}
+div.htmltext p:first-child, div.htmltext h1:first-child, div.htmltext h2:first-child, div.htmltext h3:first-child {
+    margin-top:0px;
+}
+
+div.htmltext p:last-child, div.htmltext h1:last-child, div.htmltext h2:last-child, div.htmltext h3:last-child {
+    margin-bottom: 0px;
+}
+div.frame .content {
+    [IFNOT ISIE]
+    overflow: auto;
+    [ENDIF ISIE]
+    [IF ISIE]
+    overflow: hidden;
+    [ENDIF ISIE]
+}
+span.familyTitle {
+  font-size:70%;
+  font-style: italic;
+}
+img.documentIcon {
+	width:48px;
+	}
+
+body.documentView img.documentIcon{ margin-right : 5px; }
+
+.FREEDOMTextTitle:first-letter {
+  text-transform:capitalize;
+}
+
+TABLE.tablehead TR.FREEDOMBack1, DIV.tablefoot {
+	background-color: #FFFFFF;
+}
+TR.FREEDOMBack1 {
+	color : #000000;	
+}
+
+TR.FREEDOMBack2:first-letter {
+  text-transform:capitalize;
+}
+
+TR.FREEDOMBack2{
+	background-color: #99D5FF;
+	color : #000000;
+}
+
+a.relation {
+	padding-left:15px;
+	background-repeat: no-repeat;
+}
+
+
+TABLE.edittable TD { vertical-align:top; }
+
+TD.FREEDOMText, .FREEDOMText {
+  color: #000000;
+}
+TD.FREEDOMLabel, .FREEDOMLabel {
+  text-align:right;
+  padding-right: 3px;
+}
+TR.FREEDOMOpt TD.FREEDOMLabel {
+  color: #000000;
+  text-align:right;
+  font-style: italic;
+  background-color: #99D5FF;
+  vertical-align:top;
+}
+TR.FREEDOMOpt TD.FREEDOMText {
+  color: #000000;
+  text-align:left;
+  background-color: #99D5FF;
+  vertical-align:top;
+}
+TR.FREEDOMOpt TD {
+  color: #000000;
+  text-align:left;
+  background-color: #99D5FF;
+}
+.FREEDOMLabelNeeded{
+  color: #000000;
+  text-align:right;
+  font-weight: bold;
+}
+
+.error-needed {
+    outline: solid 1px red;
+}
+
+TABLE.tarray TH.labelNeeded {
+    font-weight: bold;
+}
+TD.uplabel span {
+    text-decoration: underline;
+}
+TD.leftlabel:first-letter, TD.uplabel:first-letter, TH.headerarray:first-letter, span.dyp-frame-opener:first-letter {
+    text-transform:capitalize;
+}
+TD.FREEDOMLabel:first-letter {
+  text-transform:capitalize;
+}
+TD.FREEDOMLabel SPAN:first-letter {
+  text-transform:capitalize;
+}
+
+TD.FREEDOMLabelNeeded:first-letter {
+  text-transform:capitalize;
+}
+TD.FREEDOMLabelNeeded SPAN:first-letter {
+  text-transform:capitalize;
+}
+
+TABLE.edittable TD {
+  padding: 0px 0px 3px 0px;
+}
+SPAN.FREEDOMLabel:first-letter {
+  text-transform:capitalize;
+  color:red;
+}
+
+LEGEND, div.legend {
+  color: #15428B;
+}
+LEGEND.frame, div.legend {
+  cursor:pointer;
+}
+
+div.legend {
+	background-color: inherit;
+	border-width: 1px;
+    border-color: inherit;
+    border-style: none none solid none; 
+    
+    /*display: inline;
+    margin-left: 7px;
+    margin-top: -0.7em;
+	float:left;*/
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+[IFNOT ISIE]
+FIELDSET {
+/*   background-color: #FFFFFF;*/
+   border-radius: 6px;
+}[ENDIF ISIE]
+
+FIELDSET.frame table td, div.frame table td {
+  padding:2px;  
+  }
+div.frame {
+     border:0px;
+     padding:0px;
+     margin:0px 10px 10px 10px;
+ }
+ 
+  div.frame .legend { 
+     display:inline;
+     border-width:0px;
+     padding:0 5px 0 5px;
+     margin-left:10px;
+ }
+div.frame .legend:hover { background-color:#E6ECF0; }
+
+ div.frame .content {
+     border-style:solid solid solid solid;
+     border-color:#9BB3C4 #9BB3C4 #9BB3C4 #9BB3C4;
+     border-width:1px 1px 1px 1px;
+ 	
+     border-radius: 6px; 	
+ }
+TABLE.barmenu {
+/*	background-color: #99D5FF;*/
+	background-color: orange;
+        background-image: url('Images/tabvig.png');
+	width : 100%;
+	border-width: 0px;
+	border-spacing: 0px;
+	empty-cells: show;
+}
+DIV.barmenu {
+  margin-bottom : 10px; 
+}
+DIV.barmenu A {
+  border-color: #CCEAFF;
+  border-width: 1px;
+  border-style:  none none none solid;
+  padding-left:5px;
+  white-space:nowrap;
+}
+TD.editbutton, TD.nowrap {
+  white-space:nowrap;
+  [IFNOT ISIE]width:2px;[ENDIF ISIE]
+  [IF ISIE6]
+width:60px;
+    padding-left: 4px !important;
+[ENDIF ISIE6]
+[IF ISIE9]
+    width:5px;
+[ENDIF ISIE9]
+[IF ISIE10]
+    width:5px;
+[ENDIF ISIE10]
+}
+TD[type=docid][multiple=true]+TD.editbutton, 
+TABLE[type=docid][multiple=true] TD.editbutton,
+TD[type=account][multiple=true]+TD.editbutton,
+TABLE[type=account][multiple=true] TD.editbutton  {
+    vertical-align:bottom;
+}
+
+select.multidoc {
+    border:none;
+    width:100%
+}
+[IF ISIE]
+table[type=array] select.multidoc {
+    width:auto;/* cause IE bug */
+}
+[ENDIF ISIE]
+
+TD.MenuInactive{  
+  vertical-align:middle;
+	background-color: #99D5FF;
+        background-image: url('Images/tabvig.png');	
+	color : #000000;
+        text-transform:capitalize;	
+	border-width : 1px;
+	border-style : outset;
+	border-color : #99D5FF;
+}
+TD.MenuActive {
+  vertical-align:middle;
+	background-color: #99D5FF;
+        background-image: url('Images/tabvig.png');	
+	color : #000000;
+        text-transform:capitalize;
+	border-width : 1px;
+	border-style : solid;
+	border-color : #99D5FF;
+}
+TD.MenuSelected {
+  vertical-align:middle;
+	background-color: #99D5FF;
+        background-image: url('Images/tabvig.png');
+	color : #000000;
+	color : #000000;   
+        text-transform:capitalize;
+	border-width : 1px;
+	border-style : outset;
+	border-color : #99D5FF;
+}
+
+TD.MenuInactive div, TD.MenuActive div, TD.MenuSelected div {
+  vertical-align:middle;
+	height:14pt;
+	overflow:hidden;
+}
+
+.iconimg {
+  border-style: hidden;
+  border-width: 1px;
+  border-color: #99D5FF;
+  width:32px;
+  height:32px;
+}
+.iconimg20 {
+  border-style: hidden;
+  border-width: 1px;
+  border-color: #99D5FF;
+  width:20px;
+  height:20px;
+  
+}
+.iconline {
+  border-color: #99D5FF;
+  margin:1px;
+  padding:0px;
+  border-width:3px;
+  border-style: hidden;
+  /*background-color: palegoldenrod;*/
+  
+}
+ 
+IMG.iconone {
+  border-style: none;
+  border-width: 0px;
+  float:left;
+  cursor:pointer;
+}
+IMG.icononesel {
+  border-style: outset;
+  border-width: 2px;
+  border-color: #99D5FF;
+  background-color:#E0F2FF;
+  float:left;
+  cursor:pointer;
+}
+IMG.icononehi {
+  border-style: inset;
+  border-width: 2px;
+  border-color: #99D5FF;
+  background-color:#EFF9FF;
+  float:left;
+  cursor:pointer;
+}
+
+TD.und {
+ border-bottom:1px solid;
+ border-left:1px solid;
+ border-color:#82A0B5;
+}
+
+TD.tlist {
+  /* border-width : inherit;
+   border-style : inherit;*/
+  border-left-style:none;
+  border-right-style:none;
+  border-color : #82A0B5;
+  border-top-style:solid;
+  border-top-width:1px;
+  border-bottom-style:none;
+}
+
+DIV.unselect {
+   border-style : inset;
+  background-color:#FFFFFF;
+  color:#000000;
+   border-width : 1px;
+  margin: 2px 0px 0px 0px;
+
+}
+DIV.normal {
+  background-color:#FFFFFF;  
+}
+DIV.unselecth {
+   border-style : inset;
+  background-color:#EFF9FF!important;
+  color:#000000;
+   border-width : 1px;
+  margin: 2px 0px 0px 0px;
+
+}
+TR.unselecth {
+   /*border-top-style : inset;
+   border-bottom-style : inset;*/
+  background-color:#EFF9FF!important;
+  color:#000000;
+   border-width : 1px;
+  margin: 2px 0px 0px 0px;
+
+}
+
+DIV.select {
+  background-color:#E0F2FF;
+  color:#000000;
+  border-style : outset;
+  border-width : 1px;
+  margin: 2px 0px 0px 0px;
+} 
+
+DIV.contour {
+  background: #FFFFFF;
+  width:auto;
+  border:ridge 4px #99D5FF;
+  padding:2px;
+} 
+HR {
+  color:#99D5FF;
+}
+
+A.title {
+  font-weight:bold;
+  color:#000000;  
+  cursor:pointer;
+}
+
+
+A.title:hover {
+  background-color:#FFFFFF;
+   
+}
+
+TABLE.rows TBODY TR TD {  
+  border-width:1px 0px 0px 0px;	 
+  border-color:#99D5FF;
+  border-style:solid;
+}
+
+TABLE.border  {  
+  border:1px solid #99D5FF; 
+}
+
+TABLE.tarray  TR TD {  
+  border-width:0px 0px 1px 0px;	 
+  border-color:#99D5FF; 
+  border-style:none none solid none;
+  padding:0px;
+  vertical-align:top;
+/*  white-space:nowrap;*/
+}
+TABLE.tarray  TR TH {
+  background-color:#EBF7FF;
+  border-width:0px 0px 1px 0px;
+  border-color:#D6EEFF;
+  border-style:none none solid none;
+  padding:0px 4px 0px 4px;
+  text-align:left;
+}
+TABLE.tarray  TH {  
+  font-weight: normal;
+}
+
+TABLE.transparent TBODY TR TD,TABLE.transparent TBODY TR,TABLE.transparent THEAD TR TH {  
+  border-width:1px 0px 0px 0px;
+  border-color:#99D5FF;
+  border-style:solid;
+  background-color:transparent;
+}
+TBODY.overflow {
+  overflow:auto;
+}
+TABLE.tablefoot, DIV.tablefoot {
+	position:fixed;
+	top:auto;
+	right:0;
+	bottom:0;
+	left:0;
+}
+TABLE.tablehead {
+	position:fixed;
+	bottom:auto;
+	right:0;
+	top:0;
+	left:0;
+    z-index: 1;
+}
+#fixtablefoot {
+    max-height: 45px;
+}
+.onglet {
+	font-size: 7pt;
+	background-image:url('Images/tab.png');
+	color:black;
+	cursor: pointer;
+	border-style: none;
+}
+
+.ongleth {
+	position: relative;
+	font-size: 7pt;
+	background-image:url('Images/tabh.png');
+	color:#FFFFFF;
+	cursor: pointer;
+	border-style: none;
+}
+
+.onglets {
+	font-size: 7pt;
+	cursor: pointer;
+	background-image:url('Images/tabh.png');
+	color:#000000;
+	border-style: none;
+}
+
+.ongletv {
+	vertical-align: middle;
+	font-size: 8pt;
+	cursor: pointer;
+	border-style: none;
+	background-image:url('CORE/Images/core-noimage.png');
+	color:#000000;
+}
+
+.tabcontainer {
+	display: block;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: -1;
+	border-bottom: 1px solid #888;
+	line-height: 32px;
+	height: 32px;
+	width: 100%;
+}
+
+.ongletvg,
+.ongletvgie,
+.ongletvs,
+.ongletvsie {
+	line-height: 29px;
+	height: 29px;
+	position: relative;
+	padding: 0 8px 0 36px;
+	font-size: 8pt;
+	cursor: pointer;
+	border-style: none;
+	background-color:#99D5FF;
+	float: left;
+	margin: 2px 3px 1px 3px;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+}
+
+.ongletvs,
+.ongletvsie {
+	margin: 2px 3px 0 3px;
+	border-left: 1px solid #888;
+	border-right: 1px solid #888;
+	border-top: 1px solid #888;
+	border-bottom: 1px solid #fff;
+}
+
+.ongletvg img,
+.ongletvgie img,
+.ongletvs img,
+.ongletvsie img {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	padding: 4px 6px 5px 6px;
+	background:url('Images/tabbar.png') no-repeat right -150px;
+}
+
+.ongletvs img,
+.ongletvsie img {
+	background-position:right -100px;
+}
+
+.ongletvg {
+	background-image:url('Images/tabvg.png');
+	color:#000000;
+}
+.ongletvgie {
+	color:#000000;
+[IF ISIE6]
+  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='Images/tabvg.png',sizingMethod='scale');
+[ENDIF ISIE6]
+}
+.ongletvs {
+	background-image:url('STYLE/MODERN/Images/tabvig.png');
+/*  color:#000000;*/
+}
+.ongletvsie {
+[IF ISIE6]
+  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='STYLE/MODERN/Images/tabvig.png',sizingMethod='scale');
+[ENDIF ISIE6]
+/*  color:#000000;*/
+}
+
+UL {
+  margin-top:0px;
+}
+
+LI.translucide {
+  list-style:url('USERCARD/Images/bblue10.gif');
+}
+
+IMG.unselect {
+  border-style: hidden;
+  border-width: 3px;
+  border-style : none;
+  width:32px;
+  height:32px;  
+  cursor: crosshair;
+}
+IMG.unselect:hover {
+  border-style: hidden;
+  border-width: 1px;
+  border-color: #99D5FF;
+  background-color:#99D5FF;
+  border-style : solid;
+  cursor: pointer;
+  border-radius:25px;
+}
+IMG.select {
+  border-style: hidden;
+  border-width: 1px;
+  border-color: #99D5FF;
+  width:40px;
+  height:40px;  
+  background-color:#E0F2FF;
+  border-style : solid;
+  cursor: crosshair;
+  border-radius:25px;
+}
+
+TBODY.unselect, TR.unselect {
+  cursor: crosshair;
+}
+TR.unselect {
+  border-color:#82A0B5;
+  border-width:1px;
+}
+TR.unselect:hover, TBODY.unselect:hover TR{
+  cursor: crosshair;
+  background-color:#EFF9FF!important;
+}
+
+TBODY.unselect:hover TR {
+  cursor: crosshair;
+  background-color:#EFF9FF;
+}
+TR.selhead {
+  cursor: pointer;
+  background-color:#99D5FF;
+[IFNOT ISIE6]background-image:url('STYLE/MODERN/Images/tabvig.png');[ENDIF ISIE6]
+[IF ISIE6] filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='Images/tabvg.png',sizingMethod='scale'); float:right;width:100%;
+  text-transform:capitalize;[ENDIF ISIE6]
+}
+TR.selhead:hover {
+  background-color:#EFF9FF;
+}
+TR.dash TD {
+   border-width : 1px;
+   border-style : dashed none none none;
+   border-color : #99D5FF;
+}
+
+TR.selecta TD{
+  background:#EFF9FF!important;
+  border-style : solid;
+} 
+
+TR.select {
+  background:#E0F2FF!important;
+  border-style : solid;
+  cursor: crosshair;
+} 
+TBODY.select TR {
+  background:#E0F2FF!important;
+  cursor: crosshair;
+} 
+ 
+DIV.icon{
+  font-weight: normal;
+  font-size: 7pt;
+  text-align: center;
+  /*font-variant: small-caps;*/
+  width:64px;
+  height:80px;
+  float:left;
+  border-style:none;
+  border-color:#99D5FF;
+  overflow : hidden;
+}
+
+IMG.aicon, IMG.aiconnoh {
+	margin:0pt;
+	padding:0pt;
+	border-radius:0px 0px 0px 5px;
+}
+IMG.aicon:hover {
+  cursor: pointer;
+  background-color:#99D5FF;
+}
+IMG.button {
+  border:none;
+}
+TR.fileclass TD {	
+}
+TR.fldclass TD {
+  font-weight: bold;
+  color: red;	
+}
+TD.hidden {
+  background-color:red;
+  width:1px;
+  display:none;
+}
+.onlyprint {
+    display:none;
+}
+
+
+TABLE.sortable TH {
+  cursor:pointer;
+}
+INPUT.fullresize, TEXTAREA.fullresize {
+  width:100%;
+}
+TEXTAREA.autoresize {
+  overflow:hidden;
+  vertical-align:text-top;
+  width:100%;
+  padding:0;
+}
+input[type="file"] { 
+	width:auto;
+}
+input.dsubmit {
+  font-weight: bold;
+  background: #99D5FF; 
+}
+input.state {
+  background: #99D5FF; 
+}
+A.boldstate {
+  font-weight: bold;
+}
+A.state, A.boldstate {
+  border-style:none none solid none !important;
+  border-width:2px!important;
+}
+
+
+
+@media print {
+  .noprint {
+    display:none;
+  }
+  #error  {
+    display:none ! important;
+  }
+  *, A, A:link, A:visited, p {
+    color:black;
+  }
+  .tableborder {
+    border:none;
+  }
+  TD, TH {
+  }
+  .onlyprint { 
+    display:block;
+  }
+
+  DIV.tabsh {
+    display:none;
+  }
+  FIELDSET.frame, div.frame {
+    display:block!important; /* to see frame in tabs */
+  }
+  TBODY.overflow {
+    overflow:visible;
+  }
+}
+TABLE.huge {
+  width:100%;
+}
+TABLE.huge TBODY {
+   overflow:auto;
+   height:200px;	
+}
+DIV.button {
+	cursor:pointer;
+	border:2pt solid transparent;
+}
+
+DIV.button:hover {
+	border:outset #99D5FF 2px;
+}
+DIV#tooltip {
+   border:outset #E6ECF0 1px;
+   background-color: #E0F2FF; 
+   position:absolute;
+   visibility:hidden;
+}
+BUTTON.binline {
+  border:none;
+  background:none;
+  color:#15428B;
+  cursor:pointer;
+  font-size:8pt;
+}
+BUTTON.binline:hover, BUTTON.binline:focus {
+        background-color: #E6ECF0; 
+        text-decoration:  underline;
+  border:none;
+}
+input[type="button"].searchbutton {
+  border:none;
+  width:10pt;
+}
+SPAN.selected {
+  cursor: pointer;
+  background-color:lightgreen;
+  background-image:url('Images/buttongreen.png');
+  color:black;
+  border-style: none;
+  font-size:8pt;
+  height:20px;
+  padding:1px;
+  border-radius:25px;
+}
+
+SPAN.unselected {
+  cursor: pointer;
+  color:#000000;
+  border-style: none;
+  padding:1px;
+  height:20px;
+  font-size:8pt;
+  border-radius:25px;
+}
+SPAN.hselected {
+  cursor: pointer;
+  font-size:8pt;
+  background-color:lightblue;
+  background-image:url('Images/buttonblue.png');
+  color:black;
+  border-style: none;
+  padding:1px;
+  height:20px;
+  border-radius:25px;
+}
+SPAN.wselected {
+  cursor: pointer;
+  font-size:8pt;
+  background-color:lightblue;
+  background-image:url('Images/buttonred.png');
+  color:black;
+  border-style: none;
+  padding:1px;
+  height:20px;
+  border-radius:25px;
+}
+SPAN.selected:hover, SPAN.unselected:hover, SPAN.hselected:hover{
+  color:#EFF9FF;
+  border-radius:25px;	
+}
+
+SPAN.checked, TR.checked {
+        background: #D6EEFF; 	
+}
+SPAN.nochecked:hover, TR.nochecked:hover {
+      background-color: #F1F9FF; 	
+}
+
+DIV.tabh SPAN  {
+  border-radius: 8px 8px 0px 0px;	
+  border-width : 1px;
+  border-style :outset;
+  border-color : #E0F2FF;
+[IFNOT ISIE6]  background-image:url('STYLE/MODERN/Images/tabvig.png'); [ENDIF ISIE6]
+[IF ISIE6] filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='Images/tabvg.png',sizingMethod='scale');[ENDIF ISIE6]
+  background-color : #E0F2FF;
+  padding:2px;
+  cursor:pointer;
+  float:left;
+}
+[IFNOT ISIE]DIV.tabh SPAN:first-letter  {
+  text-transform:capitalize;	
+}[ENDIF ISIE]
+DIV.tabh SPAN.tabsel, .divsel{
+  background-color : #B8E2FF;
+/*  color : #000000;*/
+}
+
+DIV.tabh SPAN:hover {
+  border-width : 1px;
+  border-style :outset;
+  border-color : #F5FBFF;
+  background-color : #F1F9FF;
+  cursor:pointer;	
+
+}
+@media screen, print { 
+	/* Turn off list bullets */
+	ul.mktree  li { list-style: none; } 
+	/* Control how "spaced out" the tree is */
+	ul.mktree, ul.mktree ul , ul.mktree li { margin-left:10px; padding:0px; }
+	/* Provide space for our own "bullet" inside the LI */
+	ul.mktree  li           .bullet { padding-left: 15px; }
+
+	/* Show "bullets" in the links, depending on the class of the LI that the link's in */
+	ul.mktree  li.liOpen    .bullet { cursor: pointer; background: url(Images/minus.png)  center left no-repeat; }
+	ul.mktree  li.liClosed  .bullet { cursor: pointer; background: url(Images/plus.png)   center left no-repeat; }
+	ul.mktree  li.liBullet  .bullet { cursor: default; background: url(Images/bullet.gif) center left no-repeat; }
+	/* Sublists are visible or not based on class of parent LI */
+	ul.mktree  li.liOpen    ul { display: block; }
+	ul.mktree  li.liClosed  ul { display: none; }
+[IFNOT ISIE]
+    div.mktreetop {   padding-left : 20px; }
+       div.mktreetop ul.mktree  li  .bullet { margin-left : -20px; }[ENDIF ISIE]
+	
+}
+
+
+
+
+/* - for ftien4 - */
+   TD.fld {
+     text-decoration: none;
+     white-space:nowrap;
+      background:transparent;} 
+   TD.fld IMG{
+/*     width:20px;*/
+     height:20px;
+   }
+   A  {text-decoration: none;
+       color: #15428B}
+   DIV.folder  {width:100%;
+                border-style: none;      
+                display:block;
+                cursor: default}
+   DIV.folder TR {
+	background-color:transparent;
+	}
+   DIV.select TR {
+	background-color:transparent;
+	}
+
+   .urltext {
+      cursor:pointer;
+      color: #000000;
+      text-decoration:none;
+      font-size: 8pt;
+   }
+   .urltextsel {
+      cursor:pointer;
+      text-decoration:underline overline;
+      color: #000000;
+       background-color:#EFF9FF;
+       font-size: 8pt;
+      
+   }
+
+DIV.fldh {	
+  cursor:pointer;
+  overflow:hidden;
+  max-height:25px;
+}
+DIV.fldh IMG:hover {
+       background-color:#EFF9FF;
+}
+DIV.line {
+  border-style:solid none none none;
+  border-width:1px;
+  border-color: #EFF9FF;
+  clear:both;	
+}
+DIV.tabsh SPAN  {
+  border-width : 1px;
+  border-style :outset;
+  border-color : #CCEAFF;
+  background-image:url('STYLE/MODERN/Images/tabvig.png');
+  border-radius: 8px 8px 0px 0px;
+[IF ISIE6] background-image:none;[ENDIF ISIE6]
+  background-color : #E0F2FF;
+  padding:2px;
+  cursor:pointer;
+  float:left;
+}
+
+
+DIV.tabsh SPAN.tabsel  {
+  background-color : #B8E2FF;
+  /*color : #000000;	*/
+}
+DIV.tabsh SPAN:hover  {
+  background-color : #F1F9FF;
+}
+#thefolderh {
+   border:solid #99D5FF 1px;
+   float:right;
+   max-width:150px;
+  background: #FFFFFF;
+}
+.statetext {
+  border-style:none solid solid none ;
+  border-width:0px 10px 1px 0px;
+  border-radius:0px 0px 8px 0px;
+  padding-right:2px;
+  text-decoration:none;
+}
+
+img.mime {
+  width:20px;
+  border:none;
+  vertical-align:bottom;
+}
+
+DIV.static {
+  border : 1px solid #2A3B47;
+}
+
+
+/*
+ *
+ * end of #1443
+ *
+ */
+
+
+
+div.fullscreen {
+  width:100%;
+  position:absolute;
+  left:0px;
+  top:0px;
+	z-index:2;
+  background-color:#FFFFFF;
+}
+div.fileimage {
+        /*overflow-y:scroll;*/
+        overflow-x:auto;
+        border : inset 1px;
+        }
+div.fullscreen div.fileimage {
+        overflow-y:auto;
+	}
+a.fullscreen {
+  background:url('Images/window_fullscreen.png') no-repeat;
+  padding-left:20px;
+  float:right;
+}
+a.fullwidth {
+  background:url('Images/fullwidth.png') no-repeat;
+  padding-left:20px;
+  float:right;
+}
+a.fullheight {
+  background:url('Images/fullheight.png') no-repeat;
+  padding-left:20px;
+  float:right;
+}
+
+/* fonts */
+
+body, .core, P, input, textarea, select, button {
+  font-size: 9pt;
+  font-family : Helvetica, Arial, sans-serif;
+}
+H1 {
+  font-size: 14pt;
+}
+TD, TR, TH {
+  font-size: 9pt;
+}
+
+
+
+
+/* ------------------------------------------
+ * fonts in POPUPMENU
+ * ------------------------------------------
+ */
+
+
+
+.popup a.menuItem * ,.popup a.menuItem, .popup a.menuItem:link, .popup a.menuItem:visited ,.popup a.menuItemCtrl:link, .popup a.menuItemCtrl:visited , .popup a.menuItemDisabled, .popup a.menuItemDisabled:link,  .popup a.separator {
+  
+  font-size:8pt;
+  font-weight: normal;
+}
+
+
+.popup a:link {
+  font-size:8pt;
+}
+/* ---------------------------------------------------------------------------
+ * $Id: DEFAULT.css,v 1.16 2008/12/11 15:28:04 eric Exp $
+ * ---------------------------------------------------------------------------
+ 
+ * ---------------------------------------------------------------------------
+ */
+
+
+
+body, .core {
+  color: #000000;
+}
+body.core {
+  background-color: #FFFFFF;
+  background-image: none;
+}
+
+TD {
+  background-color: inherit;
+  background-image: inherit;
+}
+
+
+
+TR {
+/*  background: #FFFFFF;*/
+  color: #000000;
+}
+
+
+
+
+/*
+ * ------------------------------------------
+ * LINKS
+ * ------------------------------------------
+ */
+A:link, A:visited {
+  color: #15428B;
+  text-decoration: none;
+}
+A {
+  color: #15428B;
+  cursor:pointer  
+} 
+
+A:hover {
+        background-color: #E6ECF0; 
+        text-decoration:  underline ;
+}
+/*
+ * ------------------------------------------
+ * INPUTS
+ * ------------------------------------------
+ */
+input, SELECT, OPTION, TEXTAREA, FILE, .fileInput  {
+   color:#000000;
+   background-color:#E6ECF0;
+   margin:0pt;
+/*  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='CORE/Images/bg.png',sizingMethod='scale');*/
+}
+OPTION {
+   color:#000000;
+   background-color:#E6ECF0;
+}
+BUTTON, input[type="button"], input[type="submit"], input[type="reset"] {
+  /*border-radius:25px;*/
+  padding:0pt;
+  margin:0px;
+  vertical-align:top;
+  overflow:hidden;
+  border:1px outset;
+  color:#000000;
+  background-color:#E6ECF0;
+  background-image: url('STYLE/MODERN/Images/tabvig.png');
+   }
+
+.inlineButton {
+    width:1.5em;
+    cursor: pointer;
+}
+[IF ISIE]
+.inlineButton {
+ width: 19px;
+ height: 19px;
+}
+ [ENDIF ISIE]
+TABLE.edittable input[type="button"] {
+  border-left-style:none;
+  /*margin-right:1px;*/
+  [IF ISCHROME]/*Chrome hack*/
+  min-width: 1.5em;
+  padding: 1px
+  /*EO Chrome hack*/[ENDIF ISCHROME]
+}
+BUTTON:hover { 		
+  background-image: url('STYLE/MODERN/Images/tabvig.png');
+  margin:0px;
+  border:1px inset;
+   }
+
+
+
+OPTION:hover {  
+  color:#000000;
+  background-color:#F9FDFF;
+}
+input[type="text"]:hover,  TEXTAREA:hover,  SELECT:hover {
+  border-style:inset;
+  color:#000000;
+  background-color:#F9FDFF;
+   }
+
+.documentEdit .static {
+  border-style:inset;
+  border-color:#567992;
+  color:#567992;
+  background-color:#E6ECF0;
+}
+
+input[type="text"]:focus,  textarea:focus, input.sffocus, textarea.sffocus {
+  border-style:inset;
+  color:#000000;
+  background-color:#F5FBFF;
+   }
+
+
+/*
+ SELECT:focus { 
+  color:#000000;
+  background-color:#F5FBFF;
+   }
+*/
+/*
+input[type="submit"] { border-radius:25px;
+   }
+input[type="select"] { border-radius:25px;
+  }
+input[type="reset"] { border-radius:25px ;
+ }
+*/
+input[type="text"] { 
+  /*border-radius:7px ;*/
+
+  border:inset 1px #000000;
+ }
+input[type="checkbox"], input[type="radio"] { 
+  vertical-align:middle; 
+ }
+input[disabled], input[disabled="disabled"],input.disabled,
+textarea[disabled],
+select[disabled], select.disabled, select[disabled="disabled"] {
+  color:#567992;
+  background-color:#CDD9E1;
+}
+TEXTAREA {
+  border:inset 1px #000000;
+}
+
+input[type="image"] { 
+  border-style : none;
+  background-color:transparent;
+ }
+
+
+/*
+ * ------------------------------------------
+ * POPUPMENU
+ * ------------------------------------------
+ */
+
+
+.popup {
+  background-color: #E6ECF0!important;  
+  border-color: #E6ECF0!important;
+}
+
+.popup a.menuItem * ,.popup a.menuItem, .popup a.menuItem:link, .popup a.menuItem:visited ,.popup a.menuItemCtrl:link, .popup a.menuItemCtrl:visited , .popup a.separator {
+  color: #000000!important;
+  font-weight: normal;
+}
+
+ .popup a.menuItemDisabled, .popup a.menuItemDisabled:link, .popup a.menuItemDisabled:visited,.popup a.menuItemCtrlDisabled,.popup a.menuItemCtrlDisabled:link,.popup a.menuItemCtrlDisabled:visited {
+  color: #567992!important;
+  font-weight: normal;
+}
+.popup a.separator {
+  border-color:#000000!important;
+}
+.popup a.separator:hover {
+  text-decoration: none;
+  color: #000000!important;
+  background-color: #F5FBFF!important;  
+}
+.popup a.menuItem:hover,.popup a.menuItemCtrl:hover  {
+  color: #000000!important;
+  background-color: #F5FBFF!important;
+}
+.popup a.menuItemDisabled:hover,.popup a.menuItemCtrlDisabled:hover {
+  color: #567992!important;
+  background-color: #F5FBFF!important;	
+}
+.popup a.menuItem:hover *,.popup a.menuItemCtrl:hover *  {
+  background-color: #F5FBFF!important;  
+  color: #000000!important;
+}
+.popup a.menuItemDisabled:hover *,.popup a.menuItemCtrlDisabled:hover * {
+  color: #567992!important;
+}
+
+/*
+ * ------------------------------------------
+ * EXT-ADAPTER-SYSTEM.css
+ * ------------------------------------------
+ */
+
+.document {
+    font-family: tahoma, arial, helvetica, sans-serif;
+    padding: 10px;
+}
+
+.document legend, .document div.legend {
+    font-style: italic;
+}
+.document div.legend {
+   /* margin-top:-1.5em;	*/
+}
+
+.document legend {
+    /*font-size: 9pt;*/
+}
+
+.document a:HOVER {
+    text-decoration: none;
+}
+
+/**
+ * autocompletion.css
+ */
+
+.document .AutoCompleteDivListeStyle {
+  font-size: 10pt; font-family: arial,sans-serif; 
+  white-space:nowrap;
+  cursor:default;
+  border-style: inset ;
+  border-width: 1px ;
+  padding:0px;
+  z-index:1;
+  overflow: auto;
+}
+
+.document .AutoCompleteDiv {
+  display: block; 
+  padding-left: 3px; 
+  padding-right: 3px; 
+}
+
+.document .AutoCompleteDivAct {
+  display: block; 
+  padding-left: 3px; 
+  padding-right: 3px;
+}
+
+/**
+ * End of Autocomplete.css
+ */
+
+
+.document fieldset {
+    border-style: solid;
+    border-width: 1px ;
+    border-radius: 0px;
+    margin-bottom: 10px;
+    padding: 0px 5px 5px 5px;
+}
+
+.document .FREEDOMLabel {
+    text-align: right;
+}
+
+.document .FREEDOMLabelNeeded {
+    text-align: right;
+}
+
+.document input,.document select,.document textarea,.document file,
+.freedom input {
+    border-width: 1px;
+    border-style: solid;
+    /*font-size: 9pt;*/
+}
+
+.document select {
+    background-repeat: repeat-x;
+    border-width: 1px ;
+    border-style: solid ;
+    /*font-size: 9pt;*/
+}
+/*
+.document input[type=button] {
+    border-top: 0px;
+    border-right: 0px;
+    width: 17px;
+    margin-right: 0px !important;
+    cursor: pointer;
+    height: 22px;
+}
+*/
+.document input.constraint {
+    border-top: 0px;
+    border-right: 0px;
+    width: 17px;
+    margin-right: 0px !important;
+    cursor: pointer;
+    height: 22px;
+}
+
+.document input.normal {
+    background: transparent none repeat-x scroll 0 -1096px;
+    width: auto;
+    margin-right: 0px !important;
+    cursor: pointer;
+    height: 22px;
+}
+
+.document input.normal:hover {
+    background-position: 0px -2168px !important;
+}
+/*
+.document input[type=button]:HOVER {
+    background-position: -17px 0px;
+}
+*/
+/*
+.document input[type=text],.document input[type=password],.document select,.document textarea {
+    padding: 3px;
+}
+*/
+
+.document td,.document tr,.document th {
+
+}
+
+.document th,
+.barmenu td {
+    background-repeat: repeat-x;
+    height: 24px;
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-top: 0px !important;
+    padding-left: 3px !important;
+}
+
+.document .tarray tr td {
+    border-style: inherit !important;
+    border-color: inherit !important;
+}
+
+.document td,.document th {
+    /*font-size: 9pt;*/
+}
+
+.document .tarray {
+    border: 0;
+}
+
+.document .tarray tbody tr {
+    border-bottom: solid 1px #B8E2FF;
+}
+.document .tarray tbody tr:last-child {
+    border-bottom: none 0px white;
+}
+.document .border {
+    border-width: 1px;
+    border-style: solid;
+}
+
+.document .line {
+    margin-bottom: 10px;
+    height: 2px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-top-width: 1px ;
+    border-top-style: solid;
+    [IF ISIE6]position: relative;[ENDIF ISIE6]
+
+    top: -1px;
+}
+
+.document .tabsh span {
+    font-weight: bold;
+    font-size: 90%;
+    border-radius: 0px;
+    border-left-width: 1px ;
+    border-left-style: solid;
+    border-right-width: 1px ;
+    border-right-style: solid ;
+    border-top: 0;
+    border-bottom: 0;
+    margin-left: 1px;
+    padding: 5px 4px;
+    background-position:0 -201px;
+    background-repeat:repeat-x;
+    background-attachment:scroll;
+}
+
+.document .tabsh .tabsel {
+    background-repeat: repeat-x;
+    background-position: 0 -151px;
+    background-attachment: scroll;
+    [IF ISIE6]position: relative;[ENDIF ISIE6]
+
+    z-index: 1;
+}
+
+.document .tarray .add-button,.document .tarray .add-button:HOVER {
+    background-repeat: no-repeat;
+}
+
+.document .tarray .trash-button,.document .tarray .trash-button:HOVER {
+    background-attachment: scroll;
+    background-position: 2px 2px;
+    background-repeat: no-repeat;
+}
+
+.document .tarray .select-button,.document .tarray .select-button:HOVER {
+    background-attachment: scroll;
+    background-position: 2px 2px;
+    background-repeat: no-repeat;
+}
+
+.document .tarray .unselect-button,.document .tarray .unselect-button:HOVER {
+    background-repeat: no-repeat;
+}
+
+.document .tarray .duplicate-button,.document .tarray .duplicate-button:HOVER {
+    background-repeat: no-repeat;
+}
+
+.calendar {
+    z-index: 1;
+}
+
+/*
+ * ------------------------------------------
+ * EXT-ADAPTER-USER.css
+ * ------------------------------------------
+ */
+
+
+.document legend,.document a {
+    color: #15428B;
+}
+
+.document .normal {
+    background-color: #FFFFFF !important;
+}
+
+/**
+ * autocompletion.css
+ */
+
+.document .AutoCompleteDivListeStyle {
+  border-color: #B5B8C8;
+  background-color: #FFFFFF;
+}
+
+.document .AutoCompleteDivAct {
+  background-color: #D5E2F0; 
+  color: #222222; 
+}
+
+.document div.AutoCompleteDivAct span{
+  background-color: #D5E2F0;    
+}
+
+.document .AutoMessage {
+  background-color: #FFFFFF; 
+  color: #99BBE8;  
+}
+
+/**
+ * End of Autocomplete.css
+ */
+
+.tablesimple {
+    background-color: #FFFFFF; 
+}
+
+.document fieldset {
+    background-color: white !important;
+    border-color:  #B5B8C8;
+    border-radius: 0px;
+}
+
+.document div.frame {
+    background-color: white !important;
+    border-radius: 0px;
+}
+
+.document div.frame div.content {
+    background-color: white !important;
+    border-radius: 0px;
+    [IFNOT ISIE7][IFNOT ISIE6]margin-top:-0.6em;[ENDIF ISIE6][ENDIF ISIE7]
+}
+.document input,.document select,.document textarea,.document file,
+.freedom input {
+    border-color: #B5B8C8;
+}
+
+.document select {
+    background-color: #FFFFFF;
+    border-color: #B5B8C8;
+}
+
+.document input.constraint {
+    background-image: url('STYLE/MODERN/Images/tabvig.png');
+}
+
+.document input.normal {
+    background-image: url(STYLE/MODERN/Images/btn.gif);
+}
+
+.document th ,
+.barmenu td{
+    background-image: url(STYLE/MODERN/Images/top-bottom.gif);
+    border-color: #99BBE8 !important;
+}
+
+.document .border {
+    border-color:#99BBE8;
+}
+
+.document .line {
+    border-bottom-color:#99BBE8;
+    border-top-color: #99BBE8;
+    background-color: #DFE8F6;
+}
+
+.document .tabsh span {
+    color: #15428B;
+    border-left-color: #99BBE8;
+    border-right-color: #99BBE8;
+    background-image: url('STYLE/MODERN/Images/tabs-sprite.gif');
+}
+
+.document .tabsh .tabsel {
+    background-image: url('STYLE/MODERN/Images/tabs-sprite.gif');
+}
+
+.document input[type=button].add-doc {
+   /* background : url('Images/add.png') no-repeat;*/
+    width:16px;
+    cursor:pointer;
+}
+.document input[type=button].view-doc {
+   /* background : url('Images/accept.png') no-repeat; */
+    width:16px;
+    cursor:pointer;
+}
+.document .tarray .add-button,.document .tarray .add-button:HOVER {
+    background-image: url(STYLE/MODERN/Images/add.png) ;
+}
+
+.document .tarray .trash-button,.document .tarray .trash-button:HOVER {
+    background-color: transparent;
+    background-image: url(STYLE/MODERN/Images/bin.png);
+}
+
+.document .tarray .select-button,.document .tarray .select-button:HOVER {
+    background-color: transparent ;
+    border:none;
+   /* background-image: url(STYLE/MODERN/Images/application_get.png);*/
+}
+
+.document .tarray .unselect-button,.document .tarray .unselect-button:HOVER {
+    background-image: url(STYLE/MODERN/Images/application_put.png) ;
+}
+
+.document .tarray .duplicate-button,.document .tarray .duplicate-button:HOVER {
+    background-image: url(STYLE/MODERN/Images/application_double.png);
+}
+
+.document tr.selecta td {
+    background-color: #DFE8F6 !important;
+}
+
+
+/*
+ * ------------------------------------------
+ * customisations css
+ * ------------------------------------------
+ */
+
+td.MenuSelected {
+    color: #000000;
+    border-style: inset !important;
+}
+
+td.MenuActive {
+    color: #000000;
+    border-style: inset !important;
+}
+.headtitle {
+    color: #000000;
+    font-weight: bold;
+}
+
+A.headtitle:link,A.headtitle:visited {
+    color: #000000;  
+}
+A.headtitle:hover {
+    color: #000000;
+    background-color: #FFFFFF;[IFNOT ISIE6]
+    background-image: none;[ENDIF ISIE6]
+}

@@ -1,0 +1,47 @@
+<!-- HEAD HTML -->
+
+<html>
+  <head>
+
+   <title>[TEXT:Properties:] [TITLE]</title>
+
+   <style type="text/css">
+       .frame {
+          border:[COLOR_A3] solid 1px;
+          margin: 5px;
+          padding: 5px;
+       }
+
+       .frame .legend {
+          background-color: [COLOR_B8];
+          border-bottom:[COLOR_A3] solid 1px;
+          font-weight:bold;
+       }
+
+       body, td, th, tr {
+         font-size: 12px;
+       }
+
+       a {
+         text-decoration:none;
+       }
+       table.border, table.border td {
+          border:[COLOR_A7] solid 1px;
+          border-collapse: collapse;
+       }
+
+   </style>
+
+ </head>
+
+<body>
+
+[BLOCK COMMENT]
+<p>[comment]</p>
+<hr/>
+[ENDBLOCK COMMENT]
+<div width="100%" class="tablesimple">
+[ZONE FDL:VIEWCARD?target=mail&zone=[zone]]
+</div>
+</body>
+</html>

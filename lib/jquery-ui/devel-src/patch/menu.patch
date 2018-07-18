@@ -1,0 +1,11 @@
+@@ -415,6 +415,10 @@ $.widget( "ui.menu", {
+ 			return;
+ 		}
+
++		if (this.active.is(":hover")) {
++			return;
++		}
++
+ 		this.active.children( "a" ).removeClass( "ui-state-focus" );
+ 		this.active = null;
+

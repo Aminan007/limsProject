@@ -1,0 +1,15 @@
+# BEGIN:CONTROL_CRONTAB:/var/www/html/dynacase-control:control.cron
+WIFF_ROOT=/var/www/html/dynacase-control
+# Every days
+43 5 * * * [ -f "$WIFF_ROOT"/wiff ] && cd "$WIFF_ROOT" && ./wiff send_configuration > /dev/null
+# END:CONTROL_CRONTAB:/var/www/html/dynacase-control:control.cron
+
+# BEGIN:FREEDOM_CRONTAB:/var/www/html/lims:FREEDOM/freedom.cron
+CONTEXT_ROOT=/var/www/html/lims
+# Every hours
+01 * * * * [ -f "$CONTEXT_ROOT"/wsh.php ] && [ ! -f "$CONTEXT_ROOT"/maintenance.lock ] && cd "$CONTEXT_ROOT" && ./wsh.php --api=refreshGroups > /dev/null
+# Every days
+02 5 * * * [ -f "$CONTEXT_ROOT"/wsh.php ] && [ ! -f "$CONTEXT_ROOT"/maintenance.lock ] && cd "$CONTEXT_ROOT" && ./wsh.php --api=cleanContext --real=yes > /dev/null
+# Every 5 minutes
+*/5 * * * * [ -f "$CONTEXT_ROOT"/wsh.php ] && [ ! -f "$CONTEXT_ROOT"/maintenance.lock ] && cd "$CONTEXT_ROOT" && ./wsh.php --api=processExecute > /dev/null
+# END:FREEDOM_CRONTAB:/var/www/html/lims:FREEDOM/freedom.cron

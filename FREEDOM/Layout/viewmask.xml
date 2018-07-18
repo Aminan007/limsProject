@@ -1,0 +1,118 @@
+<style>
+        table.tablemask {
+           width:100%;
+        }
+        table.tablemask tr.tab { 
+           background-color:#cba4de; // violet
+           background-image:url("Images/tabvig.png");
+        }
+        table.tablemask tr.frame { 
+           background-color:#6eb9d5; // sky blue
+           background-image:url("Images/tabvig.png");
+        }
+        table.tablemask tr.array { 
+           background-color:#f3cc81; // orange
+           background-image:url("Images/tabvig.png");
+        }
+         table.tablemask tr.menu, table.tablemask tr.action {
+            background-color:#a4dec6; // green
+        }
+        table.tablemask tr.directmodified td { 
+          /*border:solid 2px green;
+          border-style: solid none solid none;*/
+           background-image:none;
+           /*background-image:url("Images/dashed.png");*/
+           opacity:1;
+        }
+        
+        table.tablemask tr.inheritmodified td { 
+          /* border:solid 2px blue;
+          border-style: solid none solid none;*/
+           /*background-image:url("Images/dashed.png");*/
+           opacity:1;
+        }
+        table.tablemask tr.notmodified td {
+            opacity:0.5;
+        }
+        table.tablemask tr.needmodified td {
+            opacity:1;
+        }
+        table.tablemask tr.inheritmodified td span,table.tablemask tr.directmodified td span  { 
+           /*background-color: [COLOR_WHITE];*/
+        }
+     table.tablemask i.attr {
+        float:right;
+        padding-right:1em;
+    }
+
+    table.tablemask tr.directmodified .mvisibility .vis::before,
+    table.tablemask tr.needmodified .mvisibility .need::before
+    {
+    font-family:monospace;
+       content: "* ";
+    }
+    table.tablemask tr.inheritmodified .mvisibility .vis::before {
+    font-family:monospace;
+    content: "> ";
+    }
+    table.tablemask .mvisibility .vis::before,
+    table.tablemask .mvisibility .need::before {
+       font-family:monospace;
+       content: "\00a0  ";
+    }
+
+    table.tablemask .mandatory {
+      font-weight: bold;
+    }
+    table.tablemask .mvisibility .vis,
+    table.tablemask .visibility .vis {
+       display:inline-block;
+        width:50%;
+    }
+
+    table.tablemask .newvis,
+    table.tablemask .orivis {
+      min-width:20em;
+    }
+    table.tablemask .mvisibility .need,
+    table.tablemask .visibility .need {
+    /*text-align:center;*/
+    }
+
+
+
+        /*table.tablemask tr.tab, table.tablemask tr.frame, table.tablemask tr.array{ 
+           background-image:url("Images/tabvig.png");
+        }
+        */
+</style>
+<table  width="100%" cellspacing="0">
+<tbody>
+
+
+<tr >
+  <td  colspan="2" >
+ <fieldset style="cursor:crosshair;"><legend>Masques</legend>
+<table  class="tablemask" width="100%" >
+<tr class="FREEDOMBack1" >  
+  <th>[TEXT:atype]</th>  
+  <th>[TEXT:fieldset]</th>     
+   <th>[TEXT:attrname]</th>  
+   <th class="newvis">[TEXT:New visibility / mandatory]</th>
+   <th class="orivis">[TEXT:Original visibility / mandatory]</th>
+</tr>
+[BLOCK MASK]
+<tr  class="[classtype]" >  
+  <td><span>[type]</span></td>     
+  <td><span>[framelabel]</span></td>     
+   <td><span>[attrname] <i class="attr">([attrid])</i></span></td>
+   <td class="mvisibility"><span class="vis">[mvisibility]</span><i class="need [IF isAneed]mandatory[ENDIF isAneed]"> [waneed]</i></td>
+   <td class="visibility"><span class="vis">[visibility] </span><i class="need[IF isNeed] mandatory[ENDIF isNeed]"> [wneed]</i></td>
+</tr>
+[ENDBLOCK MASK]
+</table>
+</td></tr>
+[ZONE FDL:VIEWFRAME?frameid=MSK_FR_REST]
+</tbody>
+
+</table>

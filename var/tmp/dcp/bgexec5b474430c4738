@@ -1,0 +1,2 @@
+#!/bin/bash
+'/var/www/html/lims'/wsh.php   --api=initViewPrivileges --reset-account=yes

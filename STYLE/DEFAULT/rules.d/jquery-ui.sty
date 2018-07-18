@@ -1,0 +1,21 @@
+<?php
+
+
+$sty_rules = array(
+    'css' => array(
+        'dcp/jquery-ui.css' => array(
+            "src" => array(
+                "jqueryui"=>"lib/jquery-ui/css/smoothness/jquery-ui.css"
+            )
+        ) ,
+        'dcp/images' => array(
+            "src" => array(
+                "jqueryimages"=>"lib/jquery-ui/css/smoothness/images"
+            ) ,
+            "deploy_parser" => array(
+                "className" => '\Dcp\Style\dcpCssCopyDirectory'
+            )
+        )
+    )
+);
+?>

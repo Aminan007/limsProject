@@ -1,0 +1,82 @@
+[ZONE CORE:HTMLHEAD?title=[TEXT:Change password]]
+
+<style>
+    div.authmain {
+       margin:40px auto;
+       width:100%;
+       text-align:center;
+    }
+    div.form {
+      /* margin:40px auto;*/
+       text-align:center;
+    }
+    div.errormsg {
+    margin : 10px;
+    padding : 10px;
+    color : [CORE_ERRORCOLOR];
+    text-align:left;
+    }
+    div.errormsg:first-line{
+    font-weight : bold;
+    }
+</style>
+
+<div class="head">
+<div class="societe">[CORE_CLIENT]</div>
+</div>
+        [IF finish]<div id="authform" class="authmain">
+<div id="main">
+    <div class="form">
+        <div class="zoneinput">
+            <div class="success form">
+                [TEXT:Password has been cnanged].<br/>
+                <div class="action">
+                    <a href=".">[TEXT:Connect now]</a>
+                    <div style="clear:both"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+[ENDIF finish]
+        [IFNOT finish]
+
+    <div id="authform" class="authmain" style="visibility:hidden">
+<form class="password"
+      name="chgpwd"
+      id="chgpwd"
+      method="POST" ENCTYPE="multipart/form-data"
+      action="?app=AUTHENT&amp;action=CALLBACKREQPASSWD">
+
+<input type="hidden" name="uid" value="[uid]"/>
+<input type="hidden" name="token" value="[token]"/>
+<div id="main" style="visibility:hidden">
+
+          <div id="idbanner" class="banner">
+              <div class="realm">[CORE_REALM]<br/>[TEXT: Change password for] <strong>[username]</strong></div>
+          </div>
+  <div class="form">
+
+    <div class="zoneinput">
+        <label for="pwd1" class="label" >[TEXT:New password] : </label>
+        <div class="input">
+            <input autocomplete="off"  type="password" name ="pwd1" id="pwd1"/>
+        </div>
+        <label for="pwd2" class="label">[TEXT:Confirm password] : </label>
+        <div class="input">
+            <input  autocomplete="off" type="password" name ="pwd2" id="pwd2"/>
+        </div>
+
+        <div id="msgerr" class="errormsg">[errortxt]</div>
+        <div class="action">
+            <a id="submit" href="javascript:document.chgpwd.submit();">[TEXT:Change password]</a>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+  </div>
+</div>
+</form>
+</div>
+        [ENDIF finish]
+
+        [ZONE CORE:HTMLFOOT]

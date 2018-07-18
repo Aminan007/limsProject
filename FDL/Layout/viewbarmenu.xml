@@ -1,0 +1,49 @@
+<div   class="barmenu">
+
+<script>
+// <![CDATA[
+function menuOpen(event, elmt) {
+    var useconfirm = ($(elmt).data('confirm') === true);
+    var tconfirm = $(elmt).data('tconfirm');
+    var m = $(elmt).data('m');
+    var mheight = $(elmt).data('mheight');
+    var mwidth = $(elmt).data('mwidth');
+    var target = $(elmt).data('target');
+    var url = $(elmt).data('url');
+    var isjs = ($(elmt).data('isjs') === true);
+    var jsfunction = $(elmt).data('jsfunction');
+    var self = ($(elmt).data('self') === true) || (target === '_self');
+    if (useconfirm) {
+        if (!window.confirm(tconfirm)) {
+            return;
+        }
+    }
+    if (!isjs) {
+        if (self) {
+            viewwaitbarmenu(elmt, elmt.parentNode);
+        }
+        if (m == 'm') {
+            subwindowm(mheight, mwidth, target, url);
+        } else {
+            subwindow(mheight, mwidth, target, url);
+        }
+    } else {
+        eval(jsfunction);
+    }
+}
+function openBarDocSubMenu(event, elmt) {
+    var id = $(elmt).data('id');
+    var idlink = $(elmt).data('idlink');
+    return bardocsubmenu(event, id, idlink, elmt);
+}
+function openBarDocMenu(event, elmt) {
+    var id = $(elmt).data('id');
+    bardocmenu(event, id, true, elmt);
+    return false;
+}
+// ]]>
+</script>
+    [BLOCK LINKS]
+[IFNOT menu]<a  title="[title]" onclick="return menuOpen(event, this);" data-confirm="[confirm]" data-tconfirm="[tconfirm]" data-m="[m]" data-mheight="[mheight]" data-mwidth="[mwidth]" data-target="[target]" data-url="[url]" data-isjs="[isjs]" data-jsfunction="[jsfunction]">[descr]</a>[ENDIF menu]
+[IF menu]<a  title="[title]"  onclick="openBarDocSubMenu(event, this);" data-id="[id]" data-idlink="[idlink]">[descr]&darr;</a>[ENDIF menu]
+[ENDBLOCK LINKS] [IF other]<a   onclick="return openBarDocMenu(event, this);"  data-id="[id]" title="[TEXT:Click to view menu]">[TEXT:Others]&darr;</a>[ENDIF other] </div>

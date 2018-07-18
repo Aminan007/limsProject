@@ -1,0 +1,304 @@
+
+<script language="javascript">
+
+
+  $(document).ready(function() {
+
+    $('#fedit').bind('submit', function() {
+      // deletenew();
+    });
+
+
+    /* Set change handler on se_ol select */
+    $('select#se_ol').change(function(e) {
+        toggleModePerso($(this).val() == 'perso');
+    });
+
+    /* Set perso mode if parenthesis and/or operators are selected */
+    showModePersoIfSelected();
+
+  });
+
+  function selectUpdateLocation(select) {
+    if (!select || !select.se_sysfam_input) {
+      return;
+    }
+
+    var sfamid = select.options[select.selectedIndex].value;
+    var se_sysfam = (select.se_sysfam_input.checked ? 'yes' : 'no');
+
+    var location = '[CORE_STANDURL]&app=[APPNAME]&action=[ACTION]&classid=[classid]&dirid=[dirid]&onlysubfam=[onlysubfam]';
+    location = location + '&se_famid=' + sfamid;
+    location = location + '&se_sysfam=' + se_sysfam;
+
+    document.location.href = location;
+  }
+
+  $(document).ready(function() {
+    initializeSysFamSelector($('select[name=_se_famid]').get(0), $('input#se_sysfam_0').get(0));
+  });
+
+</script>
+<style type="text/css">
+select.cond option {
+  margin-left:10px;
+}
+select.cond option.set, option[disabled] {
+  margin-left:0px;
+  font-weight: bold;
+  [IF ISIE]background-color:[COLOR_A0];[ENDIF ISIE]
+  [IF ISCHROME]background-color:[COLOR_A2];[ENDIF ISCHROME]
+}
+
+span.perso-header {
+  display: none;
+}
+select.perso {
+  display: none;
+}
+tr.FREEDOMBack2 td.opt {
+  width: 2em;
+}
+</style>
+
+<table width="100%" cellspacing="0">
+<tbody>
+<tr class="FREEDOMBack1">  
+  <td   >
+   <img needresize="1" align="top" style="width:[SIZE_IMG-SMALL]" src="[icon]">
+      <label for="sensitive"> [TEXT:familly]&nbsp;:</label>
+     <select name="_se_famid" id="famid" onchange="selectUpdateLocation(this);">
+         [BLOCK SELECTCLASS]<option VALUE="[idcdoc]" data-sysfam="[IF system_fam]yes[ENDIF system_fam][IFNOT system_fam]no[ENDIF system_fam]" [selected]>[classname]</option>
+         [ENDBLOCK SELECTCLASS]
+    </select>  
+    <input type="hidden" name="_se_fam" value="[selfam]">
+    <input type="hidden" name="id" value="[id]">
+    </td>
+ </tr></tbody>
+</table>
+
+<input type="hidden" name="_se_attrids[-1]">
+<input type="hidden" name="_se_funcs[-1]">
+<input type="hidden" name="_se_keys[-1]">
+
+<table width="100%" cellspacing="0">
+
+<tr class="FREEDOMBack1">
+<td colspan="3" >
+
+<fieldset><legend>[TEXT:Conditions]</legend>
+<table align="center">
+<tr><td><label for="sysfam"> [L_SE_SYSFAM]&nbsp;:</label>[V_SE_SYSFAM]</td></tr>
+<tr><td><label for="latest"> [L_SE_LATEST]&nbsp;:</label>[V_SE_LATEST]</td></tr>
+<tr><td><label for="latest"> [L_SE_ACL]&nbsp;:</label>[V_SE_ACL]</td></tr>
+<tr><td><label for="latest"> [L_SE_FAMONLY]&nbsp;:</label>[V_SE_FAMONLY]</td></tr>
+<tr><td><label for="latest"> [L_SE_OL]&nbsp;:</label>[V_SE_OL]</td></tr>
+</table>
+<table border="0" cellspacing="0" width="100%" id="Tse_t_detail">
+<thead>
+
+        <!-- Template for new attribute row -->
+
+<tr id="newcond" style="display:none">
+<td class="und">
+  <img title="[TEXT:delete]" onclick="delart(this); refreshCondList();" src="FREEDOM/Images/bin.png">
+</td>
+<td class="und" align="left">
+		 <select class="modeperso" name="tpl!_se_ols[]"   >
+  <option value="and">[TEXT:OP_AND]</option>
+  <option value="or">[TEXT:OP_OR]</option>
+  </select>
+	</td>
+	<td class="und">
+		 <select class="modeperso" name="tpl!_se_leftp[]"   >
+  <option selected  value="no"></option>
+  <option value="yes">(</option>
+  </select>
+	</td>
+<td class="und" >
+  <select class="cond"  name="tpl!_se_attrids[]"  onchange="filterfunc(this)">
+  [BLOCK ATTR]<option atype="[attrtype]" class="[attrtype]" ismultiple="[ismultiple]" [attrdisabled] value="[attrid]">[attrname]</option>
+  [ENDBLOCK ATTR]
+  </select></td>
+<td class="und">
+  <select  name="tpl!_se_funcs[]"  onchange="filterfunc2(this)">
+    [BLOCK FUNC]<option  ctype="[functype]" style="display:[funcdisplay]" value="[funcid]">[funcname]</option>
+    [ENDBLOCK FUNC]
+  </select></td>
+<td class="und"  >
+   <input id="thekey" type="text"  size="20"  name="tpl!_se_keys[]" ></td><td>
+   <input title="[TEXT:search methods]" type="button" value="&Sigma;" onclick="callFunction(event,this)">
+   </td>
+   	<td class="und">
+		 <select  class="modeperso" name="tpl!_se_rightp[]"   >
+  <option selected  value="no"></option>
+  <option   value="yes">)</option>
+  </select></td>
+</tr>
+
+    <!-- Template for new state row -->
+    
+<tr id="newstate" style="display:none">
+<td class="und" align="left">
+  <img title="[TEXT:delete]" onclick="delart(this); refreshCondList();" src="FREEDOM/Images//bin.png">
+</td>
+<td>
+		 <select class="modeperso" name="tpl!_se_ols[]"   >
+  <option selected  value="">[TEXT:OP_GLOB]</option>
+  <option value="and">[TEXT:OP_AND]</option>
+  <option value="or">[TEXT:OP_OR]</option>
+  </select>
+	</td>
+	<td class="und">
+		 <select class="modeperso" name="tpl!_se_leftp[]"   >
+  <option selected  value="no"></option>
+  <option value="yes">(</option>
+  </select>
+	</td>
+<td class="und" >
+  <select name="tpl!_se_attrids[]" >
+     <option value="activity">[TEXT:Activity]</option>
+     <option value="fixstate">[TEXT:State]</option>
+  </select></td>
+<td class="und">
+  <select  name="tpl!_se_funcs[]" >
+    [BLOCK FUNCSTATE]<option value="[funcid]">[funcname]</option>
+    [ENDBLOCK FUNCSTATE]
+  </select></td>
+<td class="und"  >
+  <select  name="tpl!_se_keys[]" >
+  [BLOCK STATE]<option  step="[step]" value="[stateid]">[statename]</option>
+  [ENDBLOCK STATE]
+  </select></td><td><input title="[TEXT:search methods]" type="button" value="&Sigma;" onclick="callFunction(event,this)"></td>
+	<td class="und">
+		 <select class="modeperso" name="tpl!_se_rightp[]"   >
+  <option selected  value="no"></option>
+  <option   value="yes">)</option>
+  </select></td>
+</tr>
+
+    <!-- Visible table header -->
+
+<tr class="FREEDOMBack2">
+<td>&nbsp;</td>
+<td><span class="modeperso-header">[L_SE_OLS]</span></td>
+<td><span class="modeperso-header">&nbsp;(&nbsp;</span></td>
+<td>[L_SE_ATTRIDS]</td>
+<td>[L_SE_FUNCS]</td>
+<td>[L_SE_KEYS]</td>
+<td class="opt">[TEXT:Opt]</td>
+<td><span class="modeperso-header">&nbsp;)&nbsp;</span></td>
+</tr>
+[BLOCK ENUMS]
+<tr  style="display:none"><td colspan="4">
+  <select id="selenum[attrid]"  >
+    [BLOCK [SELENUM]]<option  value="[enumkey]">[enumlabel]</option>
+    [ENDBLOCK [SELENUM]]
+  </select>
+</td></tr>
+[ENDBLOCK ENUMS]
+</thead>
+
+<tbody id="condlist">
+[BLOCK CONDITIONS]<tr id="ART[ak]">
+<td class="und">
+  <img title="[TEXT:delete]" onclick="delart(this); refreshCondList();" src="FREEDOM/Images/bin.png"></td>
+	<td class="und">
+		 <select class="modeperso" name="_se_ols[]"   >
+  <option [ols_and_selected]  value="and">[TEXT:OP_AND]</option>
+  <option [ols_or_selected]  value="or">[TEXT:OP_OR]</option>
+  </select>
+	</td>
+	<td class="und">
+		 <select  class="modeperso" name="_se_leftp[]"   >
+  <option [leftp_none_selected]  value="no"></option>
+  <option [leftp_open_selected]  value="yes">(</option>
+  </select>
+	</td>
+<td class="und" >
+  <select class="cond" data-needfilter="1" name="_se_attrids[]"  onchange="filterfunc(this)" >
+  [BLOCK [ATTRCOND]]<option [attrselected] atype="[attrtype]" [attrdisabled] class="[attrtype]" value="[attrid]" ismultiple="[ismultiple]">[attrname]</option>
+  [ENDBLOCK [ATTRCOND]]
+  </select></td>
+<td class="und">
+  <select  name="_se_funcs[]"  onchange="filterfunc2(this)">
+  [BLOCK [FUNCCOND]]
+     <option [func_selected] ctype="[func_type]"  style="display:[func_display]" value="[func_id]">[func_name]</option>
+  [ENDBLOCK [FUNCCOND]]
+  </select></td>
+<td class="und" data-issearchmethod="[IF ISSEARCHMETHOD]yes[ENDIF ISSEARCHMETHOD][IFNOT ISSEARCHMETHOD]no[ENDIF ISSEARCHMETHOD]">
+  [IFNOT ISENUM]
+	  [IFNOT ISDOCID]
+	   <input type="text"  size="20" id="_se_keys[rowidx]" name="_se_keys[]" value="[key]">
+	  [ENDIF ISDOCID]
+	  [IF ISDOCID]
+		<input autocomplete="off" autoinput="1"  onfocus="recycleDocId('[DOCID_AID]','[DOCID_AIDINDEX]');activeAuto(event, [FAMID], this, '&amp;defaultphpfunc=yes', '[DOCID_AID]', '')"   onchange="addmdocs('_[DOCID_AID]')" type="text" attrid="ilink_[DOCID_AIDINDEX]" value="[DOCID_TITLE]">
+                <input id="ic[DOCID_AIDINDEX]" type="button" onclick="recycleDocId('[DOCID_AID]','[DOCID_AIDINDEX]');sendAutoChoice(event, '[FAMID]', this, 'ilink_[DOCID_AID]', '&amp;defaultphpfunc=yes', '[DOCID_AID]')"  value="&#133;">
+           <input id="ix[DOCID_AIDINDEX]" type="button" onclick="recycleDocId('[DOCID_AID]','[DOCID_AIDINDEX]');clearInputs(['ilink_[DOCID_AID]','[DOCID_AID]'],null,'[DOCID_AID]' )" title="" value="&times;">
+        <input [IFNOT key]type="hidden"[ENDIF key] id="_se_keys[rowidx]"  name="_se_keys[]"  attrid="[DOCID_AIDINDEX]" value="[key]">
+        [IF ISDOCIDMULTIPLE]<input type="hidden"  id="mdocid_work[DOCID_AID]" value="" onchange="$('#[DOCID_AID]').val(this.value)">[ENDIF ISDOCIDMULTIPLE]
+	  [ENDIF ISDOCID]
+  [ENDIF ISENUM]
+  [IF ISENUM]
+  <select id="_se_keys[rowidx]" name="_se_keys[]" >
+  [BLOCK [SSTATE]]<option  step="[sstep]" value="[sstateid]" [sstate_selected]>[sstatename]</option>
+  [ENDBLOCK [SSTATE]]
+  </select>  
+  [ENDIF ISENUM]</td>
+<td>
+<input title="[TEXT:search methods]" type="button" value="&Sigma;" onclick="callFunction(event,this)">
+   
+</td>
+	<td class="und">
+		 <select  class="modeperso" name="_se_rightp[]"   >
+  <option [rightp_none_selected]  value="no"></option>
+  <option [rightp_open_selected]  value="yes">)</option>
+  </select></td>
+</tr>
+[ENDBLOCK CONDITIONS]
+
+</tbody>
+<tfoot>
+<tr>
+
+<td class="und" colspan="6" id="lastcell">
+   
+
+   <input value="[TEXT:addcond]"   type="button" onclick="addrow('newcond','condlist'); refreshCondList();">
+   <input  style="display:[dstate]" id="bAddState" value="[TEXT:addstate]"   type="button" onclick="addrow('newstate','condlist'); newStepIs('fixstate');refreshCondList();">
+   <input  style="display:[dstate]" id="bAddActivity" value="[TEXT:addactivity]"   type="button" onclick="addrow('newstate','condlist');newStepIs('activity');refreshCondList();">
+
+<select id="method-selector"  style="display:none" onchange="setKey(event,this)">
+           <option disabled style="font-weight: bold;" value="">[TEXT:search methods]</option>
+           <option value=""></option>
+    </select>
+
+ </td>
+</tr>
+
+
+</tfoot>
+</table>
+</fieldset>
+
+
+</td>
+</tr>
+
+<tr class="FREEDOMBack1"> 
+  <td  align="left" colspan="2" >
+ 
+ <input type="submit" style="font-weight: bold;" value="[TEXT: send search]" onClick="sendsearch('[CORE_STANDURL]&app=FREEDOM&action=SEARCH');return false" /> </td>
+  <td  align="right"></td>
+</tr>
+
+</tbody>
+</table>
+
+        <!-- Operator informations -->
+<div style="display:none;" id="topInformation">
+[topInformation]
+</div>
+<table width="100%" cellspacing="0">
+[ZONE FDL:EDITFRAME?frameid=FR_BASIC]
+</table>

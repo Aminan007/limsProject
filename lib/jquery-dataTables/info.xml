@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<module name="dynacase-jquery-dataTables-installer" version="1.9.1" release="3" license="http://www.gnu.org/licenses/lgpl-3.0.txt GNU Lesser General Public License v3.0" vendor="Third party" changelog="https://apps.anakeen.com/changelog/?moduleg=dynacase-jquery-dataTables-installer&amp;version=1.9.1">
+  <description>DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, which will add advanced interaction controls to any HTML table.</description>
+  <replaces>
+    <module name="dynacase-jquery-dataTables"/>
+  </replaces>
+  <parameters>
+    <param name="datatables" label="Datatables jquery download URL" type="text" volatile="yes" onupgrade="W" default="http://ftp.dynacase.org/third-party/DataTables-1.9.1.zip"/>
+  </parameters>
+  <pre-install>
+    <check type="syscommand" command="gunzip"/>
+    <check type="syscommand" command="tar"/>
+    <check type="syscommand" command="find"/>
+    <check type="syscommand" command="chmod"/>
+  </pre-install>
+  <pre-upgrade>
+    <check type="syscommand" command="gunzip"/>
+    <check type="syscommand" command="tar"/>
+    <check type="syscommand" command="find"/>
+    <check type="syscommand" command="chmod"/>
+  </pre-upgrade>
+  <post-install>
+    <download href="@datatables" action="programs/datatables_install">
+      <label lang="en">Download and install DataTables
+            </label>
+    </download>
+  </post-install>
+  <post-upgrade>
+    <download href="@datatables" action="programs/datatables_install">
+      <label lang="en">Download and install DataTables
+            </label>
+    </download>
+  </post-upgrade>
+</module>

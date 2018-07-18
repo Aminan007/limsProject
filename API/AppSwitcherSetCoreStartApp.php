@@ -1,0 +1,1 @@
+../APP_SWITCHER/AppSwitcherSetCoreStartApp.php

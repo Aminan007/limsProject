@@ -1,0 +1,108 @@
+[IFNOT NOFORM]<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="document-icon" content="[shorticon]"/>
+	<meta name="document-id" content="[id]"/>
+	<meta name="document-initid" content="[initid]"/>
+	<meta name="document-icon" content="[docicon]"/>
+   <title>[title]</title>
+<link rel="shortcut icon" href="[shorticon]">
+
+[CSS:CUSTOMREF]
+
+   <style type="text/css">
+
+[CSS:CODE]
+
+   </style>
+
+[JS:REF]
+
+   <script language="JavaScript">
+  <!--
+    [JS:CODE]
+addEvent(window,"load",editOnLoad);
+setTimeout("autoVresize()",500);
+addEvent(window,"load",focusFirst);
+addEvent(window,"load",resetbodyopacity);
+[IF VALTERN]addEvent(window,"load",function al1() {alterfieldset('terrible','[CORE_BGCOLORALTERN]','[CORE_TEXTFGCOLOR]');});[ENDIF VALTERN]
+  //-->
+   </script>
+
+
+
+ </head>
+
+<body class="document documentEdit" id="terrible" style="[IFNOT ISIE]opacity:0.5;[ENDIF ISIE][IF ISIE]filter: alpha(opacity = 50);[ENDIF ISIE]"
+      onbeforeunload="if (document.isChanged && (! document.isSubmitted) && (! document.isCancelled)) return document.title+':[TEXT:Changes will be loosed if you continue]'"
+      onUnLoad="if ((! document.isCancelled)&& (!document.isSubmitted)) autoUnlock('[id]');closechoose();"
+     >
+
+<!-- Title Table -->
+<form  id="fedit"
+       class="fborder" style="display:inline"
+       name="modifydoc"
+       onsubmit="return documentsubmit(this)"
+       target="fsave[id]"
+       method="POST" ENCTYPE="multipart/form-data"
+       action="[CORE_STANDURL]&app=[APPNAME]&action=GENERIC_MOD" >
+<INPUT TYPE="hidden" name="classid" value="[classid]">
+<INPUT TYPE="hidden" name="id" value="[id]">
+<INPUT TYPE="hidden" name="dirid" value="[dirid]">
+<INPUT TYPE="hidden" name="rtarget" value="[rtarget]">
+<input type="hidden" name="vid" value="[vid]">
+<input type="hidden" name="ezone" value="[ezone]">
+<input type="hidden" name="rzone" value="[rzone]">
+<input type="hidden" name="rvid" value="[rvid]">
+<input type="hidden" name="autoclose" value="[autoclose]">
+<input type="hidden" name="recallhelper" value="[recallhelper]">
+<input type="hidden" name="noredirect" value="1">
+<input type="hidden" name="quicksave" value="0">
+<input type="hidden" name="catgid" >
+<input type="hidden" name="noconstraint" value="N">
+<input type="hidden" name="updateAttrid" value="[updateAttrid]">
+
+[ENDIF NOFORM]
+[IF HEAD]
+<table id="fixtablehead" class="[IFNOT ISIE7][IFNOT ISIE6]tablehead [ENDIF ISIE6][ENDIF ISIE7]documentHead"   cellspacing="0" width="100%">
+<thead>
+<tr class="FREEDOMBack1">
+ <td width="60%">
+  <IMG class="documentIcon" align="left" border="0"  title="[FTITLE]" alt="[FTITLE]" align="absbottom" needresize="1"  SRC="[iconsrc]">
+  <IMG style="float:left" border="0" class="iconimg20" title="[TEXT:locked]" SRC="[emblem]">
+  <span class="familyTitle">[FTITLE]</span><br><span  class="FREEDOMTextBigTitle documentTitle">[title]</span>
+  [IF FOOT][ZONE FDL:EDITBARMENU][ENDIF FOOT]
+     </td><td align="right">
+      [IF helpurl]<span class="dyp-help-header-icon" title="[TEXT:Online help]" alt="[TEXT:Online help]" onclick="subwindow([FDL_VD2SIZE],[FDL_HD2SIZE],'help[helpid]','[helpurl]')"></span>[ENDIF helpurl]
+      <img class="click" style="display:[dhelp]" align="absmiddle"  onclick="subwindow([FDL_VD2SIZE],[FDL_HD2SIZE],'[fhelp]','[CORE_STANDURL]&app=FDL&action=FAMILY_HELP&id=[helpid]')"  alt="[TEXT:help]" title="[TEXT:family manual]"  src="[IMG:help.gif]">
+         <span ><b title="[TEXT:Version]">[version]</b> <a onclick="subwindow([FDL_VD2SIZE],[FDL_HD2SIZE],'histo','[CORE_STANDURL]&app=FDL&action=VIEW_WORKFLOW_GRAPH&id=[wid]')"><b class="statetext" style="border-color:[statecolor]" title="[TEXT:View cycle graph]">[state]</b></A></span>
+
+
+  </td>
+</tr>
+</thead>
+
+</table>
+[ENDIF HEAD]
+[IFNOT HEAD][IF FOOT][ZONE FDL:EDITBARMENU][ENDIF FOOT]
+[ENDIF HEAD]
+[ZONE FDL:EDITCARD]
+
+[IFNOT NOFORM]
+</form>
+<!--  FOOT HTML -->
+<iframe name="fhsave" style="display:none" src="[IMG:1x1.gif]"></iframe>
+<iframe name="fsave[id]" style="display:none" src="[IMG:1x1.gif]"></iframe>
+    <div id="fixtablefoot" class="[IFNOT ISIE]tablefoot [ENDIF ISIE]documentFoot footer">
+    [IF HEAD]
+        [BLOCK ZONE_FOOTER]
+        [ZONE [my_zone]]
+        [ENDBLOCK ZONE_FOOTER]
+    [ENDIF HEAD]
+    </div>
+    [IFNOT ISIE]<div id="fixspanfoot" style="visibility:visible;padding:0px;margin:0px;height:0px"></div>[ENDIF ISIE]
+</body>
+</html>
+[ENDIF NOFORM]

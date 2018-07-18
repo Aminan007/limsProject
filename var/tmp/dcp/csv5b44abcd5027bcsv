@@ -1,0 +1,190 @@
+// creation dossier personne
+//DOC;Famille;<special id>;<special dirid>;titre
+ORDER;DIR;;;ba_title
+DOC;DIR;FLD_ACCOUNTS;;Comptes
+
+
+
+// ;fromid;titre;id;class;name
+BEGIN;DIR;Groupe de personnes;129;;GROUP
+TYPE;C
+SCHAR;S
+ICON;group.gif
+CLASS;Dcp\Core\AccountCollection
+METHOD
+USEFOR;S
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;option
+ATTR;GRP_FR_IDENT;;Identification;N;N;frame;100;W
+ATTR;GRP_NAME;GRP_FR_IDENT;nom;Y;N;text;110;W;Y;;;;;;esize=30
+ATTR;GRP_MAIL;GRP_FR_IDENT;mail;N;Y;text;120;R;;mailto:%GRP_MAIL%
+ATTR;GRP_HASMAIL;GRP_FR_IDENT;sans adresse mail de groupe;N;Y;enum;130;W;;;;[bool]yes|adresses regroupées,no|sans adresse mail;;;system=yes|bmenu=no|elabel=permet d'éviter le calcul du mail de groupe lorsque le groupe contient beaucoup de membres
+
+ATTR;GRP_FR;;Groupes;N;N;frame;500;W
+ATTR;GRP_IDGROUP;GRP_FR;sous groupes;N;N;account;510;R;;;;;;;multiple=yes|showempty=Aucun sous groupe
+ATTR;GRP_IDPGROUP;GRP_FR;groupes parents;N;N;account;511;R;;;;;;;multiple=yes|showempty=Aucun groupe parent
+ATTR;GRP_ISREFRESHED;GRP_FR;est rafraîchi;N;N;enum;512;H;;;;1|oui,0|non;;;system=yes|bmenu=no
+ATTR;GRP_ADDUSER;;Gérer les membres;N;N;menu;1;R;;%S%app=FDL&action=EDITINSERTDOCUMENT&famid=IUSER&id=%I%;;::controlAclAccess("modify");;;ltarget=_self
+ATTR;GRP_REFRESH;;Rafraîchir;N;N;menu;2;W;;%S%app=FDL&action=FDL_METHOD&method=refreshGroup&id=%I%;;::canEditMenu();;;ltarget=_self
+ATTR;FR_BASIC;;basique;N;N;frame;0;H
+ATTR;BA_TITLE;FR_BASIC ;titre;N;N;text;1;H;N
+ATTR;FLD_FR_REST;;Restrictions;N;N;frame;0;H
+ATTR;FLD_FR_PROF;;Profils par défaut;N;N;frame;0;H
+MODATTR;FLD_TFAM;;;;;array
+DEFAULT;FLD_FAMIDS;129\n128
+DEFAULT;FLD_FAM;groupe\nutilisateur
+DEFAULT;FLD_ALLBUT;1
+END;0
+
+
+
+
+BEGIN;;Rôle;130;;ROLE
+SCHAR;S
+ICON;role.png
+USEFOR;S
+CLASS;Dcp\Core\RoleAccount
+METHOD
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;option
+ATTR;ROLE_FR_IDENT;;Identification;N;N;frame;100;W
+ATTR;ROLE_LOGIN;ROLE_FR_IDENT;Référence;N;N;text;110;R;N;;;;;::isUniqueLogin(ROLE_LOGIN)
+ATTR;ROLE_NAME;ROLE_FR_IDENT;Libellé;Y;N;text;120;W;Y
+
+ATTR;US_WHATID;ROLE_FR_IDENT;Identifiant système;N;N;int;200;R
+
+END
+
+
+
+// ;fromid;titre;id;class;name
+BEGIN;129;Groupe d'utilisateurs;127;;IGROUP
+TYPE;C
+DFLDID;FLD_ACCOUNTS
+ICON;igroup.png
+SCHAR;S
+USEFOR;S
+CLASS;Dcp\Core\GroupAccount
+METHOD;Method.DocIntranet.php
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;option
+ATTR;GRP_FR_INTRANET;;Système;N;N;frame;0;W
+
+ATTR;US_LOGIN;GRP_FR_INTRANET;identifiant;N;N;text;200;W;Y;;;;;::ConstraintLogin(US_LOGIN);esize=20
+ATTR;US_WHATID;GRP_FR_INTRANET;identifiant système;N;N;int;210;R
+ATTR;US_MEID;GRP_FR_INTRANET;groupe id;N;N;account;220;H
+
+ATTR;GRP_ROLES;GRP_FR_INTRANET;Rôles associés;N;N;docid("ROLE");310;W;;;;;;;creation={autoclose:"yes"}|multiple=yes|showempty=Aucun rôle
+ATTR;GRP_CHOOSEGROUP;;Modifier la hiérarchie;N;N;menu;10;R;;%S%app=FDL&action=OPENDOC&zone=USERCARD:CHOOSEGROUP&id=%ID%;;::canEditMenu()
+
+DEFAULT;FLD_ALLBUT;1
+DEFAULT;FLD_FAMIDS;127\n128
+DEFAULT;FLD_FAM;groupe intranet\nutilisateur
+
+DEFAULT;FLD_SUBFAM;yes\nyes
+
+END;0
+
+
+
+// ;fromid;titre;id;class;name
+BEGIN;--;utilisateur;128;;IUSER
+TYPE;C
+DFLDID;FLD_ACCOUNTS
+ICON;dynacase-iuser.png
+SCHAR;S
+CLASS;Dcp\Core\UserAccount
+USEFOR;N
+//TAG;MAILRECIPIENT
+METHOD;Method.DocIntranet.php
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;option
+ATTR;US_FR_IDENT;;État civil;N;N;frame;;W
+ATTR;US_LNAME;US_FR_IDENT;nom;Y;N;text;30;W;Y
+ATTR;US_FNAME;US_FR_IDENT;prénom;Y;N;text;35;W;Y
+ATTR;US_MAIL;US_FR_IDENT;mail;N;Y;text;40;R;;mailto:%US_MAIL%
+ATTR;US_EXTMAIL;US_FR_IDENT;mail principal;N;N;text;45;O;;;;;;::parseMail(US_EXTMAIL);esize=30
+
+ATTR;US_TAB_SYSTEM;;Système;;;tab;100000;W
+ATTR;US_FR_INTRANET;US_TAB_SYSTEM;Identification intranet;N;N;frame;100010;R
+ATTR;US_MEID;US_FR_INTRANET;utilisateur id;N;N;account;100020;H
+ATTR;US_LOGIN;US_FR_INTRANET;login;N;N;text;100030;R;Y;;;;;::ConstraintLogin(US_LOGIN);elabel=saisissez '-' pour indiquer qu'il n'y a pas de login|esize=20
+ATTR;US_WHATID;US_FR_INTRANET;identifiant;N;N;text;100040;R;;;;;;;esize=4
+ATTR;US_T_ROLES;US_FR_INTRANET;Rôles;N;N;array;100050;R;;;;;;;showempty=Aucun rôle
+ATTR;US_ROLES;US_T_ROLES;Rôle;N;N;account;100060;W;;;;;;;creation={autoclose:"yes"}|match=role
+ATTR;US_ROLESORIGIN;US_T_ROLES;Origine;N;N;enum;100070;R;;;;internal|Affectation directe,group|Obtenu par;;;eformat=bool|system=yes|bmenu=no
+ATTR;US_ROLEGORIGIN;US_T_ROLES;Groupe;N;N;account;100080;R;;;;;;;multiple=yes|match=group
+ATTR;US_GROUPS;US_FR_INTRANET;groupes d'appartenance;N;N;array;100090;R;;;;;;;showempty=Aucun groupe
+ATTR;US_GROUP;US_GROUPS;groupe (titre);N;N;text;100100;H;;;;::getTitle(US_IDGROUP)
+ATTR;US_IDGROUP;US_GROUPS;Groupe;N;N;account;100110;W;;;;;;;isuser=yes|doctitle=us_group|match=group
+ATTR;US_EXPIRES;US_FR_INTRANET;date d'expiration epoch;N;N;int;100120;H
+ATTR;US_DAYDELAY;US_FR_INTRANET;délai d'expiration en jours;N;N;int;100130;H;;;;;;;elabel=mettre -1 pour annuler l'expiration|esize=3
+ATTR;US_EXPIRESD;US_FR_INTRANET;date d'expiration;N;N;date;100140;H;;;;;;::ConstraintExpires(US_EXPIRESD,US_EXPIREST,US_DAYDELAY)
+ATTR;US_EXPIREST;US_FR_INTRANET;heure d'expiration;N;N;time;100150;H
+ATTR;US_PASSDELAY;US_FR_INTRANET;délai d'expiration epoch;N;N;int;100160;H
+ATTR;US_LDAPDN;US_FR_INTRANET;login LDAP;N;N;text;100170;R
+ATTR;US_FR_SUBSTITUTE;US_TAB_SYSTEM;Suppléants;N;N;frame;100180;R
+ATTR;US_SUBSTITUTE;US_FR_SUBSTITUTE;Suppléant;N;N;account;100190;W
+ATTR;US_INCUMBENTS;US_FR_SUBSTITUTE;Titulaires;N;N;account;100200;R;;;;;;;multiple=yes
+ATTR;US_FR_USERCHANGE;US_TAB_SYSTEM;Mot de passe;N;N;frame;100210;W
+ATTR;US_PASSWD1;US_FR_USERCHANGE;nouveau mot de passe;N;N;password;100220;O;;;;;;::testForcePassword(US_PASSWD1);esize=10
+ATTR;US_PASSWD2;US_FR_USERCHANGE;confirmation mot de passe;N;N;password;100230;O;;;;;;::ConstraintPassword(US_PASSWD1,US_PASSWD2,US_LOGIN);esize=10
+PARAM;US_FR_DEFAULT;;Paramètre;N;N;frame;10;W
+PARAM;US_DEFAULTGROUP;US_FR_DEFAULT;Groupe par défaut;N;N;account;20;W;;;;;;;match=group
+
+ATTR;US_FR_SECURITY;US_TAB_SYSTEM;Sécurité;N;N;frame;100300;R
+ATTR;US_STATUS;US_FR_SECURITY;état du compte;N;N;enum;100305;R;;;;A|activé,D|désactivé;;;system=yes
+DEFAULT;US_STATUS;A
+ATTR;US_LOGINFAILURE;US_FR_SECURITY;échecs de connexion;N;N;int;100310;R
+DEFAULT;US_LOGINFAILURE;0
+ATTR;US_ACCEXPIREDATE;US_FR_SECURITY;Date d'expiration du compte;N;N;date;100320;R
+ATTR;US_MENURESETLOGFAILS;;Réinitialiser échecs de connexion;N;N;menu;10;W;;%S%app=FDL&action=FDL_METHOD&method=resetLoginFailure&id=%I%;;::menuResetLoginFailure();;;ltarget=_self|submenu=Compte
+ATTR;US_ACTIVATEACCOUNT;;Activer le compte;N;N;menu;20;W;;%S%app=FDL&action=FDL_METHOD&method=activateAccount&id=%I%;;::menuActivateAccount();;;ltarget=_self|submenu=Compte
+ATTR;US_DESACTIVATEACCOUNT;;Désactiver le compte;N;N;menu;30;W;;%S%app=FDL&action=FDL_METHOD&method=deactivateAccount&id=%I%;;::menuDeactivateAccount();;;ltarget=_self|submenu=Compte
+
+DEFAULT ;US_DEFAULTGROUP;GDEFAULT
+
+
+
+
+ATTR;US_FR_PRIVACY;;confidentialité;N;N;frame;10;H
+ATTR;US_INITUSER;;Actualiser les utilisateurs;N;N;menu;40;W;;%S%&app=FUSERS&action=FUSERS_IUSER;;::canExecute(FUSERS,FUSERS_IUSER);;;global=yes|onlyglobal=yes|lconfirm=yes
+
+
+
+END;0
+
+
+
+;// ;fromid;titre;id;class;name
+;BEGIN;120;utilisateur;128;;IUSER
+;TYPE;C
+;//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint
+;ATTR;US_FR_ACCOUNT;;Compte Posix;N;N;frame;0;H
+;ATTR;US_UIDNUMBER;US_FR_ACCOUNT;uid Number;N;N;int;900;W
+;ATTR;US_GIDNUMBER;US_FR_ACCOUNT;gid Number;N;N;int;902;W
+;ATTR;US_LOGINSHELL;US_FR_ACCOUNT;login Shell;N;N;text;904;W
+;ATTR;US_GECOS;US_FR_ACCOUNT;gecos;N;N;text;906;W
+;ATTR;US_DESCRIPTION;US_FR_ACCOUNT;description;N;N;longtext;908;W
+;ATTR;US_HOMEDIRECTORY;US_FR_ACCOUNT;home directory;N;N;text;910;W
+;ATTR;US_FR_SHADOW;;Shadow;N;N;frame;912;H
+;ATTR;US_SHADOWLASTCHANGE;US_FR_SHADOW;last change;N;N;int;914;W
+;ATTR;US_SHADOWMIN;US_FR_SHADOW;min;N;N;int;916;W
+;ATTR;US_SHADOWMAX;US_FR_SHADOW;max;N;N;int;918;W
+;ATTR;US_SHADOWWARNING;US_FR_SHADOW;warning;N;N;int;920;W
+;ATTR;US_SHADOWINACTIVE;US_FR_SHADOW;inactive;N;N;int;922;W
+;ATTR;US_SHADOWEXPIRE;US_FR_SHADOW;expire;N;N;int;924;W
+;ATTR;US_SHADOWFLAG;US_FR_SHADOW;flag;N;N;int;926;W
+
+
+;END;0
+
+;// ;fromid;titre;id;class;name
+;BEGIN;129;groupe intranet;127;;IGROUP
+;//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint
+;ATTR;GRP_FR_ACCOUNT;;Compte Posix;N;N;frame;0;H
+
+;ATTR;GRP_GIDNUMBER;GRP_FR_ACCOUNT;gid Number;N;N;int;300;W
+;ATTR;GRP_DESC;GRP_FR_ACCOUNT;description;N;N;text;310;W
+;ATTR;GRP_T_MEMBERUID;GRP_FR_ACCOUNT;membres;N;N;array;320;W
+;ATTR;GRP_MEMBERUID;GRP_T_MEMBERUID;member uid;N;N;text;330;W
+;END;0
+
+
+

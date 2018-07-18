@@ -1,0 +1,194 @@
+[ZONE FDL:HTMLHEAD]
+
+<div class="document" style="padding : 10px">
+    <br />
+    <span class="FREEDOMTextBigTitle documentTitle">[TEXT:EXPORT_CSV Definition of the export param :]</span>
+    <br />
+    <a style="float : right" href="./?sole=Y&amp;app=FDL&amp;action=FDL_CARD&amp;props=N&amp;abstract=N&amp;id=HELP_REPORT" target="_blank">[TEXT:EXPORT_CSV help]</a>
+    <br />
+
+    <form id="exportForm" name="fviewidoc" method="POST" ENCTYPE="multipart/form-data" action="?app=FDL&amp;action=REPORT_EXPORT_CSV" target="csvfile">
+        <div id="exportKind" class="frame" style="">
+            <div class="legend">[TEXT:EXPORT_CSV Select export kind :]</div>
+            <div class="content" style="background-color: rgb(249, 250, 251); padding : 10px">
+                <table>
+                    <tr>
+                        <td>
+                            [TEXT:EXPORT_CSV Kind of export :]
+                        </td>
+                        <td>
+                            <select id="kind" name="kind" onchange="computePivotVisibility();">
+                                [BLOCK kinds]
+	                                <option value="[key]" [selected]>[label]</option>[ENDBLOCK kinds]
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <table id="pivot-tab">
+                    <tr>
+                        <td>
+                            [TEXT:EXPORT_CSV Select pivot :]</td>
+                        <td>
+                            <select name="pivot">
+                                [BLOCK pivotAttribute]
+                                <option value='[key]' [selected]>[libelle]</option>[ENDBLOCK pivotAttribute]
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="Export Option" class="frame">
+            <div class="legend" onclick='switchBlock();' title="[TEXT:EXPORT_CSV Click to show options]">[TEXT:EXPORT_CSV CSV options :] </div>
+            <div class="content" style="background-color: rgb(249, 250, 251);" >
+                <table id="csvOption" style="display : none; margin : 10px">
+                    <tr>
+                        <td>
+                            [TEXT:EXPORT_CSV Delimiter :]
+                        </td>
+                        <td>
+                            <input name="delimiter" value="[delimiter]" style="width : 3em;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            [TEXT:EXPORT_CSV Enclosure :]
+                        </td>
+                        <td>
+                            <input name="enclosure" value='[enclosure]' style="width : 3em;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            [TEXT:EXPORT_CSV Decimal separator :]
+                        </td>
+                        <td>
+                            <input name="decimalSeparator" value='[decimalSeparator]' style="width : 3em;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            [TEXT:EXPORT_CSV Numeric render :]
+                        </td>
+                        <td>
+                            <select name="numericRender">
+                                [BLOCK numericRender]
+                                <option value="[key]" [selected]>[label]</option>
+                               [ENDBLOCK numericRender]
+                        </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            [TEXT:EXPORT_CSV Encoding :]
+                    </td>
+                        <td>
+                            <select name="encoding">
+                                [BLOCK encodings]
+	                                <option value="[key]" [selected]>[label]</option>
+                                [ENDBLOCK encodings]
+                            </select>
+                        </td>
+                    </tr>
+                   <tr>
+                        <td>
+                            [TEXT:EXPORT_CSV Date format :]
+                    </td>
+                        <td>
+                            <select name="dateFormat">
+                                [BLOCK dateFormats]
+	                                <option value="[key]" [selected]>[label]</option>
+                                [ENDBLOCK dateFormats]
+                            </select>
+                        </td>
+                    </tr>
+            <tr>
+                <td>
+                    [TEXT:Strip HTML tags :]
+            </td>
+                <td>
+                    <select name="stripHtmlTag">
+
+                                [BLOCK stripHtml]
+	                                <option value="[key]" [selected]>[label]</option>
+                                [ENDBLOCK stripHtml]
+
+                    </select>
+                </td>
+            </tr>
+           <tr>
+                </table>
+            </div>
+        </div>
+
+        [BLOCK addedArguments]
+        <input type="hidden" value="[argumentValue]" name="[argumentName]" />
+        [ENDBLOCK addedArguments]
+        <input type="hidden" value="[id]" name="id" />
+        <input type="hidden" value="TRUE" name="updateDefault" />
+        <input id="iExportId" type="hidden" value="[exportId]" name="exportId" />
+        <input id="bExport" style='float : right; margin-right : 25 px' type='submit' value="[TEXT:EXPORT_CSV Exporter]" />
+    </form>
+</div>
+        <iframe name="csvfile" id="csvfile" frameborder="0" border="0" cellspacing="0" width="100%" marginwidth="0" marginheight="0" style="border:none;width:90%;height:30px"></iframe>
+<script type="text/javascript">
+    function computePivotVisibility() {
+        var value = document.getElementById("kind").value;
+        if (value != "pivot") {
+        document.getElementById("pivot-tab").style.display = 'none';
+        }else{
+        document.getElementById("pivot-tab").style.display = 'block';
+        }
+    }
+    var stopExportPolling=0;
+    function switchBlock() {
+        if (document.getElementById("csvOption").style.display != 'none') {
+            document.getElementById("csvOption").style.display = 'none';
+        }else {
+            document.getElementById("csvOption").style.display = 'block';
+        }
+    }
+
+    function pollingExport(exportId) {
+        $.ajax({
+              url: '?',
+              dataType: 'json',
+              data: {exportId:exportId,statusOnly:1,app:'FDL',action:'REPORT_EXPORT_CSV',id:'[id]'},
+              success: function(data) {
+                  $('#bExport').val(data.status);
+                  if (stopExportPolling < 1) {
+                    if (! data.end) {
+                        setTimeout(function () {pollingExport(exportId);},500);
+                    } else {
+                        setTimeout(function () {
+                        $('#bExport').removeAttr('disabled').val("[TEXT:Re-export report]");
+                        }
+                        ,2000);
+                    }
+                  } else {
+                     $('#bExport').val("[TEXT:Export Done]");
+                    setTimeout(function () {
+                        $('#bExport').removeAttr('disabled').val("[TEXT:Re-export report]");
+                        }
+                        ,2000);
+                 }
+              }});
+
+    }
+
+    $(document).ready(function() {
+        computePivotVisibility();
+
+        $('#csvfile').load(function() {
+            stopExportPolling++;
+        });
+        $('#exportForm').submit(function() {
+            stopExportPolling=0;
+            setTimeout(function () {$('#bExport').attr('disabled',true);},20);
+            setTimeout(function () {pollingExport($('#iExportId').val());},200);
+
+        });
+    });
+
+</script>
+[ZONE FDL:HTMLFOOT]

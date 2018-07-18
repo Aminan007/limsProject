@@ -1,0 +1,109 @@
+// famille fichier;;;id;class;name
+BEGIN;0;fichiers;7;;FILE
+METHOD
+CLASS;Dcp\Core\File
+SCHAR;R
+ICON;fichier.gif
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc
+
+ATTR;FI_FRDESC;;description;N;N;frame;;W
+ATTR;FI_TITLE;FI_FRDESC;titre;Y;N;text;10;R
+ATTR;FI_TITLEW;FI_FRDESC;titre;N;N;text;15;O
+ATTR;FI_SUBJECT;FI_FRDESC;sujet;N;Y;text;20;W
+ATTR;FI_KEYWORD;FI_FRDESC;mots-clés;N;N;text;30;W
+ATTR;FI_DESCRIPTION;FI_FRDESC;résumé;N;N;longtext;40;W
+
+ATTR;FI_FR_OFORMAT;;Fichiers;;;frame;;W
+ATTR;FI_FILE;FI_FR_OFORMAT;principal;N;Y;file;50;W;Y
+ATTR;FT_T_OFORMAT;FI_FR_OFORMAT;autres;N;N;array;500;W
+ATTR;FI_OFILE;FT_T_OFORMAT;fichier;N;N;file;510;W
+
+END;-;9
+
+// famille image;;;id;class;name
+BEGIN;0;image;8;;IMAGE
+METHOD
+CLASS;Dcp\Core\Image
+SCHAR;R
+ICON;photo.gif
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;options
+
+ATTR;IMG_FRFILE;;image;N;N;frame;0;W
+ATTR;IMG_TITLE;IMG_FRFILE;titre;Y;N;text;10;R
+ATTR;IMG_FILE;IMG_FRFILE;image;N;Y;image;20;W;Y;;;;;;iwidth=80
+ATTR;IMG_DESCRIPTION;IMG_FRFILE;description;N;Y;longtext;30;W
+ATTR;IMG_FR_CHAR;;caractéristiques;N;N;frame;40;W
+ATTR;IMG_CATG;IMG_FR_CHAR;catégorie;N;N;enum;50;W;;;;1|photo,2|dessin
+END;-
+
+// famille texte;;;id;class;name
+BEGIN;1;texte;24;;TEXT
+METHOD
+TYPE;C
+ICON;text.gif
+//;idattr;idframe;label;T;A;type;order;vis;need;link;phpfile;phpfunc;elink;constraint;options
+ATTR;BA_TITLE;FR_BASIC;titre;Y;N;text;1;O;Y
+ATTR;TXT_TEXT;FR_BASIC;texte;N;N;htmltext;20;W;;;;;;;vlabel=none
+ATTR;TXT_FR_ANX;;annexes;N;N;frame;30;W
+ATTR;TXT_T_IMG;TXT_FR_ANX;images;N;N;array;40;O
+ATTR;TXT_IMG;TXT_T_IMG;images;N;N;image;50;O
+ATTR;TXT_IMG_ORI;TXT_T_IMG;source;N;N;file;60;O
+END;-
+
+
+
+// famille chemise;;;id;class;name
+BEGIN;2;chemise;17;;PORTFOLIO
+CLASS;Dcp\Core\PortFolio
+ICON;chemise.gif
+METHOD
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;option
+
+ATTR;PFL_OPEN;;ouvrir;N;N;menu;10;W;;%S%&app=FREEDOM&action=OPENFOLIO&id=%I%
+ATTR;PFL_IDDEF;FLD_FR_PROF;id chemise defaut ;N;N;docid;1100;H;N
+ATTR;PFL_DEF;FLD_FR_PROF;chemise defaut;N;N;text;1110;H;N;%S%&app=FDL&action=FDL_CARD&id=%PFL_IDDEF%;fdl.php;lfamily(D,PORTFOLIO,PFL_DEF):PFL_IDDEF,PFL_DEF;%S%&app=FREEDOM&action=OPENFOLIO&id=%PFL_IDDEF%
+ATTR;FLD_OPEN;FLD_FR_PROF;ouvrir;N;N;menu;20;H
+ATTR;FLD_OPENFOLIO;;ouvrir comme une chemise;N;N;menu;20;H
+
+PARAM;PFL_FR_INIT;;Affichage de la chemise;;;frame;100;W
+PARAM;PFL_LISTSTYLE;PFL_FR_INIT;style de la liste;N;N;enum;110;W;N;;;list|Liste,icon|Icone
+PARAM;PFL_SAVETAB;PFL_FR_INIT;affichage dernier onglet consulté;N;N;enum;120;W;N;;;0|Non,1|Oui
+PARAM;PFL_SAVEDISPO;PFL_FR_INIT;affichage dernière disposition;N;N;enum;130;W;N;;;1|Oui,0|Non;;;elabel=affichage des derniers documents consultés
+PARAM;PFL_T_LINKTAB;PFL_FR_INIT;Onglets à lier (dynamique);;;array;140;W
+PARAM;PFL_IDLINKTAB;PFL_T_LINKTAB;id onglet à lier;N;N;docid("DIR");150;W;N;;fdl.php;ltabs(D,CT):PFL_IDLINKTAB,CT
+PARAM;PFL_LINKTAB;PFL_T_LINKTAB;onglet à lier;N;N;text;160;H;N;;;::getTitle(PFL_IDLINKTAB)
+PARAM;PFL_T_COPYTAB;PFL_FR_INIT;Onglets à copier pour les nouveaux documents;;;array;170;W
+PARAM;PFL_IDCOPYTAB;PFL_T_COPYTAB;id onglet à copier;N;N;docid("DIR");180;W;N;;fdl.php;ltabs(D,CT):PFL_IDCOPYTAB,CT
+PARAM;PFL_COPYTAB;PFL_T_COPYTAB;onglet à copier;N;N;text;190;H;N;;;::getTitle(PFL_IDCOPYTAB)
+
+DEFAULT;PFL_LISTSTYLE;list
+END
+
+;;; 
+
+
+
+// recherche détaillée;fromid;;id;class;name
+
+BEGIN;2;intercalaire;18;;GUIDECARD
+TYPE;C
+SCHAR;S
+ICON;intercalaire.gif
+USEFOR;SG
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink
+
+END;0
+
+// recherche détaillée;fromid;;id;class;name
+
+BEGIN;16;intercalaire dynamique;19;;SGUIDECARD
+TYPE;C
+SCHAR;S
+ICON;intercalaired.gif
+USEFOR;SG
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink
+
+END;0
+
+
+

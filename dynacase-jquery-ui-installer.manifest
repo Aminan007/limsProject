@@ -1,0 +1,17 @@
+drwxrwxr-x distrib/distrib   0 2018-02-13 05:41 ./
+drwxrwxr-x distrib/distrib   0 2018-02-13 05:41 ./STYLE/
+drwxrwxr-x distrib/distrib   0 2018-02-13 05:41 ./STYLE/DEFAULT/
+drwxrwxr-x distrib/distrib   0 2018-02-13 05:41 ./STYLE/DEFAULT/rules.d/
+-rw-rw-r-- distrib/distrib 496 2018-02-13 05:41 ./STYLE/DEFAULT/rules.d/jquery-ui.sty
+drwxrwxr-x distrib/distrib   0 2018-02-13 05:41 ./programs/
+-rwxrwxr-x distrib/distrib 2901 2018-02-13 05:41 ./programs/jquery-ui_rawinstall
+-rwxrwxr-x distrib/distrib 4067 2018-02-13 05:41 ./programs/jquery-ui_src_install
+-rwxrwxr-x distrib/distrib 4078 2018-02-13 05:41 ./programs/jquery-ui_install
+drwxrwxr-x distrib/distrib    0 2018-02-13 05:41 ./.autoloader-ignore.d/
+-rw-rw-r-- distrib/distrib   16 2018-02-13 05:41 ./.autoloader-ignore.d/dynacase-jquery-ui-installer
+drwxrwxr-x distrib/distrib    0 2018-02-13 05:41 ./lib/
+drwxrwxr-x distrib/distrib    0 2018-02-13 05:41 ./lib/jquery-ui/
+drwxrwxr-x distrib/distrib    0 2018-02-13 05:41 ./lib/jquery-ui/devel-src/
+drwxrwxr-x distrib/distrib    0 2018-02-13 05:41 ./lib/jquery-ui/devel-src/patch/
+-rw-rw-r-- distrib/distrib  204 2018-02-13 05:41 ./lib/jquery-ui/devel-src/patch/menu.patch
+-rw-rw-r-- distrib/distrib   85 2018-02-13 05:41 ./lib/jquery-ui/.htaccess

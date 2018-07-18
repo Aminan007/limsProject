@@ -1,0 +1,48 @@
+BEGIN;;Assemblage;;;COLLATING
+
+TYPE;C
+ICON;collating.png
+//PROFID
+//CPROFID
+METHOD
+CLASS;Dcp\Book\Collating
+//WID
+//CVID
+//SCHAR
+//USERFOR
+//TAG
+//;idattr;idframe;label;T;A;type;order;vis;need;link;phpfile;phpfunc;elink;constraint;options
+ATTR;COLL_FR_INFO;;Contenu;N;N;frame;2000;W
+ATTR;COLL_TITLE;COLL_FR_INFO;Titre;Y;N;text;2010;W
+ATTR;COLL_ABSTRACT;COLL_FR_INFO;Résumé;N;N;longtext;2020;W
+ATTR;COLL_ALLOTT;COLL_FR_INFO;Fichier principal;N;N;file;2030;W;Y
+ATTR;COLL_FR_PRODUCT;;Génération;N;N;frame;2040;W
+ATTR;COLL_DATEMODIF;COLL_FR_PRODUCT;Date de dernière modification;N;N;timestamp;2050;R
+ATTR;COLL_ALLODT;COLL_FR_PRODUCT;Fichier assemblé;N;N;file;2060;R
+ATTR;COLL_ALLPDF;COLL_FR_PRODUCT;Version PDF;N;N;file;2070;R;;;;::convertVaultFile(COLL_ALLODT,'pdf)
+ATTR;COLL_DATEPDF;COLL_FR_PRODUCT;Date de production;N;N;timestamp;2080;R;;;;::getFileInfo(COLL_ALLPDF,'mdate)
+ATTR;COLL_FR_CHAPTERS;;Mise en pages;N;N;frame;2090;W;;;;;;;vlabel=none
+ATTR;COLL_T_CHAPTERS;COLL_FR_CHAPTERS;Chapitres;N;N;array;2100;W
+ATTR;COLL_FAMID;COLL_T_CHAPTERS;Famille (id);N;N;docid;2110;H;;;;::getTitle(COLL_FAMID):COLL_FAM
+ATTR;COLL_FAM;COLL_T_CHAPTERS;Famille;N;N;text;2120;W;;%S%app=FDL&action=FDL_CARD&id=%COLL_FAMID%;fdl.php;lfamilies(D,COLL_FAM):COLL_FAMID,COLL_FAM
+ATTR;COLL_CHAPID;COLL_T_CHAPTERS;Chapitre (id);N;N;docid;2130;H;;;;::getTitle(COLL_CHAPID):COLL_CHAP
+ATTR;COLL_CHAP;COLL_T_CHAPTERS;Chapitre;N;N;text;2140;W;;%S%app=FDL&action=FDL_CARD&id=%COLL_CHAPID%;fdl.php;lfamily(D,COLL_FAMID,COLL_CHAP):COLL_CHAPID,COLL_CHAP
+ATTR;COLL_ATTRID;COLL_T_CHAPTERS;Attribut;N;N;text;2150;W;;;fdl.php;getFamAttribute(D,COLL_FAMID,'file,0,COLL_ATTRID):COLL_ATTRID
+ATTR;COLL_CHAPFILE;COLL_T_CHAPTERS;Fichier;N;N;file;2160;R
+ATTR;COLL_STATEFILTER;COLL_T_CHAPTERS;État attendu;N;N;text;2170;W;;;book.php;lbookstates(D,COLL_CHAPID):COLL_STATEFILTER
+ATTR;COLL_CHAPSTATE;COLL_T_CHAPTERS;État réel;N;N;text;2180;R
+ATTR;COLL_CHAPFILEDATE;COLL_T_CHAPTERS;Date;N;N;timestamp;2190;R
+
+
+
+
+ATTR;COLL_GEN_ALLODT;;<b>Assembler</b>;;;menu;30;R;;%S%app=FDL&action=FDL_METHOD&method=collating&id=%I%;;::canEditMenu();;;ltarget=_self|ltitle=Assembler l'ensemble des chapitres
+
+
+
+
+END
+
+
+
+

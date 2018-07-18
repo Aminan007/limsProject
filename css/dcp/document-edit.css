@@ -1,0 +1,741 @@
+.tarray .button {
+    width: 22px;
+    height: 22px;
+    border: 0;
+    cursor: pointer;
+}
+
+img.edit-image {
+    height: 1.6em;
+    max-width: 2em;
+    border:none;
+    padding: 0;
+    margin: 0;
+}
+
+div.edit-image {
+    display:inline-block;
+    [IF ISIE6]display:inline;[ENDIF ISIE6]
+    vertical-align: middle;
+    width:2em;
+    height: 1.6em;
+    position:relative;
+}
+
+img.edit-image:hover {
+    height: auto;
+    max-width: 100px;
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:1;
+}
+
+.fileName {
+    display:inline-block;
+    [IF ISIE6]display:inline;[ENDIF ISIE6]
+    vertical-align: bottom;
+
+}
+.fileButtons {
+    [IFNOT ISIE6]float:right;[ENDIF ISIE6]
+    [IF ISIE6]display:inline;[ENDIF ISIE6]
+}
+.fileButtons .inlineButton {
+    border-top:none;
+    border-bottom:none;
+}
+.fileInput {
+    width:100%;
+    [IFNOT ISIE6]display:inline-block;[ENDIF ISIE6]
+    border : 1px solid #82A0B5;
+    padding:1px;
+}
+input.uploadFile {
+    min-width:100px;
+    /*display: none;*/
+    /*position: absolute;*/
+    width:90%;
+    padding: 5px;
+    border: 1px solid rgb(170, 170, 170)  ;
+    margin: 2px;
+}
+
+input.hiddenFile {
+    display: none;
+
+}
+img.davIcon {
+    border:none;
+    vertical-align: bottom;
+}
+input[type=button].add-doc {
+    background : url('resizeimg.php?img=Images%2Fcreatedoc.png&size=16') no-repeat;
+    width:16px;
+}
+input[type=button].view-doc {
+    background : url('resizeimg.php?img=Images%2Feditdoc.png&size=16') no-repeat;
+    width:16px;
+}
+
+input[readonly="readonly"], input[readonly] {
+    color: #000000;
+}
+input[disabled="disabled"], input[disabled] {
+    cursor:not-allowed;
+    color: #808080;
+    text-shadow: 2px 2px 2px #eee
+}
+.tarray .add-button {
+    background : url('Images/add22.gif') no-repeat;
+}
+.tarray .trash-button {
+    background : url('Images/trash22.gif') no-repeat;
+}
+
+.tarray .select-button {
+    /*background : url('Images/next22.gif') no-repeat;*/
+}
+
+.tarray .unselect-button {
+    background : url('Images/point22.gif') no-repeat;
+}
+
+.tarray .duplicate-button {
+    background : url('Images/dup22.gif') no-repeat;
+}
+div.relationTooltip {
+    background-color: #FFFFFF;
+    border: 1px solid #2A3B47;
+    padding: 3px;
+    margin:3px;
+}
+/*
+ *
+ * refs #1443: trash columns in edition
+ *
+ */
+
+table.tarray thead tr th.withElabel {
+    cursor: help;
+}
+
+table.tarray thead tr th.visibleAttribute,
+table.tarray tbody tr td.visibleAttribute,
+table.tarray tfoot tr td.visibleAttribute {
+    visibility: visible;
+    border-style: none none solid solid;
+    border-width: 0 0 1px 1px;
+}
+
+table.tarray tbody tr td.visibleAttribute,
+table.tarray tfoot tr td.visibleAttribute {
+    padding-left: 4px;
+}
+
+/*please use empty in getHtmlInput...*/
+table.tarray tbody tr td.empty,
+table.tarray tfoot tr td.empty,
+table.tarray thead tr th.hiddenAttribute,
+table.tarray tbody tr td.hiddenAttribute,
+table.tarray tfoot tr td.hiddenAttribute{
+    display: none;
+}
+table.tarray div.drag-button {
+  cursor:move;
+  float:left;
+  margin-top:3px;
+  background : url('Images/drag22.png') no-repeat;
+  width:12px;
+}
+table.tarray input[type="radio"] {
+    width: auto;
+    height: auto;
+}
+tbody[moving="true"] {
+    cursor:move!important;
+}
+tbody[moving="true"] input {
+    cursor:move!important;
+}
+tr[moving="true"]  {
+    background-color:#CCEAFF;
+}
+[IF ISAPPLEWEBKIT]
+select.multidoc[size="1"] {
+    height:1.5em;
+}
+select.multidoc[size="2"] {
+    height:3em;
+}
+select.multidoc[size="3"] {
+    height:4.4em;
+}
+[ENDIF ISAPPLEWEBKIT]
+
+table.tarray thead tr td.tools,
+table.tarray tbody tr td.tools ,
+table.tarray tfoot tr td.tools {
+    width: 55px;
+    white-space:nowrap;
+}
+.constraint {  
+  color: red;
+  border:solid 1px red;
+  [IFNOT ISIE6]z-index:10;position:absolute;
+  margin:10px 10px 10px 30px;[ENDIF ISIE6]
+  background-color:#E6ECF0;
+  padding:3px;
+  cursor: pointer;
+}
+
+input.invalid,
+textarea.invalid,
+select.invalid,
+span.invalid,
+table.invalid,
+fieldset.invalid {
+    border: solid 1px red !important;
+    background-color: #ffc0cb ! important;
+}
+
+input[type="text"].invalid {
+    border: solid 1px red !important;
+}
+.document div.tabsh span.invalid {
+  background:#FF8B8B;
+  border:none!important;
+}
+.tipsy-constraint .tipsy-inner {
+    background-color:#C71212;
+    font-weight: bold;
+    color: white;
+    box-shadow: 5px 5px 2px grey;
+}
+.tipsy-constraint.constraint-over .tipsy-inner {
+    background-color:#ff4500;
+}
+
+.tipsy-constraint.constraint-over .tipsy-arrow-n {
+   border-bottom-color: #ff4500;
+}
+.tipsy-constraint.constraint-over  {
+    z-index: 100001;  /* one more tipsy itself */
+    opacity: 1 !important;
+}
+ .tipsy-constraint .tipsy-arrow-n {
+    border-bottom-color: #C71212;
+}
+.tipsy-constraint:hover {
+    z-index: 100002;  /* two more tipsy itself */
+    opacity: 1 !important;
+}
+.close-constraint {
+    [IFNOT ISIE8]
+    float: right;
+    left: 15px;
+    position: relative;
+    top: -13px;
+    [ENDIF ISIE8]
+    border: none;
+    cursor: pointer;
+}
+
+.tipsy-inner {
+    [IF ISIE6]
+    width:200px;
+    [ENDIF ISIE6]
+}.AutoCompleteDivListeStyle {
+  font-size: 13px; font-family: arial,sans-serif; 
+  white-space:nowrap;
+  cursor:default;
+  border: inset 1px #000000;
+  background-color: #FFFFFF;
+  padding:0px;
+  z-index:1;
+  overflow: auto;
+  box-shadow : 5px 5px 2px #82A0B5;
+}
+
+.AutoCompleteDiv {
+  display: block; 
+  padding-left: 3px; 
+  padding-right: 3px;
+  border-bottom: 1px solid #EFF9FF;
+}
+.AutoCompleteContaint {
+    width:100%;
+    margin-right: 15px;
+    display:block;
+}
+.AutoCompleteDivAct {
+  display: block; 
+  background-color: #EFF9FF; 
+  padding-left: 3px; 
+  padding-right: 3px;
+  border-bottom: 1px solid #EFF9FF;
+  color: #000000 ! important; 
+}
+
+div.AutoCompleteDivAct span{
+  background-color: #EFF9FF;    
+}
+.AutoMessage {
+  background-color: #FFFFFF; 
+  color: #82A0B5;  
+}
+/* pop up style */
+
+
+
+.popup {
+  background-color: #99D5FF;  
+  background-image: none;
+  border-color: #99D5FF;
+  border-style: outset;
+  border-width: 2px; 
+  margin: 0px;
+  position: absolute;
+  visibility: hidden;
+  text-decoration: none;
+  z-index:10;
+}
+
+.popup img {
+  width:15px;
+  height:15px;
+}
+.popup a.menuItem * {
+  color: #000000;
+}
+
+@media print {
+  .popup {
+    display:none;
+  }
+}
+
+a.menuItem, a.menuItem:link, a.menuItem:visited {
+  color: #000000;
+  background-color: transparent; 
+  cursor: default;
+  display: block;
+  font-family: sans-serif;
+  font-weight: bold;
+  padding: 2px 12px 2px 8px;
+  text-decoration: none;
+  white-space:nowrap;
+}
+
+a.menuItemCtrl:link, a.menuItemCtrl:visited {
+  color: #000000;
+  background-color: transparent; 
+  border-style:none  none none outset;
+  border-width:3px;
+  cursor: default;
+  display: block;
+  font-family: sans-serif;
+  font-weight: bold;
+  padding: 2px 12px 2px 8px;
+  text-decoration: none;
+  white-space:nowrap;
+}
+
+a.separator {
+  color: #99D5FF;
+  background-color: #99D5FF;
+  background-image: none;
+  cursor: default;
+  display: block;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: center;
+  padding: 0px;
+  border-color : #000000;
+  border-style : solid none none none;
+  border-width : 1px 0px 0px 0px;
+  text-decoration: none;
+}
+
+popup a.separator:hover {
+  text-decoration: none;
+  color: #99D5FF;
+  background-color: #99D5FF;  
+  background-image: none;	
+}
+
+.popup a.menuItem:hover,.popup a.menuItemCtrl:hover  {
+  color: #000000;
+  background-color: #99D5FF;
+  text-decoration: none;	
+}
+.popup a.menuItemDisabled:hover,.popup a.menuItemCtrlDisabled:hover {
+  color: #99D5FF;
+  background-color: #99D5FF;
+  text-decoration: none;	
+}
+.popup a.menuItem:hover *,.popup a.menuItemCtrl:hover *  {
+  color: #000000;
+}
+.popup a.menuItemDisabled:hover *,.popup a.menuItemCtrlDisabled:hover * {
+  color: #99D5FF	
+}
+
+a.menuItemDisabled, a.menuItemDisabled:link,a.menuItemDisabled:visited,a.menuItemCtrlDisabled,a.menuItemCtrlDisabled:link,a.menuItemCtrlDisabled:visited { 
+  color: #99D5FF;
+  background-color: transparent; 
+  cursor: default;
+  display: block;
+  font-family: sans-serif;
+  font-weight: normal;
+  font-style: italic;
+  padding: 2px 12px 2px 8px;
+  text-decoration: none;
+}
+a.menuItemCtrlDisabled:link {
+  border-style:none none none outset;
+  border-width:3px;
+  border-color:#99D5FF;
+}
+
+a.menuItemInvisible{ 
+  display: none;
+  cursor: default;
+}
+/* don't use: not supported by IE6  with hover
+a.menuItem:first-letter, a.menuItemDisabled:first-letter {
+  text-transform: uppercase;
+}
+*/
+
+TR.popupsource TD.tlist,  TR.popupsource TD  {
+  border-top-style:dashed!important;
+  border-bottom-style:dashed!important;
+  border-width:1px!important;
+  border-color:#A3D9FF!important;
+}
+
+
+DIV.popupsource, .popupsource {
+  border-style:dashed!important;
+  border-width:1px!important;
+  border-color:#A3D9FF!important;
+}
+.documentEdit fieldset[opened="false"] > legend > span.dyp-frame-opener:before {
+  content: "► ";
+  font-family: monospace;
+  font-style: normal;
+  color: #99D5FF;
+}
+
+.documentEdit fieldset[opened="true"] > legend > span.dyp-frame-opener:before {
+  content: "▼ ";
+  font-family: monospace;
+  font-style: normal;
+  color: #99D5FF;
+}
+
+.documentEdit span.dyp-help-hint {
+  margin: 0px 0px 0px 0.5em;
+  padding-left: 12px;
+  background-image: url(resizeimg.php?img=Images%2Fhelppage_gray.png&size=12);
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: help;
+}
+
+.document span.dyp-help-header-icon {
+     background-image: url(resizeimg.php?img=Images%2Fhelppage_gray.png&size=22);
+     background-position: center center;
+     background-repeat: no-repeat;
+     cursor: help;
+     float: right;
+     margin-right: 2px;
+     height: 22px;
+     width: 22px;
+}
+
+.document .documentTitle a:link,.document .documentTitle a:visited {
+    color: #000000;
+}
+
+.hidden-dialog-overlay {
+    background-color:#FFFFFF;
+    opacity:0.3;
+    filter: alpha(opacity = 30);
+}
+
+.documentView a img.mime {
+    vertical-align: middle;
+}
+.documentView tr[type=file] .FREEDOMText {
+    padding-top:0;
+}/* The main calendar widget.  DIV containing a table. */
+
+.calendar {
+  position: relative;
+  display: none;
+  border-top: 2px solid #E6ECF0;
+  border-right: 2px solid #2A3B47;
+  border-bottom: 2px solid #2A3B47;
+  border-left: 2px solid #E6ECF0;
+  font-size: 11px;
+  color: #000000;
+  cursor: default;
+  background: #CDD9E1;
+  font-family: tahoma,verdana,sans-serif;
+}
+
+.calendar table {
+  border-top: 1px solid #000000;
+  border-right: 1px solid #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+  border-left: 1px solid #000000;
+  font-size: 11px;
+  color: #000000;
+  cursor: default;
+  background: #CDD9E1;
+  font-family: tahoma,verdana,sans-serif;
+}
+
+/* Header part -- contains navigation buttons and day names. */
+
+.calendar .button { /* "<<", "<", ">", ">>" buttons have this class */
+  text-align: center;
+  padding: 1px;
+  border-top: 1px solid #FFFFFF;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  border-left: 1px solid #FFFFFF;
+}
+
+.calendar .nav {
+  background: transparent url(jscalendar/menuarrow.gif) no-repeat 100% 100%;
+}
+
+.calendar thead .title { /* This holds the current "month, year" */
+  font-weight: bold;
+  padding: 1px;
+  border: 1px solid #000000;
+  background: #567992;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.calendar thead .headrow { /* Row <TR> containing navigation buttons */
+}
+
+.calendar thead .daynames { /* Row <TR> containing the day names */
+}
+
+.calendar thead .name { /* Cells <TD> containing the day names */
+  border-bottom: 1px solid #000000;
+  padding: 2px;
+  text-align: center;
+  background: #9BB3C4;
+}
+
+.calendar thead .weekend { /* How a weekend day name shows in header */
+  color: #f00;
+}
+
+.calendar thead .hilite { /* How do the buttons in header appear when hover */
+  border-top: 2px solid #FFFFFF;
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  border-left: 2px solid #FFFFFF;
+  padding: 0px;
+  background-color: #F9FDFF;
+}
+
+.calendar thead .active { /* Active (pressed) buttons in header */
+  padding: 2px 0px 0px 2px;
+  border-top: 1px solid #000000;
+  border-right: 1px solid #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+  border-left: 1px solid #000000;
+  background-color: #FDFEFF;
+}
+
+/* The body part -- contains all the days in month. */
+
+.calendar tbody .day { /* Cells <TD> containing month days dates */
+  width: 2em;
+  text-align: right;
+  padding: 2px 4px 2px 2px;
+}
+.calendar tbody .day.othermonth {
+  font-size: 80%;
+  color: #aaa;
+}
+.calendar tbody .day.othermonth.oweekend {
+  color: #faa;
+}
+
+.calendar table .wn { /* week numbers */
+  padding: 2px 3px 2px 2px;
+  border-right: 1px solid #000000;
+  background: #9BB3C4;
+}
+
+.calendar tbody .rowhilite td {
+  background: #F9FDFF;
+}
+
+.calendar tbody .rowhilite td.wn {
+  background: #EDF8FF;
+}
+
+.calendar tbody td.hilite { /* Hovered cells <TD> */
+  padding: 1px 3px 1px 1px;
+  border-top: 1px solid #FFFFFF;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  border-left: 1px solid #FFFFFF;
+}
+
+.calendar tbody td.active { /* Active (pressed) cells <TD> */
+  padding: 2px 2px 0px 2px;
+  border-top: 1px solid #000000;
+  border-right: 1px solid #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+  border-left: 1px solid #000000;
+}
+
+.calendar tbody td.selected { /* Cell showing selected date */
+  font-weight: bold;
+  border-top: 1px solid #000000;
+  border-right: 1px solid #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+  border-left: 1px solid #000000;
+  padding: 2px 2px 0px 2px;
+  background: #9BB3C4;
+}
+
+.calendar tbody td.weekend { /* Cells showing weekend days */
+  color: #f00;
+}
+
+.calendar tbody td.today { /* Cell showing today date */
+  font-weight: bold;
+  color: #FDFEFF;
+}
+
+.calendar tbody .disabled { color: #999; }
+
+.calendar tbody .emptycell { /* Empty cells (the best is to hide them) */
+  visibility: hidden;
+}
+
+.calendar tbody .emptyrow { /* Empty row (some months need less than 6 rows) */
+  display: none;
+}
+
+/* The footer part -- status bar and "Close" button */
+
+.calendar tfoot .footrow { /* The <TR> in footer (only one right now) */
+}
+
+.calendar tfoot .ttip { /* Tooltip (status bar) cell <TD> */
+  padding: 1px;
+  border: 1px solid #000000;
+  background: #567992;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.calendar tfoot .hilite { /* Hover style for buttons in footer */
+  border-top: 1px solid #FFFFFF;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  border-left: 1px solid #FFFFFF;
+  padding: 1px;
+  background: #e4d8e0;
+}
+
+.calendar tfoot .active { /* Active (pressed) style for buttons in footer */
+  padding: 2px 0px 0px 2px;
+  border-top: 1px solid #000000;
+  border-right: 1px solid #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+  border-left: 1px solid #000000;
+}
+
+/* Combo boxes (menus that display months/years for direct selection) */
+
+.calendar .combo {
+  position: absolute;
+  display: none;
+  width: 4em;
+  top: 0px;
+  left: 0px;
+  cursor: default;
+  border-top: 1px solid #FFFFFF;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  border-left: 1px solid #FFFFFF;
+  background: #E6ECF0;
+  font-size: 90%;
+  padding: 1px;
+}
+
+.calendar .combo .label,
+.calendar .combo .label-IEfix {
+  text-align: center;
+  padding: 1px;
+}
+
+.calendar .combo .label-IEfix {
+  width: 4em;
+}
+
+.calendar .combo .active {
+  background: #9BB3C4;
+  padding: 0px;
+  border-top: 1px solid #000000;
+  border-right: 1px solid #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+  border-left: 1px solid #000000;
+}
+
+.calendar .combo .hilite {
+  background: #F5FBFF;
+/*  color: #2A3B47; */
+}
+
+.calendar td.time {
+  border-top: 1px solid #000000;
+  padding: 1px 0px;
+  text-align: center;
+  background-color: #9BB3C4;
+}
+
+.calendar td.time .hour,
+.calendar td.time .minute,
+.calendar td.time .ampm {
+  padding: 0px 3px 0px 4px;
+  border: 1px solid #889;
+  font-weight: bold;
+  background-color: #F9FDFF;
+}
+
+.calendar td.time .ampm {
+  text-align: center;
+}
+
+.calendar td.time .colon {
+  padding: 0px 2px 0px 3px;
+  font-weight: bold;
+}
+
+.calendar td.time span.hilite {
+  border-color: #000000;
+  background-color: #9BB3C4;
+  color: #FDFEFF;
+}
+
+.calendar td.time span.active {
+  border-color: #f00;
+  background-color: #567992;
+  color: #FFFFFF;
+}

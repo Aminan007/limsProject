@@ -1,0 +1,189 @@
+<style>
+body {
+  margin:0px;
+  padding:0px;
+}
+TD.author {
+  width:100px;white-space:nowrap;
+}
+TD.date,  {
+  width:10px;white-space:nowrap;
+}
+TD.date span, TD.author span {
+  white-space:nowrap;
+}
+tr[level="1"] {
+  color:[COLOR_A0]; /* notice */
+}
+tr[level="2"] {
+   /* info */
+}
+tr[level="4"] {
+   /* message */
+}
+tr[level="8"] {
+  color:orange;/* warning */
+}
+tr[level="16"] {
+  color:red;/* error */
+}
+.stateColor {
+  border-left:10px;border-style: none;overflow:hidden;white-space:nowrap;
+  width:100px;
+}
+td.revision {
+
+
+}
+table.dataTable thead th {
+    cursor: auto;
+}
+#allrev {
+    cursor: pointer;
+}
+td.collapsed {
+   background:url('[IMG:add.png|16]') no-repeat left center;
+}
+td.revision span.ui-icon {
+    float:left;
+}
+    td.comment {
+       border-left: solid 2px;
+    }
+    td.state  {
+        border:none;
+        cursor:pointer;
+    }
+    td.state span {
+      margin:2px;
+      border-style:outset;
+      border-width:1px;
+      float: left;
+          font-size: 30%;
+          width: 7px;
+    padding:3px;
+    }
+    h2 {
+      display:inline
+    }
+div.dataTables_wrapper input::-webkit-input-placeholder {
+    color:   [COLOR_A5];
+}
+div.dataTables_wrapper input:-moz-placeholder {
+    color:   [COLOR_A5];
+}
+div.dataTables_wrapper input[type="text"] {
+    width:250px;
+}
+
+tr.revision  td.comment{
+    border:3px solid red;
+    }
+div.filterLevel {
+    float:right;
+    }
+    div.filterLevel input {
+    }
+
+div.filterLevel label span.ui-icon {
+    float:left;
+
+    }
+label.ui-state-active {
+   /* background-image:none;*/
+   /* background-color: [COLOR_B5];*/
+    }
+label.ui-state-default {
+        font-size:92%;
+    }
+.ui-state-default .ui-icon-empty {
+    background-image:none;
+}
+</style>
+
+
+     <h2> [TEXT:History for]  [title]</h2>
+
+<div class="filterLevel">
+<input id="notice" type="checkbox" value="1"><label for="notice"><span class="ui-icon ui-icon-empty">&nbsp;</span>[TEXT:histoNotice]</label></input>
+<input checked="checked" id="info" type="checkbox" value="2"><label for="info"><span class="ui-icon ui-icon-check">&nbsp;</span>[TEXT:histoInfo]</label></input>
+<input checked="checked" id="message" type="checkbox" value="4"><label  for="message"><span class="ui-icon ui-icon-check">&nbsp;</span>[TEXT:histoMessage]</label></input>
+<input checked="checked" id="warning" type="checkbox" value="8"><label  for="warning"><span class="ui-icon ui-icon-check">&nbsp;</span>[TEXT:histoWarning]</label></input>
+<input checked="checked" id="error" type="checkbox" value="16"><label  for="error"><span class="ui-icon ui-icon-check">&nbsp;</span>[TEXT:histoError]</label></input>
+</div>
+<table  cellspacing="0" cellpadding="0"  width="100%" id="current" data-searchText="[TEXT:Search in current revision]">
+<thead>
+<tr>[IF hasversion]<th  >[TEXT:Version]</th>[ENDIF hasversion]
+    <th>[TEXT:Rev]</th>
+    <th>[IF STATE][TEXT:Activity][ENDIF STATE]</th>
+    <th style="text-align:left;">[TEXT:Author]</th>
+    <th style="text-align:left;">[TEXT:Date]</th>
+    <th style="text-align:left;width:30px">[IF viewdiff][TEXT:Diff][ENDIF viewdiff]</th>
+</tr>
+</thead>
+<tbody>
+<tr docid="[docid]" class="revision">
+    [IF hasversion]<td class="version" >[latestVersion]</td>[ENDIF hasversion]
+    <td class="revision stateColor" ><span class="ui-icon ui-icon-circlesmall-minus" >&nbsp;</span>[lastRevision]</td>
+    <td class="state">[IF STATE]<span style="background-color:[lastColor];border-color:[lastColor]">&nbsp;</span>[ENDIF STATE]<b>[lastState]</b>&nbsp;</td>
+    <td class="author" title="[TEXT:revised by]"><I style="margin-right:5px;white-space:nowrap;">[lastOwner]</I></td>
+    <td class="date"><span>[lastDate]</span></td>
+    <td>[IF viewdiff]<input type="checkbox"  name="diff" value="[docid]">[ENDIF viewdiff]</td>
+</tr>
+    [BLOCK LASTCOMMENT]
+<tr class="comment" level="[clevel]" rev="[lastRevision]" >
+    [IF hasversion]<td class="version">&nbsp;</td>[ENDIF hasversion]
+    <td class="stateColor" style="border-color:[color]">&nbsp;</td>
+    <td class="comment" style="border-color:[lastColor]">[ccomment]</td>
+    <td class="author"><I>[cauthor]</I></td>
+    <td class="date">[cdate]</td>
+    <td>&nbsp;</td>
+</tr>
+       [ENDBLOCK LASTCOMMENT]
+</tbody>
+</table>
+
+        [IF pastRevision]
+        <hr style="clear:both"/>
+
+
+        <h2>[TEXT:Past Revisions]</h2>
+<table  cellspacing="0" cellpadding="0"  width="100%" id="history" data-searchText="[TEXT:Search in past revision]">
+<thead>
+<tr>[IF hasversion]<th>[TEXT:Version]</th>[ENDIF hasversion]
+    <th id="allrev"><span class="ui-icon ui-icon-circlesmall-plus" >&nbsp;</span>[TEXT:Rev]</th>
+    <th >[IF STATE][TEXT:State][ENDIF STATE][IFNOT STATE][TEXT:Title][ENDIF STATE]</th>
+    <th style="text-align:left;">[TEXT:Author]</th>
+    <th style="text-align:left;">[TEXT:Date]</th>
+    <th style="text-align:left;width:30px">[IF viewdiff][TEXT:Diff][ENDIF viewdiff]</th>
+</tr>
+</thead>
+<tbody>
+[BLOCK TABLEBODY]
+<tr class="revision" docid="[id]">
+    [IF hasversion]<td class="version" >[version]</td>[ENDIF hasversion]
+    <td class="revision stateColor"  ><span class="ui-icon ui-icon-circlesmall-plus" >&nbsp;</span>[revision]</td>
+    <td class="state" title="[TEXT:View revision] [revision]">[IF STATE]<span style="background-color:[color];border-color:[color]">&nbsp;</span>[ENDIF STATE]<b>[state]</b>&nbsp;</td>
+    <td class="author" title="[TEXT:revised by]"><I style="margin-right:5px;white-space:nowrap;">[owner]</I></td>
+    <td class="date"><span>[date]</span></td>
+    <td>[IF viewdiff]<input type="checkbox"  name="diff" value="[id]">[ENDIF viewdiff]</td>
+</tr>
+    [BLOCK [COMMENT]]
+<tr  class="comment" level="[clevel]" rev="[revision]" >
+    [IF hasversion]<td >&nbsp;</td>[ENDIF hasversion]
+    <td class="stateColor" style="border-color:[color]">&nbsp;</td>
+    <td class="comment" style="border-color:[color]">[ccomment]</td>
+    <td><I>[cauthor]</I></td>
+    <td >[cdate]</td>
+    <td>&nbsp;</td>
+</tr>
+       [ENDBLOCK [COMMENT]]
+[ENDBLOCK TABLEBODY]
+</tbody>
+</table>
+
+        [ENDIF pastRevision]
+
+
+
+

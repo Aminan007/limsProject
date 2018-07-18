@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<module name="dynacase-datajs" disabled="no" version="3.2.8" release="0" license="http://www.gnu.org/licenses/lgpl-3.0.txt GNU Lesser General Public License v3.0" vendor="Anakeen" changelog="https://apps.anakeen.com/changelog/?moduleg=dynacase-datajs&amp;version=3.2.8">
+  <description>Dynacase data lib js.
+    </description>
+  <requires>
+    </requires>
+  <post-install>
+    <process command="programs/DATA_init">
+      <label>Reactivate DATA application</label>
+    </process>
+    <process command="programs/record_application DATA I"/>
+    <process command="programs/update_catalog"/>
+  </post-install>
+  <post-upgrade>
+    <process command="programs/pre_migration DATA"/>
+    <process command="programs/record_application DATA U"/>
+    <process command="programs/post_migration DATA"/>
+    <process command="programs/update_catalog"/>
+  </post-upgrade>
+</module>

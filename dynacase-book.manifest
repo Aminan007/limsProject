@@ -1,0 +1,39 @@
+drwxrwxr-x distrib/distrib   0 2018-02-13 05:39 ./
+drwxrwxr-x distrib/distrib   0 2018-02-13 05:39 ./BOOK/
+-rw-rw-r-- distrib/distrib 565 2018-02-13 05:39 ./BOOK/BOOK.app
+-rw-rw-r-- distrib/distrib 20340 2018-02-13 05:39 ./BOOK/Class.Book.php
+drwxrwxr-x distrib/distrib     0 2018-02-13 05:39 ./BOOK/Images/
+-rw-rw-r-- distrib/distrib  4726 2018-02-13 05:39 ./BOOK/Images/collating.png
+-rwxrwxr-x distrib/distrib 14827 2018-02-13 05:39 ./BOOK/Images/openbook.png
+-rw-rw-r-- distrib/distrib 18528 2018-02-13 05:39 ./BOOK/Images/chapter.png
+-rw-rw-r-- distrib/distrib 20545 2018-02-13 05:39 ./BOOK/Images/book.png
+-rwxrwxr-x distrib/distrib  5207 2018-02-13 05:39 ./BOOK/Images/bookpdf.png
+-rw-rw-r-- distrib/distrib  3825 2018-02-13 05:39 ./BOOK/Class.OpenDocument.php
+-rw-rw-r-- distrib/distrib   143 2018-02-13 05:39 ./BOOK/BOOK_init.php
+-rw-rw-r-- distrib/distrib  1065 2018-02-13 05:39 ./BOOK/Class.BookChapter.php
+-rw-rw-r-- distrib/distrib 21497 2018-02-13 05:39 ./BOOK/collating.ods
+drwxrwxr-x distrib/distrib     0 2018-02-13 05:39 ./BOOK/Layout/
+-rw-rw-r-- distrib/distrib  1934 2018-02-13 05:39 ./BOOK/Layout/genhtml.xml
+-rw-rw-r-- distrib/distrib  4058 2018-02-13 05:39 ./BOOK/Layout/openbook.xml
+-rw-rw-r-- distrib/distrib  1058 2018-02-13 05:39 ./BOOK/Layout/viewbook.xml
+-rw-rw-r-- distrib/distrib   365 2018-02-13 05:39 ./BOOK/Layout/genpdf.xml
+-rw-rw-r-- distrib/distrib  2159 2018-02-13 05:39 ./BOOK/Layout/genpdf.js
+-rw-rw-r-- distrib/distrib 24337 2018-02-13 05:39 ./BOOK/book.ods
+-rw-rw-r-- distrib/distrib  6687 2018-02-13 05:39 ./BOOK/Class.Collating.php
+-rw-rw-r-- distrib/distrib   970 2018-02-13 05:39 ./BOOK/book.php
+-rwxr-xr-x distrib/distrib   366 2018-02-13 05:39 ./BOOK/BOOK_post
+-rwxr-xr-x distrib/distrib   337 2018-02-13 05:39 ./BOOK/BOOK_premigr_0.4.0
+drwxrwxr-x distrib/distrib     0 2018-02-13 05:39 ./locale/
+drwxrwxr-x distrib/distrib     0 2018-02-13 05:39 ./locale/en/
+drwxrwxr-x distrib/distrib     0 2018-02-13 05:39 ./locale/en/LC_MESSAGES/
+-rw-rw-r-- distrib/distrib   385 2018-02-13 05:39 ./locale/en/LC_MESSAGES/BOOK.mo
+drwxrwxr-x distrib/distrib     0 2018-02-13 05:39 ./locale/fr/
+drwxrwxr-x distrib/distrib     0 2018-02-13 05:39 ./locale/fr/LC_MESSAGES/
+-rw-rw-r-- distrib/distrib  1202 2018-02-13 05:39 ./locale/fr/LC_MESSAGES/BOOK.mo
+drwxrwxr-x distrib/distrib     0 2018-02-13 05:39 ./FDL/
+lrwxrwxrwx distrib/distrib     0 2018-02-13 05:39 ./FDL/Class.Book.php -> ../BOOK/Class.Book.php
+lrwxrwxrwx distrib/distrib     0 2018-02-13 05:39 ./FDL/Class.OpenDocument.php -> ../BOOK/Class.OpenDocument.php
+lrwxrwxrwx distrib/distrib     0 2018-02-13 05:39 ./FDL/Class.BookChapter.php -> ../BOOK/Class.BookChapter.php
+lrwxrwxrwx distrib/distrib     0 2018-02-13 05:39 ./FDL/Class.Collating.php -> ../BOOK/Class.Collating.php
+drwxrwxr-x distrib/distrib     0 2018-02-13 05:39 ./EXTERNALS/
+lrwxrwxrwx distrib/distrib     0 2018-02-13 05:39 ./EXTERNALS/book.php -> ../BOOK/book.php

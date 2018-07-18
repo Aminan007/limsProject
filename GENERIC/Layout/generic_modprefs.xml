@@ -1,0 +1,9 @@
+<html>
+    <head>
+        <script>
+            if (window.parent && window.parent.parent && typeof window.parent.parent.reloadiframe === "function") {
+                window.parent.parent.reloadiframe(null,null,'[famname]');
+            }
+        </script>
+    </head>
+</html>

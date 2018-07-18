@@ -1,0 +1,9 @@
+drwxrwxr-x distrib/distrib   0 2018-03-05 11:08 ./
+drwxrwxr-x distrib/distrib   0 2018-03-05 11:08 ./programs/
+-rwxrwxr-x distrib/distrib 3042 2018-03-05 11:08 ./programs/datatables_install
+drwxrwxr-x distrib/distrib    0 2018-03-05 11:08 ./.autoloader-ignore.d/
+-rw-rw-r-- distrib/distrib   24 2018-03-05 11:08 ./.autoloader-ignore.d/dynacase-jquery-dataTables-installer
+drwxrwxr-x distrib/distrib    0 2018-03-05 11:08 ./lib/
+drwxrwxr-x distrib/distrib    0 2018-03-05 11:08 ./lib/jquery-dataTables/
+-rw-rw-r-- distrib/distrib 1690 2018-03-05 11:08 ./lib/jquery-dataTables/info.xml
+-rw-rw-r-- distrib/distrib   85 2018-03-05 11:08 ./lib/jquery-dataTables/.htaccess

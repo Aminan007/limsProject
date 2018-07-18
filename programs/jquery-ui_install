@@ -1,0 +1,147 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Install jquery-ui archive into Dynacase context dir
+ *
+ * @author Anakeen 2012
+ */
+
+$WIFF_ROOT = getenv("WIFF_ROOT");
+if ($WIFF_ROOT === false) {
+    print "WIFF_ROOT environment variable is not set!\n";
+    exit(1);
+}
+
+$WIFF_CONTEXT_ROOT = getenv("WIFF_CONTEXT_ROOT");
+if ($WIFF_CONTEXT_ROOT === false) {
+    print "WIFF_CONTEXT_ROOT environment variable not set!\n";
+    exit(1);
+}
+
+set_include_path(get_include_path() . PATH_SEPARATOR . $WIFF_CONTEXT_ROOT . PATH_SEPARATOR . "$WIFF_ROOT/include");
+
+include_once('WHAT/Lib.System.php');
+
+$ck_tgz = $argv[1];
+if ($ck_tgz === NULL) {
+    print sprintf("Missing JQuery-Ui archive argument\n");
+    exit(1);
+}
+$ck_tgz = realpath($ck_tgz);
+if (!is_file($ck_tgz)) {
+    print sprintf("JQuery-UI archive not found at '%s'\n", $ck_tgz);
+    exit(1);
+}
+
+$ret = chdir($WIFF_CONTEXT_ROOT);
+if ($ret === false) {
+    print sprintf("Could not change directory to '%s'\n", $WIFF_CONTEXT_ROOT);
+    exit(1);
+}
+
+$tmpfile = LibSystem::tempnam(null, 'jqueryui_untar');
+if ($tmpfile === false) {
+    print sprintf("Could not create temporary file\n");
+    exit(1);
+}
+
+$tempdir = basename($tmpfile);
+$ret = mkdir($tempdir);
+if ($ret === false) {
+    print sprintf("Could not create temporary directory '%s'\n", $tempdir);
+    @unlink($tmpfile);
+    exit(1);
+}
+
+// Unpack archive in tempdir
+$cmd = sprintf('unzip %s -d %s > %s 2>&1', escapeshellarg($ck_tgz), escapeshellarg($tempdir),
+    escapeshellarg($tmpfile));
+system($cmd, $ret);
+
+$output = file_get_contents($tmpfile);
+@unlink($tmpfile);
+
+if ($ret !== 0) {
+    print sprintf("Error %s: %s\n", $cmd, $output);
+    exit(1);
+}
+
+// Set directory/files rights
+$cmd = sprintf('find %s -type d -exec chmod 0755 {} \; > /dev/null 2>&1', escapeshellarg($tempdir));
+system($cmd, $ret);
+if ($ret !== 0) {
+    print sprintf("Error setting rights on directories\n");
+    exit(1);
+}
+$cmd = sprintf('find %s -type f -exec chmod 0644 {} \; > /dev/null 2>&1', escapeshellarg($tempdir));
+system($cmd, $ret);
+if ($ret !== 0) {
+    print sprintf("Error setting rights on files\n");
+    exit(1);
+}
+
+// Search for a /jquery-ui/ subdir in the unpacked archive
+$fh = opendir($tempdir);
+if ($fh === false) {
+    print sprintf("Error opening temporary directory '%s'\n", $tempdir);
+    exit(1);
+}
+
+$jqui_subdir = false;
+while (($file = readdir($fh)) !== false) {
+    if (is_dir(sprintf("%s/%s", $tempdir, $file)) && preg_match("/^js$/", $file)) {
+        $jqui_subdir = $file;
+        break;
+    }
+}
+if ($jqui_subdir === false) {
+    print sprintf("Could not find a valid jquery-ui js file in '%s'\n", $tempdir);
+    exit(1);
+}
+$jqui_subdir = 'lib/jquery-ui';
+// Create jquery-ui dir if it does not exists
+if (!is_dir('lib/jquery-ui')) {
+    $ret = mkdir('lib/jquery-ui');
+    if ($ret === false) {
+        print sprintf("Could not create 'lib/jquery-ui' directory\n");
+        exit(1);
+    }
+}
+
+// Copy new jquery-ui files over existing jquery-ui directory
+$cmd = sprintf('cp -r %s/* %s', escapeshellarg($tempdir), escapeshellarg($jqui_subdir));
+system($cmd, $ret);
+
+if ($ret !== 0) {
+    print sprintf("Error copying jquery-ui files (%s)\n", $cmd);
+    exit(1);
+}
+
+$cmd = sprintf("cd lib/jquery-ui/js && ln -sf `ls -1t jquery-ui*min.js | head -1` jquery-ui.js");
+system($cmd, $ret);
+$cmd = sprintf("cd lib/jquery-ui/js && ln -sf `ls -1t jquery-[0-9]*min.js | head -1` jquery.js");
+system($cmd, $ret);
+
+if ($handle = opendir('lib/jquery-ui/css')) {
+    echo "Directory handle: $handle\n";
+    echo "Entries:\n";
+
+    /* This is the correct way to loop over the directory. */
+    while (false !== ($entry = readdir($handle))) {
+        echo "Entry $entry\n";
+        if (strpos($entry,'.')===false) {
+	  $cmd = sprintf("cd lib/jquery-ui/css/$entry && ln -sf `ls -1t jquery-ui*custom.css | head -1` jquery-ui.css");
+	 
+	  system($cmd, $ret);
+	}	
+    }
+    closedir($handle);
+}
+
+// Cleanup tempdir
+$cmd = sprintf('rm -Rf %s', escapeshellarg($tempdir));
+system($cmd, $ret);
+$cmd = sprintf('%s/wsh.php --api=setStyle', escapeshellarg($WIFF_CONTEXT_ROOT));
+system($cmd, $ret);
+exit(0);
+?>

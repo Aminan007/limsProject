@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+
+   <title>[TEXT: history] [title]</title>
+
+
+<LINK REL="stylesheet" type="text/css" HREF="[CORE_SSTANDURL]app=FDL&amp;action=ALLVIEWCSS&amp;wv=[WVERSION]" >
+
+[CSS:REF]
+
+
+<style type="text/css">
+[CSS:CODE]
+
+
+</style>
+
+[JS:REF]
+
+   <script language="JavaScript1.2">
+  <!--
+    [JS:CODE]
+
+-->
+</script>   
+ </head>
+
+<body>
+
+[ZONE FDL:VIEWHISTO]
+
+
+</body>
+</html>

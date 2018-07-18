@@ -1,0 +1,25 @@
+<textarea id="[aid]" name="[aname]" type="htmltext" onchange="htmlText.setValue(this.id, this.value)"
+          [IF height] style="height : [height]" [ENDIF height] >[Value]
+</textarea>
+<textarea id="conf_[aid]" style="display : none;">[jsonconf]</textarea>
+[IFNOT isInDuplicableTableLine]
+<script type="text/javascript">
+addEvent(window,'load', function(){
+    var conf=JSON.parse(document.getElementById("conf_[aid]").value);
+    [IF allowedContent]
+        conf.allowedContent = {
+            $1: {
+            // Use the ability to specify elements as an object.
+            elements: CKEDITOR.dtd,
+            attributes: true,
+            styles: true,
+            classes: true
+            }
+        };
+        conf.disallowedContent = 'script; *[on*]';
+    [ENDIF allowedContent]
+
+    window.htmlText.initEditor("[aid]", conf);
+});
+</script>
+[ENDIF isInDuplicableTableLine]

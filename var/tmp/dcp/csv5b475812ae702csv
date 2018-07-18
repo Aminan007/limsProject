@@ -1,0 +1,81 @@
+BEGIN;DIR;Livre;;;BOOK
+
+TYPE;C
+ICON;book.png
+//PROFID
+//CPROFID
+DFLDID;auto
+METHOD
+CLASS;Dcp\Book\Book
+//WID
+//CVID
+//SCHAR
+//USERFOR
+//TAG
+//;idattr;idframe;label;T;A;type;order;vis;need;link;phpfile;phpfunc;elink;constraint;options
+
+MODATTR;BA_DESC;;Sujet
+ATTR;BOOK_FR_INFO;;Contenu;N;N;frame;100;W
+ATTR;BOOK_ABSTRACT;BOOK_FR_INFO;Résumé;N;N;longtext;110;W;;;;;;;vlabel=up
+ATTR;BOOK_PDF;BOOK_FR_INFO;PDF;N;N;file;120;R
+ATTR;BOOK_DATEPDF;BOOK_FR_INFO;Date de production;N;N;timestamp;130;R;;;;::getFileDate(BOOK_PDF)
+ATTR;BOOK_FR_PAGES;;Mise en pages;N;N;frame;130;W
+ATTR;BOOK_TOC;BOOK_FR_PAGES;Table des matières;N;N;enum;140;W;;;;yes|Avec table des matières,no|Sans table des matières;;;system=yes|bmenu=no
+ATTR;BOOK_HEADLEFT;BOOK_FR_PAGES;Entête gauche;N;N;text;150;W;;;;;;;elabel=utiliser ##PAGES## et ##PAGE## pour la numérotation des pages
+ATTR;BOOK_HEADMIDDLE;BOOK_FR_PAGES;Entête centre;N;N;text;160;W
+ATTR;BOOK_HEADRIGHT;BOOK_FR_PAGES;Entête droite;N;N;text;170;W
+ATTR;BOOK_FOOTLEFT;BOOK_FR_PAGES;Pied de page gauche;N;N;text;180;W
+ATTR;BOOK_FOOTMIDDLE;BOOK_FR_PAGES;Pied de page centre;N;N;text;190;W
+ATTR;BOOK_FOOTRIGHT;BOOK_FR_PAGES;Pied de page droite;N;N;text;200;W
+ATTR;BOOK_TPLODT;BOOK_FR_PAGES;Style OpenDocument;N;N;file;210;W;;;;;;;search=no
+ATTR;BOOK_ADDCHAPTER;;Insérer un nouveau chapitre;;;menu;10;R;;%S%app=GENERIC&action=GENERIC_EDIT&classid=CHAPTER&chap_bookid=%INITID%&chap_book=%T%&dirid=%INITID%;;::controlAclAccess(modify)
+
+
+ATTR;BOOK_OPEN;;Ouvrir;;;menu;20;R;;%S%app=FDL&action=FDL_CARD&id=%I%&zone=BOOK:OPENBOOK
+ATTR;BOOK_GEN_HTML;;Visualisation;;;menu;30;R;;%S%app=FDL&action=IMPCARD&id=%I%&zone=BOOK:GENHTML:S
+ATTR;BOOK_GEN_PDF;;Génération PDF;;;menu;40;R;;%S%app=FDL&action=IMPCARD&id=%I%&zone=BOOK:GENPDF:S
+MODATTR;FLD_FR_PROF;;;;;;;H
+MODATTR;FLD_FR_REST;;;;;;;H
+MODATTR;FLD_OPEN;;;;;;;H
+DEFAULT;FLD_ALLBUT;1
+DEFAULT;FLD_FAM;Chapitre
+DEFAULT;FLD_FAMIDS;CHAPTER
+DEFAULT;FLD_SUBFAM;yes
+
+
+END
+
+
+BEGIN;;Chapitre;;;CHAPTER
+
+TYPE;C
+ICON;chapter.png
+//PROFID
+//CPROFID
+//DFLDID;auto
+METHOD
+CLASS;Dcp\Book\Chapter
+//WID
+//CVID
+//SCHAR
+//USERFOR
+//TAG
+//;idattr;idframe;label;T;A;type;order;vis;need;link;phpfile;phpfunc;elink;constraint;options
+
+ATTR;CHAP_FR_IDENT;;Identification;N;N;frame;;W
+ATTR;CHAP_LEVEL;CHAP_FR_IDENT;Numérotation;Y;N;text;10;W;Y
+ATTR;CHAP_TITLE;CHAP_FR_IDENT;Titre;Y;N;text;20;W;Y
+ATTR;CHAP_COMMENT;CHAP_FR_IDENT;Commentaire;N;Y;longtext;30;W
+ATTR;CHAP_BOOKID;CHAP_FR_IDENT;Identificateur livre;N;N;docid;40;H;Y;;;::getTitle(CHAP_BOOKID):CHAP_BOOK
+ATTR;CHAP_BOOK;CHAP_FR_IDENT;LIvre;N;Y;text;50;W;Y;%S%app=FDL&action=FDL_CARD&latest=Y&id=%CHAP_BOOKID%;fdl.php;lfamily(D,BOOK,CHAP_BOOK):CHAP_BOOKID,CHAP_BOOK
+ATTR;CHAP_FR_CONTENT;;Contenu;N;N;frame;60;W
+ATTR;CHAP_CONTENT;CHAP_FR_CONTENT;Contenu;N;N;htmltext;70;W;;;;;;;vlabel=none|editheight=300px
+
+
+
+
+
+
+END
+
+

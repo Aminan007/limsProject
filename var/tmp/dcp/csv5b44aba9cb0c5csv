@@ -1,0 +1,303 @@
+// famille de base;;titre;id;class;name
+BEGIN;0;de base;1;;BASE
+TYPE;C
+USEFOR;S
+
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;option
+ATTR;FR_BASIC;;Basique;N;N;frame;0;W
+ATTR;BA_TITLE;FR_BASIC  ;Titre;Y;N;text;1;O;Y
+
+END
+
+
+
+// famille dossier;;;id;class;name
+BEGIN;1;Dossier;2;Dir;DIR
+TYPE;C
+ICON;folder.png
+USEFOR;F
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;option
+ATTR;BA_DESC;FR_BASIC;Description;N;Y;longtext;20;W
+ATTR;GUI_COLOR;FR_BASIC;Couleur intercalaire;N;N;color;30;O
+ATTR;GUI_ISRSS;FR_BASIC;Utilisable comme flux RSS;N;N;enum;32;W;;;;[bool]no|non,yes|oui;;;bmenu=no|system=yes
+ATTR;GUI_SYSRSS;FR_BASIC;Flux RSS système;N;N;enum;33;R;;;;;;;bmenu=no|system=yes
+ATTR;FLD_FR_REST;;Restrictions;N;N;frame;0;R
+ATTR;FLD_ALLBUT;FLD_FR_REST;Tout ou rien;N;N;enum;1000;W;;;-;0|tout sauf,1|seulement;;;system=yes
+ATTR;FLD_TFAM;FLD_FR_REST;Familles filtrées;N;N;array;1005;W;;;;;;;vlabel=none
+ATTR;FLD_FAM;FLD_TFAM;Familles (titre);N;N;text;1010;H;;;;::getTitle(FLD_FAMIDS)
+ATTR;FLD_FAMIDS;FLD_TFAM;Familles;N;N;docid('-1');1015;W;;;fdl.php;lfamilies(D,CT):FLD_FAMIDS,CT
+ATTR;FLD_SUBFAM;FLD_TFAM;Restriction sous famille;N;N;enum;1020;W;;;;[bool]yes|inclure les sous familles,no|ne pas inclure les sous familles;;;bmenu=no|system=yes
+ATTR;FLD_FR_PROF;;Profils par défaut;N;N;frame;0;R
+ATTR;FLD_PDOC;FLD_FR_PROF;Profil par défaut de document (titre);N;N;text;1030;H;;;;::getTitle(FLD_PDOCID)
+ATTR;FLD_PDOCID;FLD_FR_PROF;Profil par défaut de document;N;N;docid('PDOC');1040;W;;;fdl.php;lfamilly(D,PDOC,CT):FLD_PDOCID,CT
+ATTR;FLD_PDIR;FLD_FR_PROF;Profil par défaut de dossier (titre);N;N;text;1050;H;;;;::getTitle(FLD_PDIRID):FLD_PDIR
+ATTR;FLD_PDIRID;FLD_FR_PROF;Profil par défaut de dossier;N;N;docid('PDIR');1060;W;;;fdl.php;lfamilly(D,PDIR,CT):FLD_PDIRID,CT
+
+ATTR;FLD_OPEN;;Ouvrir;N;N;menu;20;R;;%S%app=FREEDOM&action=FREEDOM_VIEW&dirid=%I%
+ATTR;FLD_COPYBASKET;;Insérer le porte-document;N;N;menu;30;R;;C%S%app=FREEDOM&action=FREEDOM_INSERTFLD&id=%I%&dirid={FREEDOM_IDBASKET}&clean=Y
+ATTR;FLD_OPENFOLIO;;Ouvrir comme une chemise;N;N;menu;40;R;;C%S%app=FREEDOM&action=OPENFOLIO&id=%I%
+ATTR;FLD_INSERTDOC;;Insérer des documents;N;N;menu;50;R;;C%S%app=FDL&action=EDITINSERTDOCUMENT&id=%I%;;;;;ltarget=_self
+ATTR;FLD_SETSYSRSS;;RSS visible/masquée aux utilisateurs;N;N;menu;60;R;;C%S%app=FREEDOM&action=SETSYSRSS&id=%I%;;;;;ltarget=_self
+DEFAULT;FLD_SUBFAM
+END
+
+//DOC;Famille;<special id>;<special dirid>;titre
+DOC;2;9;;Racine
+
+
+
+
+// famille profile doc;;;id;class;name
+BEGIN;1;Profil de document;3;PDoc;PDOC
+SCHAR;S
+TYPE;C
+ICON;profil.gif
+USEFOR;SP
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;option
+ATTR;PRF_DESC;FR_BASIC ;Description;N;N;longtext;10;W;N
+ATTR;DPDOC_FR_DYN;;Dynamique;N;N;frame;100;W
+ATTR;DPDOC_FAMID;DPDOC_FR_DYN;Famille (id);N;N;docid;110;H;;;;::getTitle(DPDOC_FAMID):DPDOC_FAM
+ATTR;DPDOC_FAM;DPDOC_FR_DYN;Famille;N;Y;text;120;W;;%S%app=FDL&action=FDL_CARD&id=%DPDOC_FAMID%;fdl.php;lfamilies(D,DPDOC_FAM):DPDOC_FAMID,DPDOC_FAM;;;elabel=famille utilisée pour les profils dynamiques
+ATTR;PRF_ACCESS;;Accessibilités;N;N;action;200;R;;;FREEDOM;FREEDOM_GACCESS;;::controlActifProfil()
+ATTR;PRF_ACTIVATE;;Activer;N;N;action;210;R;;;FREEDOM;MODPROF&profid=%I%&docid=%I%;;::profilIsActivate(false);ltarget=_self
+ATTR;PRF_DESACTIVATE;;Désactiver;N;N;action;220;R;;;FREEDOM;MODPROF&profid=0&docid=%I%;;::profilIsActivate(true);ltarget=_self
+ATTR;PRF_FORCECOMPUTING;;Forcer la propagation du profil;N;N;menu;230;R;;::recomputeProfiledDocument();;::profilIsActivate(true);;;ltarget=_self|ltitle=Force le recalcul des profils des documents associés
+END;1;9
+
+// famille profile dossier;;;;;name
+BEGIN;PDOC;Profil de dossier;4;PDir;PDIR
+SCHAR;S
+TYPE;C
+ICON;profil_dossier.gif
+USEFOR;SP
+END;1;9
+
+// famille profile recherche;;;;;name
+BEGIN;PDOC;Profil de recherche;6;PDocSearch;PSEARCH
+SCHAR;S
+TYPE;C
+ICON;profil_recherche.gif
+USEFOR;SP
+END;1;9
+
+// famille profile famille;;;;;name
+BEGIN;PDOC;Profil de famille;23;PFam;PFAM
+SCHAR;S
+TYPE;C
+ICON;profil_family.gif
+MODATTR;DPDOC_FR_DYN;;;;;;;H
+USEFOR;SP
+
+END;1;9
+
+
+
+
+
+
+
+// famille chemise;;;id;class;name
+BEGIN;DIR;Porte-documents;26;;BASKET
+TYPE;C
+ICON;basket.gif
+USEFOR;S
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink
+ATTR;FLD_COPYBASKET;FLD_FR_PROF;Insérer le porte-document;N;N;menu;20;H
+ATTR;FLD_CLEAR;;Vider;N;N;menu;20;W;;[basket]%S%app=FREEDOM&action=FREEDOM_CLEARFLD&id=%I%
+END;1;-1
+
+
+
+
+
+// famille dossier;inherit;;id;class;name
+BEGIN;0;Aide en ligne;;;HELPPAGE
+CLASS;Dcp\Core\HelpPage
+METHOD
+USEFOR;S
+ICON;helppage.png
+
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;option
+ATTR;HELP_FR_IDENTIFICATION;;Aide;N;N;frame;10;W
+ATTR;HELP_FAMILY;HELP_FR_IDENTIFICATION;Famille;N;Y;docid("x");20;R;;;fdl.php;lfamilies(D,CT):HELP_FAMILY,CT
+ATTR;HELP_T_HELP;HELP_FR_IDENTIFICATION;Description;N;N;array;30;W;;;helppage.php;FDL:helppage_edithelp(A,D,ID):;;;empty=yes
+ATTR;HELP_NAME;HELP_T_HELP;Libellé;N;N;text;40;W
+ATTR;HELP_LANG;HELP_T_HELP;Langue du libellé;N;N;enum;50;W;;;helppage.php;helppageenumlang()
+ATTR;HELP_DESCRIPTION;HELP_T_HELP;Description;N;N;longtext;60;W
+ATTR;HELP_T_SECTIONS;HELP_FR_IDENTIFICATION;Rubriques;N;N;array;70;W;;;helppage.php;FDL:helppage_editsection(A,D,ID):;;;empty=yes
+ATTR;HELP_SEC_ORDER;HELP_T_SECTIONS;Ordre de la rubrique;N;N;int;80;W
+ATTR;HELP_SEC_NAME;HELP_T_SECTIONS;Nom de la rubrique;N;N;text;90;W
+ATTR;HELP_SEC_LANG;HELP_T_SECTIONS;Langue;N;N;enum;100;W;;;helppage.php;helppageenumlang()
+ATTR;HELP_SEC_KEY;HELP_T_SECTIONS;Clé de la rubrique;N;N;text;110;W;;;helppage.php;helppage_getHelpAttr(HELP_FAMILY, HELP_SEC_KEY):HELP_SEC_KEY,HELP_SEC_NAME;;::isString(HELP_SEC_KEY,[a-zA-Z0-9_]+)
+ATTR;HELP_SEC_TEXT;HELP_T_SECTIONS;Texte;N;N;htmltext;120;W
+
+PARAM;HELP_FR_FAMILY;;Paramètres de famille;N;N;frame;10;W
+PARAM;HELP_T_FAMILY;HELP_FR_FAMILY;Langues;N;N;array;20;W
+PARAM;HELP_P_LANG_NAME;HELP_T_FAMILY;Libellé de la langue;N;N;text;30;W
+PARAM;HELP_P_LANG_KEY;HELP_T_FAMILY;Langue;N;N;text;40;W
+
+
+DEFAULT;HELP_LANG;fr_FR
+DEFAULT;HELP_SEC_LANG;fr_FR
+DEFAULT;HELP_P_LANG_NAME;français\nenglish
+DEFAULT;HELP_P_LANG_KEY;fr_FR\nen_US
+
+END;0
+
+
+
+// famille dossier;inherit;;id;class;name
+BEGIN;0;Mail;15;;MAIL
+TYPE;C
+METHOD
+CLASS;Dcp\Core\MailEdit
+USEFOR;S
+ICON;dmail.gif
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;option
+ATTR;MAIL_FR;;Adresses;N;N;frame;10;W
+ATTR;MAIL_FROM;MAIL_FR;De;N;Y;text;20;R
+ATTR;MAIL_DEST;MAIL_FR;Destinataires;N;N;array;30;W
+ATTR;MAIL_COPYMODE;MAIL_DEST;;N;Y;enum;40;W;;;;to|À,cc|Cc,bcc|Bcc;;;system=yes
+ATTR;MAIL_RECIPID;MAIL_DEST;Id destinataire;N;N;docid;50;H
+ATTR;MAIL_RECIP;MAIL_DEST;Destinataire;N;Y;text;60;W;;;fdl.php;lmail(D,MAIL_RECIP):MAIL_RECIP,MAIL_RECIPID,MAIL_SENDFORMAT
+ATTR;MAIL_SENDFORMAT;MAIL_DEST;Notif.;N;Y;enum;70;W;;;;[bool]plain|document complet,link|notification avec lien vers le document;;;system=yes
+ATTR;MAIL_SUBJECT;MAIL_FR;Sujet;N;Y;text;80;W
+ATTR;MAIL_SAVECOPY;MAIL_FR;Enregistrer une copie;N;N;enum;90;W;;;;no|Pas de copie,yes|Copie sur le serveur;;;eformat=bool|system=yes|elabel=enregistrer une copie du message sur le serveur
+ATTR;MAIL_FR_CM;;Commentaire;N;N;frame;100;W
+ATTR;MAIL_CM;MAIL_FR_CM;Commentaire;N;Y;longtext;110;W
+ATTR;MAIL_FORMAT;MAIL_FR_CM;Format;N;Y;enum;120;W;;;;html|HTML,pdf|PDF,htmlpdf|HTML & PDF;;;system=yes
+END;0
+
+BEGIN;0;Modèle de mail;41;;MAILTEMPLATE
+TYPE;C
+METHOD
+CLASS;Dcp\Core\MailTemplate
+RESET;attributes
+USEFOR;S
+ICON;tmail.png
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;option
+ATTR;TMAIL_FR;;Entête;N;N;frame;10;W
+ATTR;TMAIL_TITLE;TMAIL_FR;Titre;Y;N;text;20;O;Y
+ATTR;TMAIL_FAMILY;TMAIL_FR;Famille;N;N;docid("x");30;W;;;fdl.php;lfamilies(D, CT):TMAIL_FAMILY,CT
+ATTR;TMAIL_WORKFLOW;TMAIL_FR;Famille cycle;N;N;docid("x");40;W;;;fdl.php;lfamilies(D, CT,20):TMAIL_WORKFLOW,CT;;;elabel=famille cycle pour récupérer le commentaire ou les paramètres de transition
+ATTR;TMAIL_T_FROM;TMAIL_FR;Émetteur;N;N;array;50;U
+ATTR;TMAIL_FROMTYPE;TMAIL_T_FROM;type;N;N;enum;60;W;;;;F|Adresse fixe,A|Attribut texte,D|Attribut relation,E|Paramètre de famille texte,DE|Paramètre de famille relation,P|Paramètres globaux,WA|Attribut cycle,WD|Relation cycle,WE|Paramètre cycle;;;system=yes|bmenu=no
+ATTR;TMAIL_FROM;TMAIL_T_FROM;De;N;N;text;70;W;;;fdl.php;tplmail(D,TMAIL_FROMTYPE,TMAIL_FAMILY,TMAIL_WORKFLOW,TMAIL_FROM):TMAIL_FROM
+ATTR;TMAIL_DEST;TMAIL_FR;Destinataires;N;N;array;80;W
+ATTR;TMAIL_COPYMODE;TMAIL_DEST;-;N;N;enum;90;W;;;;to|À,cc|Cc,bcc|Bcc;;;system=yes|bmenu=no
+ATTR;TMAIL_DESTTYPE;TMAIL_DEST;Type;N;N;enum;100;W;;;;F|Adresse fixe,A|Attribut texte,D|Attribut relation,E|Paramètre de famille texte,DE|Paramètre de famille relation,P|Paramètres globaux,WA|Attribut cycle,WD|Relation cycle,WE|Paramètre cycle,RD|Document destinataire;;;system=yes|bmenu=no
+ATTR;TMAIL_RECIP;TMAIL_DEST;Destinataire;N;N;text;110;W;;;fdl.php;tplmail(D,TMAIL_DESTTYPE,TMAIL_FAMILY,TMAIL_WORKFLOW,TMAIL_RECIP):TMAIL_RECIP
+ATTR;TMAIL_SUBJECT;TMAIL_FR;Sujet;N;Y;text;120;W
+ATTR;TMAIL_FR_CONTENT;;Contenu;N;N;frame;130;W
+ATTR;TMAIL_SAVECOPY;TMAIL_FR_CONTENT;Enregistrer une copie;N;N;enum;140;W;;;;no|Pas de copie,yes|Copie sur le serveur;;;eformat=bool|system=yes|bmenu=no|elabel=enregistrer une copie du message sur le serveur lors de l'envoi
+ATTR;TMAIL_ULINK;TMAIL_FR_CONTENT;Avec liens;N;N;enum;150;W;;;;no|Sans lien,yes|Avec liens;;;eformat=bool|system=yes|bmenu=no
+ATTR;TMAIL_BODY;TMAIL_FR_CONTENT;Corps;N;N;htmltext;160;W;;;;;;;jsonconf={"addPlugins": ["docattr"]}|allowedcontent=all
+ATTR;TMAIL_T_ATTACH;TMAIL_FR_CONTENT;Attachements;N;N;array;170;W
+ATTR;TMAIL_ATTACH;TMAIL_T_ATTACH;Attachement;N;N;text;180;W;;;fdl.php;tplmail(D,'G,TMAIL_FAMILY,TMAIL_WORKFLOW,TMAIL_ATTACH):TMAIL_ATTACH
+ATTR;TMAIL_FORMAT;TMAIL_FR_CONTENT;Format;N;N;enum;190;H;;;;html|HTML,pdf|PDF,htmlpdf|HTML & PDF;;;system=yes|bmenu=no
+DEFAULT;TMAIL_ULINK;yes
+END;0
+
+BEGIN;;Message envoyé;;;SENTMESSAGE
+TYPE;C
+CLASS;Dcp\Core\SentEmail
+ICON;sentmessage.png
+SCHAR;S
+CVID;0
+METHOD
+USEFOR;S
+
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;option
+ATTR;EMSG_FR_IDENT;;Identification;N;N;frame;100;R
+ATTR;EMSG_REFID;EMSG_FR_IDENT;Document référence;;;docid("x");110;R
+ATTR;EMSG_FROM;EMSG_FR_IDENT;De;;;text;120;S
+ATTR;EMSG_T_RECIPIENT;EMSG_FR_IDENT;Destinataires;;;array;500;U
+ATTR;EMSG_SENDTYPE;EMSG_T_RECIPIENT;Type;;;enum;510;S;;;;to|Pour,cc|Copie,bcc|Copie cachée
+ATTR;EMSG_RECIPIENT;EMSG_T_RECIPIENT;Destinataire;;;text;520;S
+ATTR;EMSG_SUBJECT;EMSG_FR_IDENT;Sujet;Y;;text;530;S
+ATTR;EMSG_DATE;EMSG_FR_IDENT;Date;;;timestamp("%d %B %Y %H:%S");540;S;;;;;;;iwidth=64px
+ATTR;EMSG_SIZE;EMSG_FR_IDENT;Taille;;;int;550;R
+ATTR;EMSG_FR_BODIES;;Corps de messages;;;frame;560;R
+ATTR;EMSG_TEXTBODY;EMSG_FR_BODIES;Texte;;;longtext;570;R;;;;;;;vlabel=up
+ATTR;EMSG_HTMLBODY;EMSG_FR_BODIES;Texte formaté;;;ifile;580;R;;;;;;;vlabel=up
+ATTR;EMSG_T_ATTACH;EMSG_FR_BODIES;Attachements;;;array;590;R
+ATTR;EMSG_ATTACH;EMSG_T_ATTACH;Fichier;;;file;600;R;;;;;;;vlabel=none
+
+PARAM;EMSG_FR_PARAMETERS;;Paramètres;;;frame;10;W
+PARAM;EMSG_EDITCONTROL;EMSG_FR_PARAMETERS;Force la lecture seule;N;N;enum;20;W;;;;lockedit|Droit édit verrouillé,freeedit|Droit édit libre;;;system=yes|bmenu=no
+
+END
+
+
+
+
+
+BEGIN;DIR;Archive;;;ARCHIVING
+TYPE;C
+ICON;archive.png
+SCHAR;S
+USEFOR;S
+CLASS;Dcp\Core\Archiving
+METHOD
+
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink;constraint;option
+ATTR;ARC_STATUS;FR_BASIC;Statut;N;Y;enum;100;R;;;;O|Ouvert,C|Clôturé,P|Purgé;;;system=yes
+ATTR;ARC_CLOTDATE;FR_BASIC;Date de clôture;N;N;date;110;R
+ATTR;ARC_PROFIL;FR_BASIC;Profil applicable;N;N;docid("PDIR");120;R
+ATTR;ARC_TAB_PURGE;;Purge;N;N;tab;120;R
+ATTR;ARC_FR_PURGE;ARC_TAB_PURGE;Purge;N;N;frame;130;R;;;;;;;vlabel=none
+ATTR;ARC_PURGEDATE;ARC_FR_PURGE;Date de destruction;N;N;date;140;R
+ATTR;ARC_PURGEMANIF;ARC_FR_PURGE;Documents détruits;N;N;htmltext;150;R
+ATTR;ARC_LIST;;Voir les documents;N;N;menu;10;R;;%S%app=GENERIC&action=GENERIC_LIST&dirid=%ID%&famid=0;;::equal('arc_status,'O);;;submenu=Archivage|ltarget=flist
+ATTR;ARC_LISTC;;Voir les documents archivés;N;N;menu;10;R;;%S%app=GENERIC&action=GENERIC_LIST&dirid=%ID%&famid=0;;::equal('arc_status,'C);;;submenu=Archivage|ltarget=flist
+ATTR;ARC_CLOSE;;Archiver les documents;N;N;menu;10;R;;::arc_close();;::equal('arc_status,'O);;;lconfirm=yes|ltarget=_self|submenu=Archivage|ltitle=Réaliser l'archivage des documents inclus dans l'archive
+ATTR;ARC_MODPROF;;Gérer les droits des documents archivés;N;N;menu;20;R;;%S%app=FREEDOM&action=FREEDOM_GACCESS&id=%ARC_PROFIL%;;;;;submenu=Archivage
+ATTR;ARC_REOPEN;;Désarchiver les documents archivés;N;N;menu;30;R;;::arc_reopen();;::equal('arc_status,'C);;;lconfirm=yes|ltarget=_self|submenu=Archivage|ltitle=Désarchiver les documents archivés
+ATTR;ARC_PURGE;;Détruire les documents archivé;N;N;menu;40;R;;::arc_purge();;::equal('arc_status,'C);;;lconfirm=yes|ltarget=_self|submenu=Archivage|ltitle=Supprimer définitivement les documents archivés|tconfirm=Manipulation irréversible\nDétruire les documents archivés ?
+ATTR;ARC_CLEAR;;Vider l'archive de son contenu;N;N;menu;50;R;;::arc_clear();;::equal('arc_status,'O);;;lconfirm=yes|ltarget=_self|submenu=Archivage
+MODATTR;GUI_COLOR;;;;;;;H
+MODATTR;GUI_ISRSS;;;;;;;H
+DEFAULT;ARC_STATUS;O
+
+END
+
+
+
+
+;;;;;;;;;;;;;;;#
+
+
+
+// famille dossier;;;id;class;name
+BEGIN;0;Post-it;27;;POSTIT
+CLASS;Dcp\Core\PostitView
+METHOD
+USEFOR;S
+SCHAR;S
+ICON;postit.gif
+//;idattr;idframe;label;T;A;type;ord;vis;need;link;phpfile;phpfunc;elink
+
+ATTR;PIT_FR_TEXT;;Texte;N;N;frame;0;W
+ATTR;PIT_TITLE;PIT_FR_TEXT;Titre;Y;N;text;1;H;;;;::getPostitTitle(PIT_IDADOC)
+ATTR;PIT_TCOM;PIT_FR_TEXT;Commentaires;N;N;array;10;W
+ATTR;PIT_COM;PIT_TCOM;Commentaire;N;N;longtext;20;W
+ATTR;PIT_DATE;PIT_TCOM;Date;N;N;date;30;R
+ATTR;PIT_IDUSER;PIT_TCOM;Id utilisateur;N;N;docid;40;H;;;;::getTitle(PIT_IDUSER):PIT_USER
+ATTR;PIT_USER;PIT_TCOM;Utilisateur;N;N;text;50;R;;%S%app=FDL&action=FDL_CARD&id=%PIT_IDUSER%;fdl.php;lfamilly(D,IUSER,PIT_USER):PIT_IDUSER,PIT_USER
+ATTR;PIT_COLOR;PIT_TCOM;Couleur;N;N;color;60;W
+ATTR;PIT_FR_DOC;;Attachement;N;N;frame;70;W
+ATTR;PIT_IDADOC;PIT_FR_DOC;Id doc attaché;N;N;docid;80;H;;;;::getTitle(PIT_IDADOC):PIT_ADOC
+ATTR;PIT_ADOC;PIT_FR_DOC;Doc attaché;N;N;text;90;R;;%S%app=FDL&action=FDL_CARD&id=%PIT_IDADOC%
+ATTR;PIT_VIEWDOC;;Voir le document associé;N;N;menu;100;W;;%S%app=FDL&action=FDL_CARD&id=%PIT_IDADOC%
+ATTR;PIT_FR_EDIT;;Édition;N;N;frame;110;H
+ATTR;PIT_NCOM;PIT_FR_EDIT;Nouveau commentaire;N;N;longtext;120;O
+ATTR;PIT_NCOLOR;PIT_FR_EDIT;Nouvelle couleur;N;N;color;130;O
+ATTR;PIT_MOD;;Modifier le contenu;N;N;menu;10;R;;%S%app=GENERIC&action=GENERIC_EDIT&id=%I%&zone=FDL:EDITBODYCARD:T
+DEFAULT;PIT_DATE;::getDate()
+DEFAULT;PIT_IDUSER;::userDocId()
+DEFAULT;PIT_COLOR;#FFFFCC
+END
+
+
+
+

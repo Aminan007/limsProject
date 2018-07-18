@@ -1,0 +1,50 @@
+.documentEdit fieldset[opened="false"] > legend > span.dyp-frame-opener:before {
+  content: "► ";
+  font-family: monospace;
+  font-style: normal;
+  color: #99D5FF;
+}
+
+.documentEdit fieldset[opened="true"] > legend > span.dyp-frame-opener:before {
+  content: "▼ ";
+  font-family: monospace;
+  font-style: normal;
+  color: #99D5FF;
+}
+
+.documentEdit span.dyp-help-hint {
+  margin: 0px 0px 0px 0.5em;
+  padding-left: 12px;
+  background-image: url(../../resizeimg.php?img=Images%2Fhelppage_gray.png&size=12);
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: help;
+}
+
+.document span.dyp-help-header-icon {
+     background-image: url(../../resizeimg.php?img=Images%2Fhelppage_gray.png&size=22);
+     background-position: center center;
+     background-repeat: no-repeat;
+     cursor: help;
+     float: right;
+     margin-right: 2px;
+     height: 22px;
+     width: 22px;
+}
+
+.document .documentTitle a:link,.document .documentTitle a:visited {
+    color: #000000;
+}
+
+.hidden-dialog-overlay {
+    background-color:#FFFFFF;
+    opacity:0.3;
+    filter: alpha(opacity = 30);
+}
+
+.documentView a img.mime {
+    vertical-align: middle;
+}
+.documentView tr[type=file] .FREEDOMText {
+    padding-top:0;
+}

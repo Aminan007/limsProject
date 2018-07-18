@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<accounts date="2018-07-13T10:22:08" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XSD/accounts.xsd">
+  <roles>
+    <role id="14">
+      <reference>role5b4743a661923</reference>
+      <displayName>utilisateur lims</displayName>
+      <document family="ROLE">
+        <role title="utilisateur lims" revision="0" modification-date="2018-07-12T14:03:50" version="" state=""/>
+      </document>
+    </role>
+  </roles>
+  <groups>
+    <group id="2">
+      <reference>all</reference>
+      <displayName>Utilisateurs</displayName>
+      <document family="IGROUP">
+        <igroup name="GDEFAULT" title="Utilisateurs" revision="0" modification-date="2018-07-12T14:06:08" version="" state=""/>
+      </document>
+    </group>
+    <group id="15">
+      <reference>grp_user_lims</reference>
+      <displayName>utilisateurs lims</displayName>
+      <associatedRoles reset="false">
+        <associatedRole reference="role5b4743a661923"/>
+      </associatedRoles>
+      <parentGroups reset="false">
+        <parentGroup reference="all"/>
+      </parentGroups>
+      <document family="IGROUP">
+        <igroup title="utilisateurs lims" revision="0" modification-date="2018-07-12T14:09:35" version="" state=""/>
+      </document>
+    </group>
+  </groups>
+  <users>
+    <user id="16">
+      <login>aridhi.amina</login>
+      <firstname>amina</firstname>
+      <lastname>aridhi</lastname>
+      <mail>amina.aridhi@etudiant-isi.utm.tn</mail>
+      <status activated="true"/>
+      <password crypted="true">$5$Y85TsbC3xITyu/CZ$VDgvt5qb2.XAocHr5/O66Fe8TNsIPP8Iuhw250t75c7</password>
+      <associatedRoles reset="false">
+        <associatedRole reference="role5b4743a661923"/>
+      </associatedRoles>
+      <parentGroups reset="false">
+        <parentGroup reference="grp_user_lims"/>
+      </parentGroups>
+      <document family="IUSER">
+        <iuser title="aridhi amina" revision="0" modification-date="2018-07-12T14:09:36" version="" state="">
+          <us_tab_system>
+            <us_fr_security>
+              <us_accexpiredate>2018-11-15</us_accexpiredate>
+            </us_fr_security>
+          </us_tab_system>
+        </iuser>
+      </document>
+    </user>
+  </users>
+</accounts>

@@ -1,0 +1,34 @@
+
+/* fonts */
+
+body, .core, P, input, textarea, select, button {
+  font-size: 10pt;
+  font-family : Helvetica, Arial, sans-serif;
+}
+H1 {
+  font-size: 18pt;
+}
+TD, TR, TH {
+  font-size: 10pt;
+}
+
+
+
+
+/* ------------------------------------------
+ * fonts in POPUPMENU
+ * ------------------------------------------
+ */
+
+
+
+.popup a.menuItem * ,.popup a.menuItem, .popup a.menuItem:link, .popup a.menuItem:visited ,.popup a.menuItemCtrl:link, .popup a.menuItemCtrl:visited , .popup a.menuItemDisabled, .popup a.menuItemDisabled:link,  .popup a.separator {
+  
+  font-size:9pt;
+  font-weight: normal;
+}
+
+
+.popup a:link {
+  font-size:9pt;
+}

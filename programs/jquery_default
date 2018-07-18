@@ -1,0 +1,24 @@
+#!/usr/bin/env php
+<?php
+
+$WIFF_CONTEXT_ROOT = getenv("WIFF_CONTEXT_ROOT");
+
+$jqueryPath = $WIFF_CONTEXT_ROOT.DIRECTORY_SEPARATOR.'lib'.DIRECTORY_SEPARATOR.'jquery'.DIRECTORY_SEPARATOR;
+
+if (!$WIFF_CONTEXT_ROOT || !is_dir($jqueryPath)) {
+    echo("The path of jquery is not valid : $jqueryPath\n");
+    exit(10);
+}
+
+$version = $argv[1];
+
+$versionPath = $jqueryPath.$version.DIRECTORY_SEPARATOR;
+
+if (!is_dir($versionPath)) {
+    echo("The path of jquery version is not valid : $versionPath\n");
+    exit(20);
+}
+
+exec("cd $jqueryPath; ln -sf $version/jquery.js ./jquery-debug.js; ln -sf $version/jquery.js ./");
+
+exit(0);

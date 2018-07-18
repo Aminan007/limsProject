@@ -1,0 +1,44 @@
+<div class="head">
+    <div class="societe">[CORE_CLIENT]</div>
+</div>
+<div id="authform" class="authmain" style="visibility:hidden">
+<div id="main" style="visibility:hidden">
+
+    <div id="idbanner" class="banner">
+        <div class="realm">[CORE_REALM]</div>
+    </div>
+
+    <div class="form">
+        <div class="zoneinput">
+            [IF FORM_SEND_OK]
+            <div id="form_send_ok" class="text error-false">
+                [TEXT:submitreqpasswd_form_send_ok]
+            </div>
+            [ENDIF FORM_SEND_OK]
+
+            [IF FORM_SEND_ERROR_INVALID_ARGS]
+            <div id="form_send_error_invalid_args" class="text error-true">
+                [IF MAILMULTIPLE][TEXT:submitreqpasswd_form_multiplemail][ENDIF MAILMULTIPLE]
+                [IFNOT MAILMULTIPLE][TEXT:submitreqpasswd_form_send_error_invalid_args][ENDIF MAILMULTIPLE]
+            </div>
+            [ENDIF FORM_SEND_ERROR_INVALID_ARGS]
+
+            [IF FORM_SEND_ERROR_EXTERNAL_AUTH]
+            <div id="form_send_error_external_auth" class="text error-true">
+                [TEXT:submitreqpasswd_form_send_error_external_auth]
+            </div>
+            [ENDIF FORM_SEND_ERROR_EXTERNAL_AUTH]
+
+            [IF FORM_SEND_ERROR_UNKNOWN]
+            <div id="form_send_error_unknown" class="text error-true">
+                [TEXT:submitreqpasswd_form_send_error_unknown]
+            </div>
+            [ENDIF FORM_SEND_ERROR_UNKNOWN]
+            <div class="action">
+                <a href="[CORE_BASEURL]app=AUTHENT&action=REQPASSWD&lang=[lang]">Retour</a>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

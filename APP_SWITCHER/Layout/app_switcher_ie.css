@@ -1,0 +1,65 @@
+.css-menu {
+    zoom: 1;
+    width:20em;
+}
+.css-menu-list {
+    zoom: 1;
+    width:15em;
+}
+
+.css-menu-element {
+    zoom : 1;
+    width:15em;
+    word-wrap: break-word;
+    height: auto;
+    background-color: white;
+}
+
+.css-fold-menu {
+    left: -1em;
+    top: 0;
+    margin-top: auto;
+}
+
+.css-menu-content-hidden {
+    display: none;
+    left: 0;
+}
+
+.css-menu-element-icon {
+    position: absolute;
+    right: 0;
+    top: 0.25em;
+}
+
+.css-application-icon {
+    zoom: 1;
+    display: inline;
+}
+
+.css-application-icon img {
+    height: 24px;
+    width : 24px;
+}
+
+.css-shortcut-element {
+    zoom: 1;
+    display: inline;
+    padding: 0 2px;
+}
+
+.css-shortcut-element-hidden {
+    display: none;
+}
+
+.css-contextualMenu-element {
+    height: auto;
+}
+
+.css-content {
+    height: auto;
+}
+
+.css-user-icon {
+    display: none;
+}

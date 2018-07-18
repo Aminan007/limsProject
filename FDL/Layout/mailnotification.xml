@@ -1,0 +1,31 @@
+<!-- HEAD HTML -->
+
+<html>
+  <head>
+
+   <title>[TEXT:Properties:] [TITLE]</title>
+
+   <style type="text/css">
+
+       a {
+       text-decoration:none;
+       }
+
+   </style>
+
+ </head>
+
+<body class="freedom"   >
+
+[BLOCK COMMENT]
+<p>[comment]</p>
+<hr/>
+[ENDBLOCK COMMENT]
+
+    <h3> [V_TITLE] </h3>
+
+    <div class="border" >
+[ZONE FDL:VIEWCARD?target=mail&zone=FDL:VIEWTHUMBCARD:T]
+</div>
+</body>
+</html>

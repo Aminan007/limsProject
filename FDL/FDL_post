@@ -1,0 +1,126 @@
+#!/bin/bash
+
+if [ -z "$pgservice_core" -o -z "$pgservice_freedom" ]; then
+    echo "Env variables pgservice_core or pgservice_freedom is empty !"
+    echo "Check your context for missing or misconfigured environment variables."
+    exit 1
+fi
+
+. "$wpub"/log.sh
+. "$wpub"/libutil.sh
+
+#------------------------------
+#post installation
+#------------------------------
+if [ "$1" = "I" ] ; then
+
+    log "Checking if the database service '$pgservice_freedom' is running and available..."
+    PGSERVICE="$pgservice_freedom" pgIsRunning
+    RET=$?
+    if [ $RET -ne 0 ]; then
+	echo "Could not connect to database service '$pgservice_freedom' !"
+	echo "Check that your database is running and acessible with the service from pgservice.conf."
+	exit $RET
+    fi
+    
+    OUT=`PGSERVICE="$pgservice_freedom" psql -c 'CREATE SCHEMA family;' 2> /dev/null`
+    RET=$?
+    if [ $RET -ne 0 ]; then
+	echo "An error occured while creating schema family : $RET"
+	exit $RET
+    fi
+
+    for CLASS in \
+        Doc \
+        DocRead \
+	; do
+        "$wpub"/wsh.php --api=updateclass --dbcoord="service='$pgservice_freedom'" --appc=FDL "--class=$CLASS"
+    done
+
+    DATABASE=`PGSERVICE="$pgservice_freedom" psql -At -c "SELECT current_database();" 2> /dev/null`
+    DATABASE_QUOTED=$(echo "$DATABASE" | sed -e 's/"/""/g')
+    PGSERVICE="$pgservice_freedom" psql -c "ALTER DATABASE \"$DATABASE_QUOTED\" SET standard_conforming_strings = 'off';"
+    RET=$?
+    if [ $RET -ne 0 ]; then
+        echo "An error occured while setting standard_conforming_strings to 'off'"
+        exit $RET
+    fi
+
+    PGSERVICE="$pgservice_freedom" pgExecuteSqlFile "$wpub/WHAT/getprivilege.sql"
+    RET=$?
+    if [ $RET -ne 0 ]; then
+	echo "Error executing sql file \"$wpub/WHAT/getprivilege.sql\""
+	exit $RET
+    fi
+    
+    PGSERVICE="$pgservice_freedom" pgExecuteSqlFile "$wpub/FDL/fdl.sql"
+    RET=$?
+    if [ $RET -ne 0 ]; then
+	echo "Error executing sql file \"$wpub/FDL/fdl.sql\""
+	exit $RET
+    fi
+
+    for CLASS in \
+        DocAttr \
+        DocAttrLDAP \
+        DocCount \
+        DocFam \
+        DocHisto \
+        DocLog \
+        DocEnum \
+        DocWait \
+        DocPermExt \
+        DocPerm \
+        DocRel \
+        DocTimer \
+        DocUTag \
+        DocVaultIndex \
+        QueryDir \
+        TaskRequest \
+        VGroup \
+    ; do
+        "$wpub"/wsh.php --api=updateclass --dbcoord="service='$pgservice_freedom'" --appc=FDL "--class=$CLASS"
+    done
+
+    "$wpub"/wsh.php --api=updateclass --dbcoord="service='$pgservice_freedom'" --appc=VAULT "--class=VaultDiskDirStorage"
+    "$wpub"/wsh.php --api=updateclass --dbcoord="service='$pgservice_freedom'" --appc=VAULT "--class=VaultDiskFsStorage"
+    "$wpub"/wsh.php --api=updateclass --dbcoord="service='$pgservice_freedom'" --appc=VAULT "--class=VaultDiskStorage"
+
+    "$wpub"/wsh.php --api=updateclass --dbcoord="service='$pgservice_freedom'" --class=Group
+
+
+
+    "$wpub"/wsh.php --api=fdl_trigger --docid=-1 | PGSERVICE="$pgservice_freedom" psql
+    "$wpub"/wsh.php --api=fdl_trigger --trigger=Y --docid=-1 | PGSERVICE="$pgservice_freedom" psql
+    #if [ ! -f "$wpub/VAULT/${freedom_context}.vault" ]; then
+    #    #cp $wpub/FDL/FREEDOM.vault $wpub/VAULT/FREEDOM.vault
+    #	sed -e"s/fs1/$freedom_context/g" "$wpub/FDL/FREEDOM.vault" > "$wpub/VAULT/${freedom_context}.vault"
+    #fi
+    #$wpub/wsh.php --api=vault_init
+    
+fi
+
+#------------------------------
+#post update
+#------------------------------
+if [ "$1" = "U" ] ; then
+
+    PGSERVICE="$pgservice_freedom" pgExecuteSqlFile "$wpub/WHAT/getprivilege.sql"
+    RET=$?
+    if [ $RET -ne 0 ]; then
+	echo "Error executing sql file \"$wpub/WHAT/getprivilege.sql\""
+	exit $RET
+    fi
+    
+    PGSERVICE="$pgservice_freedom" pgExecuteSqlFile "$wpub/FDL/fdl.sql"
+    RET=$?
+    if [ $RET -ne 0 ]; then
+	echo "Error executing sql file \"$wpub/FDL/fdl.sql\""
+	exit $RET
+    fi
+
+    "$wpub"/wsh.php --api=generateDocumentClass
+    "$wpub"/wsh.php --api=fdl_trigger | PGSERVICE="$pgservice_freedom" psql
+    "$wpub"/wsh.php --api=fdl_trigger --trigger=Y | PGSERVICE="$pgservice_freedom" psql
+
+fi

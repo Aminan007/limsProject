@@ -1,0 +1,6 @@
+drwxrwxr-x distrib/distrib   0 2018-02-13 05:42 ./
+drwxrwxr-x distrib/distrib   0 2018-02-13 05:42 ./programs/
+-rwxrwxr-x distrib/distrib 2919 2018-02-13 05:42 ./programs/tipsy_install
+drwxrwxr-x distrib/distrib    0 2018-02-13 05:42 ./lib/
+drwxrwxr-x distrib/distrib    0 2018-02-13 05:42 ./lib/tipsy/
+-rw-rw-r-- distrib/distrib   85 2018-02-13 05:42 ./lib/tipsy/.htaccess

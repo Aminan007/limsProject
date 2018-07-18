@@ -1,0 +1,134 @@
+[ZONE FDL:HTMLHEAD]
+
+<style>
+option.pref {
+    background-color:[COLOR_B3];
+    }
+input.disable, select.disable {
+    visibility:hidden!important;
+    }
+input[type=submit] {
+    padding:3px;
+    }
+.other {
+    visibility:hidden;
+    padding-left:6px;
+    padding-right:6px;
+    margin-left:3px;
+    width:1em;
+    }
+
+    .caution {
+    text-align:right;
+    }
+.caution span {
+    margin-right:10px;
+    font-style: italic;
+}
+    .submit {
+        width : 5em;
+    }
+.warning {
+    border: solid 2px orange;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    background: #FFD68A;
+    padding: 1em;
+    margin: 10px auto;
+    left: 0;
+    right: 0;
+    width:70%;
+    overflow: auto;
+    max-height: 80%;
+ }
+.warning p:first-child {
+    font-weight:bold;
+}
+button.close {
+    width: 2em;
+    padding: 0.25em;
+    text-align: center;
+    float: right;
+    font-size: 150%;
+    }
+</style>
+<h2 style="text-align:center">[TEXT:Export Documents from] </h2>
+<h3 style="text-align:center">[title]</h3>
+
+<form target="outputfile" id="exportForm"
+      name="dexport" style="display:inline"
+      method="POST" ENCTYPE="multipart/form-data"
+      action="?app=[exportapp]&amp;action=[exportaction]&amp;id=[dirid]"       >
+<input type="hidden" id="iExportId" name="exportId" value="[exportid]"></input>
+<table align="center">
+<tr><td></td><td></td><td rowspan="7"><img align="left" src="[IMG:ardown.png]"></td></tr>
+<tr><td align="right" style="cursor:help" title="[TEXT:Prefer choose Latin if you are under microsoft else use UTF-8]">
+[TEXT:Encoding] :</td><td><select name="code">
+  <option value="utf8">UTF-8</option>
+  <option value="iso8859-15">Latin 1</option>
+</select></td></tr>
+<tr><td align="right" style="cursor:help" title="[TEXT:Select Profil if it is to globaly reuse file to reinitialize profil]">[TEXT:Profile] :</td>
+<td><select name="wprof">
+  <option value="N">[TEXT:Without profil]</option>
+  <option value="Y">[TEXT:With profil]</option>
+</select>  <select name="wproftype">
+    <option value=":useAccount">[TEXT:Use account reference]</option>
+    <option value=":useDocument">[TEXT:Use document reference]</option>
+</select> </td></tr>
+<tr><td align="right" style="cursor:help" title="[TEXT:Export archive file with data file - fdl.csv- and attached files]">[TEXT:Files] :</td>
+<td><select name="wfile">
+  <option value="N">[TEXT:Without files]</option>
+  <option value="Y">[TEXT:With files]</option>
+</select></td></tr>
+<tr><td align="right" style="cursor:help" title="[TEXT:Select identifier to set the second column -specid- this file can only reimport in the same database]">[TEXT:Identificators] :</td>
+<td><select name="wident">
+  <option value="N">[TEXT:Without identificators]</option>
+  <option value="Y">[TEXT:With identificators]</option>
+</select></td></tr>
+<tr><td align="right" style="cursor:help" title="[TEXT:Choose a family to import only set of attributes]">[TEXT:Choose columns] :</td>
+  <td><select onchange="if (this.options[this.selectedIndex].value > 0) subwindow([FDL_VD2SIZE],[FDL_HD2SIZE],'exportcols','[CORE_STANDURL]app=[APPNAME]&action=EDITEXPORTCHOOSECOLS&id='+this.options[this.selectedIndex].value)" name="wcolumn">
+  <option value="">[TEXT:Apply my preferences]</option>
+  <option value="-">[TEXT:Don't care preferences]</option>
+[BLOCK coptions]
+  <option [IF pref]class="pref"[ENDIF pref] value="[idcdoc]">[classname] </option>[ENDBLOCK coptions]
+
+</select></td></tr>
+<tr><td align="right" style="cursor:help" title="[TEXT:Raw data set database value. Formated data : data are exported like can see it in navigator.]">[TEXT:Format export] :</td>
+  <td><select class="import-format" name="eformat" >
+  <option value="I">[TEXT:Importation data]</option>
+  <option value="R">[TEXT:Raw data only]</option>
+  <option value="F">[TEXT:Formated data]</option>
+  <option value="X">[TEXT:XML data (Zip with one xml by document)]</option>
+  <option value="Y" >[TEXT:XML data (only one xml file)]</option>
+</select></td></tr>
+
+<tr><td align="right" style="cursor:help" title="[TEXT:Enclosure character]">[TEXT:EXPORT_CSV Enclosure :]</td>
+  <td>
+  <select  class="csv--option" name="csv-enclosure">
+      <option value="">[TEXT:csv-noenclosure]</option>
+      <option [IF selectDoubleQuote]selected="selected" [ENDIF selectDoubleQuote]value='"'>[TEXT:csv-doublequote] "</option>
+      <option [IF selectSimpleQuote]selected="selected" [ENDIF selectSimpleQuote]value="'">[TEXT:csv-simplequote] '</option>
+      [IF customEnclosure]<option selected="selected" value="[customEnclosure]">[TEXT:csv-custom : ][customEnclosure]</option>[ENDIF customEnclosure]
+      <option value="other">[TEXT:csv-other-enclosure]</option>
+  </select><input type="text" maxlength="1" size="2" class="other other--enclosure csv--option"></input>
+  </td></tr>
+
+<tr><td align="right" style="cursor:help" title="[TEXT:Separator character]">[TEXT:EXPORT_CSV Delimiter :]</td>
+  <td><select class="csv--option" name="csv-separator" >
+      <option value=";">[TEXT:csv-semicolon] ;</option>
+      <option [IF selectComma]selected="selected" [ENDIF selectComma]value=",">[TEXT:csv-comma] ,</option>
+      [IF customSeparator]<option selected="selected" value="[customSeparator]">[TEXT:csv-custom : ][customSeparator]</option>[ENDIF customSeparator]
+      <option value="other">[TEXT:csv-other-separator]</option>
+  </select><input type="text" maxlength="1" size="2"  class="other other--separator csv--option"></input>
+
+  </td></tr>
+
+<tr><td colspan="2" class="caution">[IF viewinfo]<span>[TEXT:Export as administrator. Attributes with invisibility access are exported.]</span>[ENDIF viewinfo]
+    </td><td class="submit"><input id="bExport" type="submit" value="[TEXT:Export]"></td></tr>
+</table>
+
+</form>
+
+        <iframe name="outputfile" id="outputfile" src="about:blank" frameborder="0" border="0" cellspacing="0" width="100%" marginwidth="0" marginheight="0" style="border:none;width:90%;height:30px"></iframe>
+[ZONE FDL:HTMLFOOT]
