@@ -4,7 +4,7 @@
 namespace Dcp\AttributeIdentifiers {
 
       /**
-        * Groupe de personnes
+        * groupe
         */
      class Group  extends Dir  {
         
@@ -37,6 +37,12 @@ namespace Dcp\AttributeIdentifiers {
         
         /** enum sans adresse mail de groupe */
 		const grp_hasmail='grp_hasmail';
+        
+        /** longtext attribution */
+		const grp_role='grp_role';
+        
+        /** enum fonction */
+		const grp_type='grp_type';
         
         /** frame Groupes */
 		const grp_fr='grp_fr';

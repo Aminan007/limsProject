@@ -6,7 +6,7 @@ namespace {
 include_once("FDLGEN/Class.Doc2.php");
 
 class ADoc129 extends ADoc2 {
-    // for familly : Groupe de personnes
+    // for familly : groupe
 
    function __construct () {
       ADoc2::__construct();
@@ -20,9 +20,9 @@ class ADoc129 extends ADoc2 {
      
      $this->attr["fld_fr_prof"]=new FieldSetAttribute("fld_fr_prof", "129","Profils par défaut","H","N","frame",$this->attr["FIELD_HIDDENS"],"","GROUP");
      
-     $this->attr["fr_basic"]=new FieldSetAttribute("fr_basic", "129","basique","H","N","frame",$this->attr["FIELD_HIDDENS"],"","GROUP");
-     
      $this->attr["fld_fr_rest"]=new FieldSetAttribute("fld_fr_rest", "129","Restrictions","H","N","frame",$this->attr["FIELD_HIDDENS"],"","GROUP");
+     
+     $this->attr["fr_basic"]=new FieldSetAttribute("fr_basic", "129","basique","H","N","frame",$this->attr["FIELD_HIDDENS"],"","GROUP");
      
      $this->attr["grp_fr_ident"]=new FieldSetAttribute("grp_fr_ident", "129","Identification","W","N","frame",$this->attr["FIELD_HIDDENS"],"","GROUP");
      
@@ -49,6 +49,16 @@ class ADoc129 extends ADoc2 {
 						$this->attr["grp_fr_ident"],"","yes|adresses regroupées,no|sans adresse mail","","","N","bool","system=yes|bmenu=no|elabel=permet d'éviter le calcul du mail de groupe lorsque le groupe contient beaucoup de membres","GROUP");
 
      
+     $this->attr["grp_role"]=new NormalAttribute("grp_role", "129","attribution","longtext","",false,200,"",
+                                                "W",false,false,false,
+						$this->attr["grp_fr_ident"],"","","","","N","","","GROUP");
+
+     
+     $this->attr["grp_type"]=new NormalAttribute("grp_type", "129","fonction","enum","",false,210,"",
+                                                "W",false,false,false,
+						$this->attr["grp_fr_ident"],"","none| ,service|service,desk|bureau","","","N","","","GROUP");
+
+     
      $this->attr["grp_idgroup"]=new NormalAttribute("grp_idgroup", "129","sous groupes","account","",true,510,"",
                                                 "R",false,false,false,
 						$this->attr["grp_fr"],"fdl.php","fdlGetAccounts(CT,15,\"multiple=yes|showempty=Aucun sous groupe\"):grp_idgroup,CT","","","N","","multiple=yes|showempty=Aucun sous groupe","GROUP");
@@ -70,7 +80,7 @@ class ADoc129 extends ADoc2 {
 
      
 		
-	 $this->absoluteOrders=["fr_basic"=>10,"ba_title"=>20,"ba_desc"=>30,"gui_color"=>40,"gui_isrss"=>50,"gui_sysrss"=>60,"grp_adduser"=>70,"grp_refresh"=>80,"fld_open"=>90,"fld_copybasket"=>100,"fld_openfolio"=>110,"fld_insertdoc"=>120,"fld_setsysrss"=>130,"grp_fr_ident"=>140,"grp_name"=>150,"grp_mail"=>160,"grp_hasmail"=>170,"grp_fr"=>180,"grp_idgroup"=>190,"grp_idpgroup"=>200,"grp_isrefreshed"=>210,"fld_fr_rest"=>220,"fld_allbut"=>230,"fld_tfam"=>240,"fld_fam"=>250,"fld_famids"=>260,"fld_subfam"=>270,"fld_fr_prof"=>280,"fld_pdoc"=>290,"fld_pdocid"=>300,"fld_pdir"=>310,"fld_pdirid"=>320];
+	 $this->absoluteOrders=["fr_basic"=>10,"ba_title"=>20,"ba_desc"=>30,"gui_color"=>40,"gui_isrss"=>50,"gui_sysrss"=>60,"grp_adduser"=>70,"grp_refresh"=>80,"fld_open"=>90,"fld_copybasket"=>100,"fld_openfolio"=>110,"fld_insertdoc"=>120,"fld_setsysrss"=>130,"grp_fr_ident"=>140,"grp_name"=>150,"grp_mail"=>160,"grp_hasmail"=>170,"grp_role"=>180,"grp_type"=>190,"grp_fr"=>200,"grp_idgroup"=>210,"grp_idpgroup"=>220,"grp_isrefreshed"=>230,"fld_fr_rest"=>240,"fld_allbut"=>250,"fld_tfam"=>260,"fld_fam"=>270,"fld_famids"=>280,"fld_subfam"=>290,"fld_fr_prof"=>300,"fld_pdoc"=>310,"fld_pdocid"=>320,"fld_pdir"=>330,"fld_pdirid"=>340];
      $this->fromids[129]=129;
      $this->fromname='GROUP';
 
@@ -78,6 +88,8 @@ class ADoc129 extends ADoc2 {
     $this->fields["grp_name"]="grp_name";
     $this->fields["grp_mail"]="grp_mail";
     $this->fields["grp_hasmail"]="grp_hasmail";
+    $this->fields["grp_role"]="grp_role";
+    $this->fields["grp_type"]="grp_type";
     $this->fields["grp_idgroup"]="grp_idgroup";
     $this->fields["grp_idpgroup"]="grp_idpgroup";
     $this->fields["grp_isrefreshed"]="grp_isrefreshed";
@@ -96,11 +108,11 @@ namespace {
 
 namespace Dcp\Family {
 class Group extends \Dcp\Core\AccountCollection {
-   //  family : Groupe de personnes
+   //  family : groupe
 
    public $dbtable="doc129";
    public $dbseq="seq_doc129";
-   public $sqlcreate = array("create table doc129 (ba_title text,grp_name text,grp_mail text,grp_hasmail text,grp_idgroup text,grp_idpgroup text,grp_isrefreshed text) inherits (doc2);",
+   public $sqlcreate = array("create table doc129 (ba_title text,grp_name text,grp_mail text,grp_hasmail text,grp_role text,grp_type text,grp_idgroup text,grp_idpgroup text,grp_isrefreshed text) inherits (doc2);",
      "create sequence seq_doc129 start 1;",
      "alter TABLE doc129 ADD primary key (id);",
      "select setval('seq_doc129', count(distinct initid)+1, false )  from only doc129;");
@@ -108,7 +120,7 @@ class Group extends \Dcp\Core\AccountCollection {
 
      public $fromid=129;
      public $fromname='GROUP';
-     public $fromtitle="Groupe de personnes";
+     public $fromtitle="groupe";
      const familyName='GROUP';
 
    function __construct ($dbaccess='', $id='',$res='',$dbid=0) {

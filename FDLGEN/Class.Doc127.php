@@ -40,7 +40,7 @@ class ADoc127 extends ADoc129 {
 
      
 		
-	 $this->absoluteOrders=["fr_basic"=>10,"ba_title"=>20,"grp_adduser"=>30,"grp_refresh"=>40,"grp_choosegroup"=>50,"fld_open"=>60,"fld_copybasket"=>70,"fld_openfolio"=>80,"fld_insertdoc"=>90,"fld_setsysrss"=>100,"grp_fr_ident"=>110,"grp_name"=>120,"grp_mail"=>130,"grp_hasmail"=>140,"grp_fr_intranet"=>150,"us_login"=>160,"us_whatid"=>170,"us_meid"=>180,"grp_roles"=>190,"grp_fr"=>200,"grp_idgroup"=>210,"grp_idpgroup"=>220,"grp_isrefreshed"=>230,"fld_fr_rest"=>240,"fld_fr_prof"=>250,"ba_desc"=>260,"gui_color"=>270,"gui_isrss"=>280,"gui_sysrss"=>290,"fld_allbut"=>300,"fld_tfam"=>310,"fld_pdoc"=>320,"fld_pdocid"=>330,"fld_pdir"=>340,"fld_pdirid"=>350,"fld_fam"=>360,"fld_famids"=>370,"fld_subfam"=>380];
+	 $this->absoluteOrders=["fr_basic"=>10,"ba_title"=>20,"grp_adduser"=>30,"grp_refresh"=>40,"grp_choosegroup"=>50,"fld_open"=>60,"fld_copybasket"=>70,"fld_openfolio"=>80,"fld_insertdoc"=>90,"fld_setsysrss"=>100,"grp_fr_ident"=>110,"grp_name"=>120,"grp_mail"=>130,"grp_hasmail"=>140,"grp_role"=>150,"grp_type"=>160,"grp_fr_intranet"=>170,"us_login"=>180,"us_whatid"=>190,"us_meid"=>200,"grp_roles"=>210,"grp_fr"=>220,"grp_idgroup"=>230,"grp_idpgroup"=>240,"grp_isrefreshed"=>250,"fld_fr_rest"=>260,"fld_fr_prof"=>270,"ba_desc"=>280,"gui_color"=>290,"gui_isrss"=>300,"gui_sysrss"=>310,"fld_allbut"=>320,"fld_tfam"=>330,"fld_pdoc"=>340,"fld_pdocid"=>350,"fld_pdir"=>360,"fld_pdirid"=>370,"fld_fam"=>380,"fld_famids"=>390,"fld_subfam"=>400];
      $this->fromids[127]=127;
      $this->fromname='IGROUP';
 
